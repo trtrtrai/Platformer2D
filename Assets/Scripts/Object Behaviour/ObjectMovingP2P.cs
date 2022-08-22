@@ -1,55 +1,49 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
+[RequireComponent(typeof(ObjectMovingP2PSetup))]
 public class ObjectMovingP2P : MonoBehaviour
 {
-    [SerializeField]
-    [Range(0, 100)]
-    int numberOfChain;
-
-    [SerializeField]
-    Sprite chain;
-
-    [SerializeField]
-    GameObject mainObject;
-
-    [SerializeField]
-    GameObject firstPoint;
-
-    [SerializeField]
-    GameObject lastPoint;
-
     [SerializeField]
     bool startAtRight;
 
     [SerializeField]
     [Range(0f, 100f)]
-    float initialPlace;
+    float speed;
+
+    GameObject firstPoint;
+    GameObject lastPoint;
+
+    private void Awake()
+    {
+        gameObject.GetComponent<ObjectMovingP2PSetup>().enabled = false;    
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        if (numberOfChain <= 2) gameObject.GetComponent<ObjectMovingP2P>().enabled = false;
-
-        for (int i = 0; i < numberOfChain; i++)
+        var listChains = new List<GameObject>();
+        gameObject.GetComponentsInChildren<Transform>().ToList().ForEach((t) => listChains.Add(t.gameObject));
+        
+        if(listChains.Count % 2 == 1)
         {
-            var obj = Instantiate(Resources.Load<GameObject>("Prefabs/Chain"), gameObject.transform);
-            obj.transform.localPosition = new Vector3(i * 0.1f, 0, 0);
-            obj.GetComponent<SpriteRenderer>().sprite = chain;
-
-            if (i == 0) firstPoint = obj;
-            if (i == numberOfChain - 1) lastPoint = obj;
+            firstPoint = listChains[listChains.Count - 1];
+            lastPoint = listChains[listChains.Count - 2];
         }
-
-        var position = mainObject.transform.localPosition;
-        position.x = (numberOfChain - 1) * 0.1f * initialPlace / 100;
-        mainObject.transform.localPosition = position;
+        else
+        {
+            firstPoint = listChains[listChains.Count - 2];
+            lastPoint = listChains[listChains.Count - 1];
+        }
+        //Debug.Log(firstPoint.transform.localPosition);
+        //Debug.Log(lastPoint.transform.localPosition);
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        
     }
 }

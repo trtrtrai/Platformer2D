@@ -57,8 +57,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Character\CharacterBehaviour.cs" />
-    <Compile Include="Assets\Scripts\Object Behaviour\ObjectRotation.cs" />
     <Compile Include="Assets\Scripts\Object Behaviour\ObjectMovingP2P.cs" />
+    <Compile Include="Assets\Scripts\Object Behaviour\ObjectRotation.cs" />
+    <Compile Include="Assets\Scripts\Object Behaviour\ObjectMovingP2PSetup.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
