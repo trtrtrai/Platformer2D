@@ -62,6 +62,7 @@ public class ObjectMovingP2PSetup : MonoBehaviour
             else CreateChainsVertical();
 
             numberOfChain = old;
+            mainObject.transform.localPosition = new Vector3(0, 0);
 
             spawnHori = isHorizontal;
         }
