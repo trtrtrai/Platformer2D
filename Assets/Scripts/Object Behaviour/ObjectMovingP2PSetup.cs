@@ -8,7 +8,7 @@ using System.Linq;
 public class ObjectMovingP2PSetup : MonoBehaviour
 {
     [SerializeField]
-    bool isHorizontal;
+    Axis objAxis;
 
     [SerializeField]
     [Range(1, 100)]
@@ -34,7 +34,7 @@ public class ObjectMovingP2PSetup : MonoBehaviour
     private List<GameObject> listChains;
 
     private float mainObjPos;
-    private bool spawnHori = true;
+    private bool isHorizontal;
 
     // Start is called before the first frame update
     void Start()
@@ -47,13 +47,13 @@ public class ObjectMovingP2PSetup : MonoBehaviour
         }
 
         mainObjPos = mainObjPosition;
-        spawnHori = isHorizontal;
+        isHorizontal = isHorizontalInEditMode();
         //gameObject.GetComponentsInChildren<Transform>().ToList().ForEach((t) => Debug.Log(t.gameObject.name));
     }
 
     private void LateUpdate()
     {
-        if (spawnHori != isHorizontal)
+        if (isHorizontalInEditMode() != isHorizontal)
         {
             //Reset
             var old = numberOfChain;
@@ -64,7 +64,7 @@ public class ObjectMovingP2PSetup : MonoBehaviour
             numberOfChain = old;
             mainObject.transform.localPosition = new Vector3(0, 0);
 
-            spawnHori = isHorizontal;
+            isHorizontal = isHorizontalInEditMode();
         }
 
         if (isHorizontal) CreateChainsHorizontal();
@@ -76,6 +76,8 @@ public class ObjectMovingP2PSetup : MonoBehaviour
             mainObjPos = mainObjPosition;
         }
     }
+
+    private bool isHorizontalInEditMode() => objAxis.Equals(Axis.Horizontal);
 
     private void CreateChainsHorizontal()
     {
