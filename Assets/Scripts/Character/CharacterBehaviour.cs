@@ -17,7 +17,6 @@ public class CharacterBehaviour : MonoBehaviour
     [SerializeField]int jumpCount = 2;
     [SerializeField]bool isGrounded;
     [SerializeField]LayerMask ground;
-    [SerializeField]GameObject detectGround;
     [SerializeField]new CircleCollider2D collider2D;
     [SerializeField]Animator animator;
 

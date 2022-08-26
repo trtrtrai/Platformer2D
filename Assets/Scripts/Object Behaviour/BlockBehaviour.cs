@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BlockBehaviour : MonoBehaviour
 {
@@ -8,6 +9,9 @@ public class BlockBehaviour : MonoBehaviour
 
     [SerializeField]
     GameController controller;
+
+    [SerializeField]
+    GameObject eSymbol;
 
     private bool isDetect;
     private bool isInQues;
@@ -47,6 +51,8 @@ public class BlockBehaviour : MonoBehaviour
     {
         if (collision.gameObject.tag.Equals("Player"))
         {
+            PositionESymbol(collision.gameObject.transform.localPosition);
+            eSymbol.SetActive(true);
             isDetect = true;
         }
     }
@@ -55,10 +61,18 @@ public class BlockBehaviour : MonoBehaviour
     {
         if (collision.gameObject.tag.Equals("Player"))
         {
+            eSymbol.SetActive(false);
             isDetect = false;
         }
     }
 
+    private void PositionESymbol(Vector3 player)
+    {
+        var obj = gameObject.transform.localPosition;
+        if (player.x < obj.x) eSymbol.transform.localPosition = new Vector3(0.1f, 0.1f);
+        else if (player.x > obj.x) eSymbol.transform.localPosition = new Vector3(-0.1f, 0.1f);
+        //...
+    }
 
     private async Task Wait(int miliSec)
     {
