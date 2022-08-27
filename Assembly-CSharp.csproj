@@ -58,11 +58,14 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Object Behaviour\BlockBehaviour.cs" />
     <Compile Include="Assets\Scripts\Character\CharacterBehaviour.cs" />
+    <Compile Include="Assets\Scripts\Controller\QuestionManager.cs" />
     <Compile Include="Assets\Scripts\Object Behaviour\ObjectMovingP2PSetup.cs" />
     <Compile Include="Assets\Scripts\Object Behaviour\ObjectMovingP2P.cs" />
     <Compile Include="Assets\test.cs" />
     <Compile Include="Assets\Scripts\Controller\GameController.cs" />
     <Compile Include="Assets\Scripts\Object Behaviour\ObjectRotation.cs" />
+    <Compile Include="Assets\Scripts\Controller\CanvasController.cs" />
+    <Compile Include="Assets\Scripts\Model\Question.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
@@ -79,11 +82,13 @@
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Properties.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
+    <None Include="Assets\StreamingAssets\Answers.txt" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF Overlay.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Mobile.shader" />
     <None Include="Assets\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
+    <None Include="Assets\StreamingAssets\Questions.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Sprite.shader" />
   </ItemGroup>

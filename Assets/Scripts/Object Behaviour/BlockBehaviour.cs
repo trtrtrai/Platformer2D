@@ -8,7 +8,7 @@ public class BlockBehaviour : MonoBehaviour
     int timeToDestroy;
 
     [SerializeField]
-    GameController controller;
+    GameController gameController;
 
     [SerializeField]
     GameObject eSymbol;
@@ -32,19 +32,24 @@ public class BlockBehaviour : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
-                Debug.Log("Active");
-                isInQues = true;
-                GetComponent<Animator>().SetBool("isDestroy", true);
-                /*topPart.SetActive(true);
-                bottomPart.SetActive(true);*/
+                //Debug.Log("Active");
+                gameController.CanvasController.InstantiateUI(new GameController.ResourcesLoadEventHandler("Prefabs/", "QuestionUI", new Vector3(), true));
             }
         }
 
         if (isInQues)
         {
+            GetComponent<Animator>().SetBool("isDestroy", true);
             isInQues = false;
             wait?.Invoke(timeToDestroy);
         }
+    }
+
+    public void Answer(bool result)
+    {
+        isInQues = result;
+        if (result) Destroy(GameObject.Find("QuestionUI(Clone)").gameObject);
+        gameController.PopGameState();
     }
 
     private void OnCollisionStay2D(Collision2D collision)
@@ -77,17 +82,17 @@ public class BlockBehaviour : MonoBehaviour
     private async Task Wait(int miliSec)
     {
         await Task.Delay(miliSec);
-        Debug.Log(miliSec);
+        //Debug.Log(miliSec);
         gameObject.SetActive(false);
 
         var pos = gameObject.transform.localPosition;
         pos.x += 0.02f;
-        var obj = controller.InvokeResourcesLoad(gameObject, new GameController.ResourcesLoadEventHandler("Prefabs/", "Block_part_top", pos));
+        var obj = gameController.InvokeResourcesLoad(gameObject, new GameController.ResourcesLoadEventHandler("Prefabs/", "Block_part_top", pos));
         obj.GetComponent<Rigidbody2D>().AddForce(new Vector2(-1, 1.5f), ForceMode2D.Impulse);
 
         pos = gameObject.transform.localPosition;
         pos.x -= 0.04f;
-        obj = controller.InvokeResourcesLoad(gameObject, new GameController.ResourcesLoadEventHandler("Prefabs/", "Block_part_bottom", pos));
+        obj = gameController.InvokeResourcesLoad(gameObject, new GameController.ResourcesLoadEventHandler("Prefabs/", "Block_part_bottom", pos));
         obj.GetComponent<Rigidbody2D>().AddForce(new Vector2(1f, 1.5f), ForceMode2D.Impulse);
     }
 
