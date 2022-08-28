@@ -64,8 +64,8 @@
     <Compile Include="Assets\test.cs" />
     <Compile Include="Assets\Scripts\Controller\GameController.cs" />
     <Compile Include="Assets\Scripts\Object Behaviour\ObjectRotation.cs" />
-    <Compile Include="Assets\Scripts\Controller\CanvasController.cs" />
     <Compile Include="Assets\Scripts\Model\Question.cs" />
+    <Compile Include="Assets\Scripts\Controller\CanvasController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

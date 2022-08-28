@@ -33,7 +33,7 @@ public class BlockBehaviour : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.E))
             {
                 //Debug.Log("Active");
-                gameController.CanvasController.InstantiateUI(new GameController.ResourcesLoadEventHandler("Prefabs/", "QuestionUI", new Vector3(), true));
+                gameController.CanvasController.InstantiateUI(new ResourcesLoadEventHandler("Prefabs/", "QuestionUI", new Vector3(), true));
             }
         }
 
@@ -87,12 +87,12 @@ public class BlockBehaviour : MonoBehaviour
 
         var pos = gameObject.transform.localPosition;
         pos.x += 0.02f;
-        var obj = gameController.InvokeResourcesLoad(gameObject, new GameController.ResourcesLoadEventHandler("Prefabs/", "Block_part_top", pos));
+        var obj = gameController.InvokeResourcesLoad(gameObject, new ResourcesLoadEventHandler("Prefabs/", "Block_part_top", pos));
         obj.GetComponent<Rigidbody2D>().AddForce(new Vector2(-1, 1.5f), ForceMode2D.Impulse);
 
         pos = gameObject.transform.localPosition;
         pos.x -= 0.04f;
-        obj = gameController.InvokeResourcesLoad(gameObject, new GameController.ResourcesLoadEventHandler("Prefabs/", "Block_part_bottom", pos));
+        obj = gameController.InvokeResourcesLoad(gameObject, new ResourcesLoadEventHandler("Prefabs/", "Block_part_bottom", pos));
         obj.GetComponent<Rigidbody2D>().AddForce(new Vector2(1f, 1.5f), ForceMode2D.Impulse);
     }
 

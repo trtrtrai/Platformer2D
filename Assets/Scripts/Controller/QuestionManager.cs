@@ -4,15 +4,16 @@ using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using UnityEngine;
+using UnityEngine.UI;
+using System.Linq;
+using TMPro;
 
 public class QuestionManager : MonoBehaviour
 {
     [SerializeField]
     GameObject QuestContainer;
 
-    [SerializeField]
-    GameObject AnswerContainer;
-
+    private GameObject AnswerContainer;
     private CanvasController parent;
     private Question question;
     // Start is called before the first frame update
@@ -21,7 +22,8 @@ public class QuestionManager : MonoBehaviour
         parent = gameObject.transform.parent.gameObject.GetComponent<CanvasController>();
         parent.SetState(GameState.QuestionDisplay);
         question = ChooseAQuestion();
-        //Debug.Log(question.Quest + " " + question.CorrectIndex);
+        LoadQuestionScene();
+        //Debug.Log(question.Quest + " " + question.Type);
     }
 
     private Question ChooseAQuestion()
@@ -37,10 +39,21 @@ public class QuestionManager : MonoBehaviour
         }       
     }
 
-    // Update is called once per frame
-    void Update()
+    private void LoadQuestionScene()
     {
-        
+        switch (question.Type)
+        {
+            case QuestionType.OneTrue:
+                AnswerContainer = parent.InstantiateUI(QuestContainer, new ResourcesLoadEventHandler("Prefabs/", "OneTrueAnswer", new Vector3(), QuestContainer.transform));
+                var tmp = QuestContainer.GetComponentInChildren<TMP_Text>();
+                tmp.text = question.Quest;
+                List<Button> buttons = AnswerContainer.GetComponentsInChildren<Button>().ToList();
+                for (int i=0;i<buttons.Count;i++)
+                {
+                    buttons[i].GetComponentInChildren<TMP_Text>().text = question.Answers[i];
+                }
+                break;
+        }
     }
 
     private void OnDestroy()
