@@ -9,12 +9,12 @@
 			"Type":0,
 			"Quest":"Giai đoạn 1966-1975, trường Đại học Cần Thơ có bao nhiêu cơ sở?",
 			"Answers":["1","2","4","7"],
-			"CorrectIndex":3
+			"CorrectIndex":2
 		},
 		{
 			"Type":0,
 			"Quest":"Năm 2022, hiệu trường trường ĐHCT là ai?",
 			"Answers":["Trần Trung Tín","Nguyễn Hiếu Trung","Trần Ngọc Hải","Hà Thành Toàn"],
-			"CorrectIndex":4
+			"CorrectIndex":3
 		},
 ]

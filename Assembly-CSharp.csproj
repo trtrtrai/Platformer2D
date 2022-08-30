@@ -62,9 +62,10 @@
     <Compile Include="Assets\Scripts\Object Behaviour\ObjectMovingP2PSetup.cs" />
     <Compile Include="Assets\Scripts\Object Behaviour\ObjectMovingP2P.cs" />
     <Compile Include="Assets\test.cs" />
+    <Compile Include="Assets\Scripts\Model\Question.cs" />
     <Compile Include="Assets\Scripts\Controller\GameController.cs" />
     <Compile Include="Assets\Scripts\Object Behaviour\ObjectRotation.cs" />
-    <Compile Include="Assets\Scripts\Model\Question.cs" />
+    <Compile Include="Assets\Scripts\Model\QuestionData.cs" />
     <Compile Include="Assets\Scripts\Controller\CanvasController.cs" />
   </ItemGroup>
   <ItemGroup>

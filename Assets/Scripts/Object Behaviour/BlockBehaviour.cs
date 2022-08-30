@@ -16,6 +16,7 @@ public class BlockBehaviour : MonoBehaviour
     private bool isDetect;
     private bool isInQues;
     private WaitToDisable wait;
+    private GameObject QuestionObj;
 
     // Start is called before the first frame update
     void Start()
@@ -33,7 +34,8 @@ public class BlockBehaviour : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.E))
             {
                 //Debug.Log("Active");
-                gameController.CanvasController.InstantiateUI(new ResourcesLoadEventHandler("Prefabs/", "QuestionUI", new Vector3(), true));
+                QuestionObj = gameController.CanvasController.InstantiateUI(new ResourcesLoadEventHandler("Prefabs/", "QuestionUI", new Vector3(), true));
+                //QuestionObj.GetComponent<QuestionManager>().
             }
         }
 
