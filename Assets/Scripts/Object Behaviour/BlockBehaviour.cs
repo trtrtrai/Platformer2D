@@ -13,15 +13,17 @@ public class BlockBehaviour : MonoBehaviour
     [SerializeField]
     GameObject eSymbol;
 
+    [SerializeField]
+    [Range(30f, 180f)]
+    float timeForAnswer;
+
     private bool isDetect;
-    private bool isInQues;
     private WaitToDisable wait;
     private GameObject QuestionObj;
 
     // Start is called before the first frame update
     void Start()
     {
-        isInQues = false;
         wait += Wait;
         //wait.Invoke(500);
     }
@@ -35,23 +37,27 @@ public class BlockBehaviour : MonoBehaviour
             {
                 //Debug.Log("Active");
                 QuestionObj = gameController.CanvasController.InstantiateUI(new ResourcesLoadEventHandler("Prefabs/", "QuestionUI", new Vector3(), true));
-                //QuestionObj.GetComponent<QuestionManager>().
+                var questMng = QuestionObj.GetComponent<QuestionManager>();
+                questMng.Sender += Answer;
+                questMng.TimeAnswer = timeForAnswer;
             }
-        }
-
-        if (isInQues)
-        {
-            GetComponent<Animator>().SetBool("isDestroy", true);
-            isInQues = false;
-            wait?.Invoke(timeToDestroy);
         }
     }
 
     public void Answer(bool result)
     {
-        isInQues = result;
-        if (result) Destroy(GameObject.Find("QuestionUI(Clone)").gameObject);
+        Destroy(QuestionObj);
         gameController.PopGameState();
+
+        if (result) 
+        {     
+            GetComponent<Animator>().SetBool("isDestroy", true);
+            wait?.Invoke(timeToDestroy);
+        }
+        else
+        {
+            Debug.Log("Wrong answer");
+        }
     }
 
     private void OnCollisionStay2D(Collision2D collision)

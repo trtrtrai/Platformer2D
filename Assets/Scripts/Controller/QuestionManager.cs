@@ -1,13 +1,12 @@
 using Newtonsoft.Json;
-using System.Collections;
 using System.Collections.Generic;
-using System.Data;
 using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
 using TMPro;
 
+[RequireComponent(typeof(Timer))]
 public class QuestionManager : MonoBehaviour
 {
     [SerializeField]
@@ -18,15 +17,26 @@ public class QuestionManager : MonoBehaviour
     private Question question;
     private List<Button> buttons;
     private List<int> exceptedBtns;
+    private Timer timer;
+
+    public SendResultToCaller Sender;
+    public float TimeAnswer;
     // Start is called before the first frame update
     void Start()
     {
         parent = gameObject.transform.parent.gameObject.GetComponent<CanvasController>();
         parent.SetState(GameState.QuestionDisplay);
         question = new Question(ChooseAQuestion());
+        timer = gameObject.GetComponent<Timer>();
 
         LoadQuestionScene();
         //Debug.Log(question.Quest + " " + question.Type);
+    }
+
+    private void Update()
+    {
+        TimeAnswer -= Time.deltaTime;
+        timer.UpdateTimer(TimeAnswer);
     }
 
     private QuestionData ChooseAQuestion()
@@ -61,12 +71,21 @@ public class QuestionManager : MonoBehaviour
                     buttons[t].GetComponentInChildren<TMP_Text>().text = answers[t];
                     buttons[t].onClick.AddListener(() => 
                     {
-                        if (question.CheckingResult(t)) buttons[t].gameObject.GetComponent<Image>().color = new Color(0, 1, 0);
-                        else
+                        var result = question.CheckingResult(t);
+
+                        if (exceptedBtns.Count == 0)
                         {
-                            if (exceptedBtns.Count == 0) buttons[t].gameObject.GetComponent<Image>().color = new Color(1, 59/255, 59/255);
-                            FindRightButton(t);
+                            Sender?.Invoke(result);
+
+                            if (result) buttons[t].gameObject.GetComponent<Image>().color = new Color(0, 1, 0);
+                            else
+                            {
+                                buttons[t].gameObject.GetComponent<Image>().color = new Color(1, 59 / 255, 59 / 255);
+                                
+                            }
                         }
+                        else if (result) buttons[t].gameObject.GetComponent<Image>().color = new Color(0, 1, 0);
+                        else FindRightButton(t);
 
                         buttons[t].onClick.RemoveAllListeners();
                     });
@@ -99,4 +118,6 @@ public class QuestionManager : MonoBehaviour
     {
         
     }
+
+    public delegate void SendResultToCaller(bool result);
 }

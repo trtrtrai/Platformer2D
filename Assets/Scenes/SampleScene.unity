@@ -545,6 +545,7 @@ MonoBehaviour:
   timeToDestroy: 500
   gameController: {fileID: 172168250}
   eSymbol: {fileID: 1673751997}
+  timeForAnswer: 30
 --- !u!1 &172168248
 GameObject:
   m_ObjectHideFlags: 0
