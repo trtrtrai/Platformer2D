@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
 using TMPro;
+using System.Threading.Tasks;
 
 [RequireComponent(typeof(Timer))]
 public class QuestionManager : MonoBehaviour
@@ -19,7 +20,7 @@ public class QuestionManager : MonoBehaviour
     private List<int> exceptedBtns;
     private Timer timer;
 
-    public SendResultToCaller Sender;
+    public event SendResultToCaller Sender;
     public float TimeAnswer;
     // Start is called before the first frame update
     void Start()
@@ -28,6 +29,7 @@ public class QuestionManager : MonoBehaviour
         parent.SetState(GameState.QuestionDisplay);
         question = new Question(ChooseAQuestion());
         timer = gameObject.GetComponent<Timer>();
+        timer.TimeOutAsyncEvent += TimeOutAsyncHandle;
 
         LoadQuestionScene();
         //Debug.Log(question.Quest + " " + question.Type);
@@ -35,8 +37,20 @@ public class QuestionManager : MonoBehaviour
 
     private void Update()
     {
-        TimeAnswer -= Time.deltaTime;
-        timer.UpdateTimer(TimeAnswer);
+        if (TimeAnswer > 0)
+        {
+            TimeAnswer -= Time.unscaledDeltaTime;
+            timer.UpdateTimer(TimeAnswer);
+        }
+    }
+
+    private async Task TimeOutAsyncHandle()
+    {
+        // Message box notify
+        var obj = parent.InstantiateUI(new ResourcesLoadEventHandler("Prefabs/", "NotificationUI", new Vector3(), true));
+        await Task.Delay(3000);
+        Destroy(obj);
+        Sender?.Invoke(false);
     }
 
     private QuestionData ChooseAQuestion()
@@ -81,7 +95,7 @@ public class QuestionManager : MonoBehaviour
                             else
                             {
                                 buttons[t].gameObject.GetComponent<Image>().color = new Color(1, 59 / 255, 59 / 255);
-                                
+                                FindRightButton(t);
                             }
                         }
                         else if (result) buttons[t].gameObject.GetComponent<Image>().color = new Color(0, 1, 0);
@@ -116,8 +130,12 @@ public class QuestionManager : MonoBehaviour
 
     private void OnDestroy()
     {
-        
+        parent.PopState();
+        timer.TimeOutAsyncEvent -= TimeOutAsyncHandle;
+        question.UnSubQuestionResult();
     }
+
+    public void UnSubSender(SendResultToCaller action) => Sender -= action;
 
     public delegate void SendResultToCaller(bool result);
 }

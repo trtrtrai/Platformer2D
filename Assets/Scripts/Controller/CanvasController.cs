@@ -24,4 +24,6 @@ public class CanvasController : MonoBehaviour
     public GameObject InstantiateUI(GameObject parent, ResourcesLoadEventHandler args) => gameController.InvokeResourcesLoad(parent, args);
 
     public void SetState(GameState type) => gameController.SetGameState(type);
+
+    public void PopState() => gameController.PopGameState();
 }

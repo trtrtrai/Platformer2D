@@ -62,6 +62,8 @@ public class Question
         rawData.Answers[i2] = c;
     }
 
+    public void UnSubQuestionResult() => QuestionResult -= isTrue;
+
     public bool CheckingResult(int choice) => QuestionResult.Invoke(choice);
 
     public delegate bool CorrectChoice(int choice);

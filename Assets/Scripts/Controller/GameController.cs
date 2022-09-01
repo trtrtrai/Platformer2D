@@ -73,7 +73,7 @@ public enum GameState
 {
     GameDisplay,
     QuestionDisplay,
-
+    NotificationDisplay,
 }
 
 public enum QuestionType

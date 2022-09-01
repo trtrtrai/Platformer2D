@@ -61,13 +61,14 @@
     <Compile Include="Assets\Scripts\Controller\QuestionManager.cs" />
     <Compile Include="Assets\Scripts\Object Behaviour\ObjectMovingP2PSetup.cs" />
     <Compile Include="Assets\Scripts\Object Behaviour\ObjectMovingP2P.cs" />
+    <Compile Include="Assets\Scripts\Model\MessageContainer.cs" />
     <Compile Include="Assets\test.cs" />
     <Compile Include="Assets\Scripts\Model\Question.cs" />
+    <Compile Include="Assets\Scripts\Model\Timer.cs" />
     <Compile Include="Assets\Scripts\Controller\GameController.cs" />
     <Compile Include="Assets\Scripts\Object Behaviour\ObjectRotation.cs" />
     <Compile Include="Assets\Scripts\Model\QuestionData.cs" />
     <Compile Include="Assets\Scripts\Controller\CanvasController.cs" />
-    <Compile Include="Assets\Scripts\Model\Timer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

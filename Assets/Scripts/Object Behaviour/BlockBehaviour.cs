@@ -1,6 +1,8 @@
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
+using static UnityEngine.Networking.UnityWebRequest;
 
 public class BlockBehaviour : MonoBehaviour
 {
@@ -18,7 +20,7 @@ public class BlockBehaviour : MonoBehaviour
     float timeForAnswer;
 
     private bool isDetect;
-    private WaitToDisable wait;
+    private event WaitToDisable wait;
     private GameObject QuestionObj;
 
     // Start is called before the first frame update
@@ -40,17 +42,26 @@ public class BlockBehaviour : MonoBehaviour
                 var questMng = QuestionObj.GetComponent<QuestionManager>();
                 questMng.Sender += Answer;
                 questMng.TimeAnswer = timeForAnswer;
+                Time.timeScale = 0; // Pause game
             }
         }
     }
 
-    public void Answer(bool result)
+    private void Answer(bool result)
     {
-        Destroy(QuestionObj);
-        gameController.PopGameState();
+        QuestionObj.GetComponent<QuestionManager>().UnSubSender(Answer);
+        StartCoroutine(StopToSeeResult(3, result));
+    }
 
-        if (result) 
-        {     
+    private IEnumerator StopToSeeResult(float s, bool result)
+    {
+        yield return new WaitForSecondsRealtime(s);
+
+        Destroy(QuestionObj);
+        Time.timeScale = 1;
+
+        if (result)
+        {
             GetComponent<Animator>().SetBool("isDestroy", true);
             wait?.Invoke(timeToDestroy);
         }
@@ -91,8 +102,9 @@ public class BlockBehaviour : MonoBehaviour
     {
         await Task.Delay(miliSec);
         //Debug.Log(miliSec);
-        gameObject.SetActive(false);
+        Destroy(gameObject);
 
+        // block will break some parts when destroy
         var pos = gameObject.transform.localPosition;
         pos.x += 0.02f;
         var obj = gameController.InvokeResourcesLoad(gameObject, new ResourcesLoadEventHandler("Prefabs/", "Block_part_top", pos));
@@ -102,6 +114,11 @@ public class BlockBehaviour : MonoBehaviour
         pos.x -= 0.04f;
         obj = gameController.InvokeResourcesLoad(gameObject, new ResourcesLoadEventHandler("Prefabs/", "Block_part_bottom", pos));
         obj.GetComponent<Rigidbody2D>().AddForce(new Vector2(1f, 1.5f), ForceMode2D.Impulse);
+    }
+
+    private void OnDestroy()
+    {
+        wait -= Wait;
     }
 
     private delegate Task WaitToDisable(int sec);
