@@ -19,6 +19,7 @@ public class QuestionManager : MonoBehaviour
     private List<Button> buttons;
     private List<int> exceptedBtns;
     private Timer timer;
+    private bool isChosen = false;
 
     public event SendResultToCaller Sender;
     public float TimeAnswer;
@@ -37,7 +38,7 @@ public class QuestionManager : MonoBehaviour
 
     private void Update()
     {
-        if (TimeAnswer > 0)
+        if (TimeAnswer > 0 && !isChosen)
         {
             TimeAnswer -= Time.unscaledDeltaTime;
             timer.UpdateTimer(TimeAnswer);
@@ -46,11 +47,13 @@ public class QuestionManager : MonoBehaviour
 
     private async Task TimeOutAsyncHandle()
     {
+        // Disable buttons
+        buttons.ForEach((b) => b.enabled = false);
         // Message box notify
         var obj = parent.InstantiateUI(new ResourcesLoadEventHandler("Prefabs/", "NotificationUI", new Vector3(), true));
-        await Task.Delay(3000);
-        Destroy(obj);
         Sender?.Invoke(false);
+        await Task.Delay(3000);
+        Destroy(obj);     
     }
 
     private QuestionData ChooseAQuestion()
@@ -89,6 +92,7 @@ public class QuestionManager : MonoBehaviour
 
                         if (exceptedBtns.Count == 0)
                         {
+                            isChosen = true;
                             Sender?.Invoke(result);
 
                             if (result) buttons[t].gameObject.GetComponent<Image>().color = new Color(0, 1, 0);

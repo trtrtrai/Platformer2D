@@ -1,9 +1,8 @@
 using System.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.UI;
 using System.Collections;
-using static UnityEngine.Networking.UnityWebRequest;
 
+[RequireComponent(typeof(BlockSetup))]
 public class BlockBehaviour : MonoBehaviour
 {
     [SerializeField]
@@ -22,12 +21,16 @@ public class BlockBehaviour : MonoBehaviour
     private bool isDetect;
     private event WaitToDisable wait;
     private GameObject QuestionObj;
+    private BlockSetup setup;
 
     // Start is called before the first frame update
     void Start()
     {
         wait += Wait;
         //wait.Invoke(500);
+
+        setup = gameObject.GetComponent<BlockSetup>();
+        setup.enabled = false;
     }
 
     // Update is called once per frame
@@ -62,7 +65,7 @@ public class BlockBehaviour : MonoBehaviour
 
         if (result)
         {
-            GetComponent<Animator>().SetBool("isDestroy", true);
+            setup.PlayAnimation();
             wait?.Invoke(timeToDestroy);
         }
         else
@@ -92,28 +95,29 @@ public class BlockBehaviour : MonoBehaviour
 
     private void PositionESymbol(Vector3 player)
     {
-        var obj = gameObject.transform.localPosition;
-        if (player.x < obj.x) eSymbol.transform.localPosition = new Vector3(0.1f, 0.1f);
-        else if (player.x > obj.x) eSymbol.transform.localPosition = new Vector3(-0.1f, 0.1f);
-        //...
+        var box = gameObject.GetComponent<BoxCollider2D>();
+        var obj = gameObject.transform.localPosition + new Vector3(box.offset.x, box.offset.y);
+        switch (setup.ObjAxis)
+        {
+            case Axis.Horizontal:
+                if (player.x < obj.x) eSymbol.transform.localPosition = new Vector3(0.1f + box.size.x - 0.16f, 0.1f);
+                else if (player.x > obj.x) eSymbol.transform.localPosition = new Vector3(-0.1f, 0.1f);
+                break;
+            case Axis.Vertical:
+                if (player.x < obj.x) eSymbol.transform.localPosition = new Vector3(0.1f, 0.1f + box.size.y - 0.16f);
+                else if (player.x > obj.x) eSymbol.transform.localPosition = new Vector3(-0.1f, 0.1f + box.size.y - 0.16f);
+                break;
+        }
+        
     }
 
     private async Task Wait(int miliSec)
     {
         await Task.Delay(miliSec);
         //Debug.Log(miliSec);
+
+        setup.OnParentDestroy(gameController);
         Destroy(gameObject);
-
-        // block will break some parts when destroy
-        var pos = gameObject.transform.localPosition;
-        pos.x += 0.02f;
-        var obj = gameController.InvokeResourcesLoad(gameObject, new ResourcesLoadEventHandler("Prefabs/", "Block_part_top", pos));
-        obj.GetComponent<Rigidbody2D>().AddForce(new Vector2(-1, 1.5f), ForceMode2D.Impulse);
-
-        pos = gameObject.transform.localPosition;
-        pos.x -= 0.04f;
-        obj = gameController.InvokeResourcesLoad(gameObject, new ResourcesLoadEventHandler("Prefabs/", "Block_part_bottom", pos));
-        obj.GetComponent<Rigidbody2D>().AddForce(new Vector2(1f, 1.5f), ForceMode2D.Impulse);
     }
 
     private void OnDestroy()
