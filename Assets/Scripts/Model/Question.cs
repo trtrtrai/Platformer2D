@@ -24,10 +24,19 @@ public class Question
         Debug.Log(rawData.Answers[1] + " old:" + data.Answers[1]);*/
     }
 
-    private bool isTrue(int i)
+    private bool isTrue(List<int> listAnswers)
     {
-        //Debug.Log($"{i} - {i == rawData.CorrectIndex}");
-        return i == rawData.CorrectIndex;
+        // remove same index in list
+        // {code}
+
+        if (listAnswers.Count != rawData.CorrectIndex.Count) return false;
+
+        foreach (var item in listAnswers)
+        {
+            if (!rawData.CorrectIndex.Contains(item)) return false;
+        }
+
+        return true;
     }
 
     public List<string> GetAnswers()
@@ -46,8 +55,8 @@ public class Question
                 {
                     int index1 = Random.Range(0, rawData.Answers.Count); // Index will be swap 0 to Count-1
                     int index2 = Random.Range(0, rawData.Answers.Count); // Index will be swap
-                    if (index1 == rawData.CorrectIndex) rawData.CorrectIndex = index2; // Change CorrectIndex
-                    else if (index2 == rawData.CorrectIndex) rawData.CorrectIndex = index1; // Change CorrectIndex
+                    if (index1 == rawData.CorrectIndex[0]) rawData.CorrectIndex[0] = index2; // Change CorrectIndex
+                    else if (index2 == rawData.CorrectIndex[0]) rawData.CorrectIndex[0] = index1; // Change CorrectIndex
                     //Debug.Log($"Swap {index1} and  {index2} - {rawData.CorrectIndex}");
                     Swap(index1, index2);
                 }
@@ -64,7 +73,7 @@ public class Question
 
     public void UnSubQuestionResult() => QuestionResult -= isTrue;
 
-    public bool CheckingResult(int choice) => QuestionResult.Invoke(choice);
+    public bool CheckingResult(List<int> choice) => QuestionResult.Invoke(choice);
 
-    public delegate bool CorrectChoice(int choice);
+    public delegate bool CorrectChoice(List<int> choice);
 }

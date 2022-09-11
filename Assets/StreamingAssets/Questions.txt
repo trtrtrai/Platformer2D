@@ -3,18 +3,24 @@
 			"Type":0,
 			"Quest":"Năm 2022, Đại học Cần Thơ vừa chào đón khóa thứ mấy vào trường?",
 			"Answers":["K45","K46","K47","K48"],
-			"CorrectIndex":3
+			"CorrectIndex":[3]
 		},
 		{
 			"Type":0,
 			"Quest":"Giai đoạn 1966-1975, trường Đại học Cần Thơ có bao nhiêu cơ sở?",
 			"Answers":["1","2","4","7"],
-			"CorrectIndex":2
+			"CorrectIndex":[2]
 		},
 		{
 			"Type":0,
 			"Quest":"Năm 2022, hiệu trường trường ĐHCT là ai?",
 			"Answers":["Trần Trung Tín","Nguyễn Hiếu Trung","Trần Ngọc Hải","Hà Thành Toàn"],
-			"CorrectIndex":3
+			"CorrectIndex":[3]
+		},
+		{
+			"Type":1,
+			"Quest":"Hãy chọn tất cả các khu thuộc Đại học Cần Thơ tính đến năm 2022!",
+			"Answers":["Khu I","Khu II","Khu III","Khu Hòa An", "Khu Măng Đen", "Khu Vĩnh Châu"],
+			"CorrectIndex":[0, 1, 2, 3, 4, 5]
 		},
 ]

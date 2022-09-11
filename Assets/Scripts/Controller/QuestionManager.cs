@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using System.Linq;
 using TMPro;
 using System.Threading.Tasks;
+using static CustomRandom;
 
 [RequireComponent(typeof(Timer))]
 public class QuestionManager : MonoBehaviour
@@ -50,7 +51,7 @@ public class QuestionManager : MonoBehaviour
         // Disable buttons
         buttons.ForEach((b) => b.enabled = false);
         // Message box notify
-        var obj = parent.InstantiateUI(new ResourcesLoadEventHandler("Prefabs/", "NotificationUI", new Vector3(), true));
+        var obj = parent.InstantiateUI(new ResourcesLoadEventHandler("Prefabs/UI/Notification/", "NotificationUI", new Vector3(), true));
         Sender?.Invoke(false);
         await Task.Delay(3000);
         Destroy(obj);     
@@ -63,7 +64,7 @@ public class QuestionManager : MonoBehaviour
         using (JsonReader jReader = new JsonTextReader(sReader))
         {
             var questions = serializer.Deserialize<List<QuestionData>>(jReader);
-            int num = Random.Range(0, questions.Count - 1);
+            int num = RdPositiveRange(questions.Count);
             //Debug.Log(num);
             return questions[num];
         }       
@@ -77,7 +78,7 @@ public class QuestionManager : MonoBehaviour
                 var tmp = QuestContainer.GetComponentInChildren<TMP_Text>();
                 tmp.text = question.Quest;
 
-                AnswerContainer = parent.InstantiateUI(QuestContainer, new ResourcesLoadEventHandler("Prefabs/", "OneTrueAnswer", new Vector3(), QuestContainer.transform));
+                AnswerContainer = parent.InstantiateUI(QuestContainer, new ResourcesLoadEventHandler("Prefabs/UI/Question/OneTrue/", "OneTrueAnswer", new Vector3(), QuestContainer.transform));
                 buttons = AnswerContainer.GetComponentsInChildren<Button>().ToList();
                 exceptedBtns = new List<int>();
 
@@ -88,7 +89,7 @@ public class QuestionManager : MonoBehaviour
                     buttons[t].GetComponentInChildren<TMP_Text>().text = answers[t];
                     buttons[t].onClick.AddListener(() => 
                     {
-                        var result = question.CheckingResult(t);
+                        var result = question.CheckingResult(new List<int>() { t});
 
                         if (exceptedBtns.Count == 0)
                         {
@@ -108,6 +109,8 @@ public class QuestionManager : MonoBehaviour
                         buttons[t].onClick.RemoveAllListeners();
                     });
                 }
+                break;
+            case QuestionType.MultipleTrue:
                 break;
         }
     }

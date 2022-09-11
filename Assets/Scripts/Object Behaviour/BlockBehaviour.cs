@@ -41,7 +41,7 @@ public class BlockBehaviour : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.E))
             {
                 //Debug.Log("Active");
-                QuestionObj = gameController.CanvasController.InstantiateUI(new ResourcesLoadEventHandler("Prefabs/", "QuestionUI", new Vector3(), true));
+                QuestionObj = gameController.CanvasController.InstantiateUI(new ResourcesLoadEventHandler("Prefabs/UI/Question/", "QuestionUI", new Vector3(), true));
                 var questMng = QuestionObj.GetComponent<QuestionManager>();
                 questMng.Sender += Answer;
                 questMng.TimeAnswer = timeForAnswer;

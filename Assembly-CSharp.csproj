@@ -65,6 +65,7 @@
     <Compile Include="Assets\Scripts\Model\BlockSetup.cs" />
     <Compile Include="Assets\test.cs" />
     <Compile Include="Assets\Scripts\Object Behaviour\DestroyAfter.cs" />
+    <Compile Include="Assets\Scripts\Others\CustomRandom.cs" />
     <Compile Include="Assets\Scripts\Model\Question.cs" />
     <Compile Include="Assets\Scripts\Model\Timer.cs" />
     <Compile Include="Assets\Scripts\Controller\GameController.cs" />
