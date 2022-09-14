@@ -40,7 +40,7 @@ public class GameController : MonoBehaviour
         }
         else obj = Instantiate(Resources.Load<GameObject>(args.Path + args.ObjectName));
 
-        if (args.Position != new Vector3()) obj.transform.localPosition = args.Position;
+        if (args.Position != Vector3.zero) obj.transform.localPosition = args.Position;
 
         return obj;
     }

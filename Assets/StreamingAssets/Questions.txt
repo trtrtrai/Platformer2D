@@ -20,7 +20,7 @@
 		{
 			"Type":1,
 			"Quest":"Hãy chọn tất cả các khu thuộc Đại học Cần Thơ tính đến năm 2022!",
-			"Answers":["Khu I","Khu II","Khu III","Khu Hòa An", "Khu Măng Đen", "Khu Vĩnh Châu"],
-			"CorrectIndex":[0, 1, 2, 3, 4, 5]
+			"Answers":["Khu I","Khu II","Khu III","Khu IV","Khu Hòa An", "Khu Măng Đen", "Khu Vĩnh Châu"],
+			"CorrectIndex":[0,1,2,4,5,6]
 		},
 ]

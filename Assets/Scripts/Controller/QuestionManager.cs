@@ -7,6 +7,7 @@ using System.Linq;
 using TMPro;
 using System.Threading.Tasks;
 using static CustomRandom;
+using static UnityEngine.UI.Toggle;
 
 [RequireComponent(typeof(Timer))]
 public class QuestionManager : MonoBehaviour
@@ -17,8 +18,6 @@ public class QuestionManager : MonoBehaviour
     private GameObject AnswerContainer;
     private CanvasController parent;
     private Question question;
-    private List<Button> buttons;
-    private List<int> exceptedBtns;
     private Timer timer;
     private bool isChosen = false;
 
@@ -48,8 +47,8 @@ public class QuestionManager : MonoBehaviour
 
     private async Task TimeOutAsyncHandle()
     {
-        // Disable buttons
-        buttons.ForEach((b) => b.enabled = false);
+        // Disable buttons (OneTrue only???)
+        //buttons.ForEach((b) => b.enabled = false);
         // Message box notify
         var obj = parent.InstantiateUI(new ResourcesLoadEventHandler("Prefabs/UI/Notification/", "NotificationUI", new Vector3(), true));
         Sender?.Invoke(false);
@@ -72,17 +71,17 @@ public class QuestionManager : MonoBehaviour
 
     private void LoadQuestionScene()
     {
+        var tmp = QuestContainer.GetComponentInChildren<TMP_Text>();
+        tmp.text = question.Quest;
+        var answers = question.GetAnswers();
+
         switch (question.Type)
         {
             case QuestionType.OneTrue:
-                var tmp = QuestContainer.GetComponentInChildren<TMP_Text>();
-                tmp.text = question.Quest;
-
                 AnswerContainer = parent.InstantiateUI(QuestContainer, new ResourcesLoadEventHandler("Prefabs/UI/Question/OneTrue/", "OneTrueAnswer", new Vector3(), QuestContainer.transform));
-                buttons = AnswerContainer.GetComponentsInChildren<Button>().ToList();
-                exceptedBtns = new List<int>();
-
-                var answers = question.GetAnswers();
+                var script = AnswerContainer.GetComponent<OneTrue>();
+                var buttons = script.Buttons;
+             
                 for (int i=0;i<buttons.Count;i++)
                 {
                     var t = i;
@@ -91,47 +90,51 @@ public class QuestionManager : MonoBehaviour
                     {
                         var result = question.CheckingResult(new List<int>() { t});
 
-                        if (exceptedBtns.Count == 0)
+                        if (script.ButtonClicked() == 0)
                         {
                             isChosen = true;
-                            Sender?.Invoke(result);
-
-                            if (result) buttons[t].gameObject.GetComponent<Image>().color = new Color(0, 1, 0);
-                            else
-                            {
-                                buttons[t].gameObject.GetComponent<Image>().color = new Color(1, 59 / 255, 59 / 255);
-                                FindRightButton(t);
-                            }
+                            Sender?.Invoke(result);                      
                         }
-                        else if (result) buttons[t].gameObject.GetComponent<Image>().color = new Color(0, 1, 0);
-                        else FindRightButton(t);
+                        script.AfterCheck(t, result, !result);
 
                         buttons[t].onClick.RemoveAllListeners();
                     });
                 }
                 break;
             case QuestionType.MultipleTrue:
+                AnswerContainer = parent.InstantiateUI(QuestContainer, new ResourcesLoadEventHandler("Prefabs/UI/Question/MultipleTrue/", "MultipleTrueAnswer", new Vector3(), true));
+                parent.InstantiateUI(gameObject, new ResourcesLoadEventHandler("Prefabs/UI/Question/MultipleTrue/", "ToggleFalseGuide", new Vector3(), true));
+                parent.InstantiateUI(gameObject, new ResourcesLoadEventHandler("Prefabs/UI/Question/MultipleTrue/", "ToggleTrueGuide", new Vector3(), true));
+                var content = AnswerContainer.GetComponent<MultipleTrue>().Content;
+
+                answers.ForEach((a) => {
+                    var obj = parent.InstantiateUI(content, new ResourcesLoadEventHandler("Prefabs/UI/Question/MultipleTrue/", "MultipleAnswer", new Vector3(), true));
+
+                    var label = obj.GetComponentInChildren<TMP_Text>();
+                    label.text = a;
+
+                    obj.GetComponent<Toggle>().onValueChanged.AddListener((t) => {
+                        if (t) label.color = new Color(0, 129/255, 1);
+                        else label.color = new Color(0, 0, 0);
+                    });
+                    obj.GetComponent<Toggle>().isOn = false;
+                });
+
+                var btnCheck = parent.InstantiateUI(gameObject, new ResourcesLoadEventHandler("Prefabs/UI/Question/MultipleTrue/", "CheckMultipleTrue", new Vector3(), true)).GetComponentInChildren<Button>();
+                btnCheck.onClick.AddListener(() =>{
+                    content.GetComponentsInChildren<Toggle>().ToList().ForEach((t) => { 
+                        t.interactable = false; 
+                        t.onValueChanged.RemoveAllListeners();
+                    });
+
+                    //...
+
+                    btnCheck.interactable = false;
+                    btnCheck.GetComponentInChildren<TMP_Text>().GetComponent<RectTransform>().anchorMax = new Vector2(1, 0.75f);
+                    // can decor linear color for TextMeshPro...
+                    btnCheck.onClick.RemoveAllListeners();
+                });
                 break;
-        }
-    }
-
-    private void FindRightButton(int except)
-    {
-        exceptedBtns.Add(except);
-
-        for (int i = 0; i < buttons.Count; i++)
-        {
-            var isInvoke = true;
-            for (int j = 0; j < exceptedBtns.Count; j++)
-            {
-                if (i == exceptedBtns[j])
-                {
-                    isInvoke = false;
-                    break;
-                }
-            }
-
-            if (isInvoke) buttons[i].onClick.Invoke();
         }
     }
 
