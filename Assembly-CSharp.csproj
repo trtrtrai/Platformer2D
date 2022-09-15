@@ -64,6 +64,7 @@
     <Compile Include="Assets\Scripts\Model\MessageContainer.cs" />
     <Compile Include="Assets\Scripts\Model\BlockSetup.cs" />
     <Compile Include="Assets\test.cs" />
+    <Compile Include="Assets\Scripts\Model\OneTrue.cs" />
     <Compile Include="Assets\Scripts\Model\MultipleTrue.cs" />
     <Compile Include="Assets\Scripts\Object Behaviour\DestroyAfter.cs" />
     <Compile Include="Assets\Scripts\Others\CustomRandom.cs" />
@@ -73,7 +74,7 @@
     <Compile Include="Assets\Scripts\Object Behaviour\ObjectRotation.cs" />
     <Compile Include="Assets\Scripts\Model\QuestionData.cs" />
     <Compile Include="Assets\Scripts\Controller\CanvasController.cs" />
-    <Compile Include="Assets\Scripts\Model\OneTrue.cs" />
+    <Compile Include="Assets\Scripts\Interfaces\IQuest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

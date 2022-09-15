@@ -140,6 +140,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Content: {fileID: 6915347037811382659}
+  onColor: {r: 0, g: 0.5058824, b: 1, a: 1}
+  offColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!1 &6915347037811382659
 GameObject:
   m_ObjectHideFlags: 0

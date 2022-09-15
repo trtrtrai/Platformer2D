@@ -7,6 +7,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1420450986660111059, guid: 9dbeeec6ff53fcc4d93ec346952253ad, type: 3}
+      propertyPath: LabelTrue.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1420450986660111059, guid: 9dbeeec6ff53fcc4d93ec346952253ad, type: 3}
+      propertyPath: LabelTrue.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1420450986660111059, guid: 9dbeeec6ff53fcc4d93ec346952253ad, type: 3}
+      propertyPath: LabelFalse.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1420450986660111059, guid: 9dbeeec6ff53fcc4d93ec346952253ad, type: 3}
+      propertyPath: LabelFalse.b
+      value: 0.23137255
+      objectReference: {fileID: 0}
+    - target: {fileID: 1420450986660111059, guid: 9dbeeec6ff53fcc4d93ec346952253ad, type: 3}
+      propertyPath: LabelFalse.g
+      value: 0.23137255
+      objectReference: {fileID: 0}
+    - target: {fileID: 1420450986660111059, guid: 9dbeeec6ff53fcc4d93ec346952253ad, type: 3}
+      propertyPath: LabelFalse.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5361929989157206536, guid: 9dbeeec6ff53fcc4d93ec346952253ad, type: 3}
       propertyPath: m_fontColor.b
       value: 0.03748659

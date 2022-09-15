@@ -1,129 +1,134 @@
 using System.Threading.Tasks;
 using UnityEngine;
 using System.Collections;
+using Assets.Scripts.Controller;
+using Assets.Scripts.Model;
 
-[RequireComponent(typeof(BlockSetup))]
-public class BlockBehaviour : MonoBehaviour
+namespace Assets.Scripts.ObjectBehaviour
 {
-    [SerializeField]
-    int timeToDestroy;
-
-    [SerializeField]
-    GameController gameController;
-
-    [SerializeField]
-    GameObject eSymbol;
-
-    [SerializeField]
-    [Range(30f, 180f)]
-    float timeForAnswer;
-
-    private bool isDetect;
-    private event WaitToDisable wait;
-    private GameObject QuestionObj;
-    private BlockSetup setup;
-
-    // Start is called before the first frame update
-    void Start()
+    [RequireComponent(typeof(BlockSetup))]
+    public class BlockBehaviour : MonoBehaviour
     {
-        wait += Wait;
-        //wait.Invoke(500);
+        [SerializeField]
+        int timeToDestroy;
 
-        setup = gameObject.GetComponent<BlockSetup>();
-        setup.enabled = false;
-    }
+        [SerializeField]
+        GameController gameController;
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (isDetect)
+        [SerializeField]
+        GameObject eSymbol;
+
+        [SerializeField]
+        [Range(30f, 180f)]
+        float timeForAnswer;
+
+        private bool isDetect;
+        private event WaitToDisable wait;
+        private GameObject QuestionObj;
+        private BlockSetup setup;
+
+        // Start is called before the first frame update
+        void Start()
         {
-            if (Input.GetKeyDown(KeyCode.E))
+            wait += Wait;
+            //wait.Invoke(500);
+
+            setup = gameObject.GetComponent<BlockSetup>();
+            setup.enabled = false;
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+            if (isDetect)
             {
-                //Debug.Log("Active");
-                QuestionObj = gameController.CanvasController.InstantiateUI(new ResourcesLoadEventHandler("Prefabs/UI/Question/", "QuestionUI", new Vector3(), true));
-                var questMng = QuestionObj.GetComponent<QuestionManager>();
-                questMng.Sender += Answer;
-                questMng.TimeAnswer = timeForAnswer;
-                Time.timeScale = 0; // Pause game
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    //Debug.Log("Active");
+                    QuestionObj = gameController.CanvasController.InstantiateUI(new ResourcesLoadEventHandler("Prefabs/UI/Question/", "QuestionUI", new Vector3(), true));
+                    var questMng = QuestionObj.GetComponent<QuestionManager>();
+                    questMng.Sender += Answer;
+                    questMng.TimeAnswer = timeForAnswer;
+                    Time.timeScale = 0; // Pause game
+                }
             }
         }
-    }
 
-    private void Answer(bool result)
-    {
-        QuestionObj.GetComponent<QuestionManager>().UnSubSender(Answer);
-        StartCoroutine(StopToSeeResult(3, result));
-    }
-
-    private IEnumerator StopToSeeResult(float s, bool result)
-    {
-        yield return new WaitForSecondsRealtime(s);
-
-        Destroy(QuestionObj);
-        Time.timeScale = 1;
-
-        if (result)
+        private void Answer(bool result)
         {
-            setup.PlayAnimation();
-            wait?.Invoke(timeToDestroy);
+            QuestionObj.GetComponent<QuestionManager>().UnSubSender(Answer);
+            StartCoroutine(StopToSeeResult(3, result));
         }
-        else
+
+        private IEnumerator StopToSeeResult(float s, bool result)
         {
-            Debug.Log("Wrong answer");
-        }
-    }
+            yield return new WaitForSecondsRealtime(s);
 
-    private void OnCollisionStay2D(Collision2D collision)
-    {
-        if (collision.gameObject.tag.Equals("Player"))
+            Destroy(QuestionObj);
+            Time.timeScale = 1;
+
+            if (result)
+            {
+                setup.PlayAnimation();
+                wait?.Invoke(timeToDestroy);
+            }
+            else
+            {
+                Debug.Log("Wrong answer");
+            }
+        }
+
+        private void OnCollisionStay2D(Collision2D collision)
         {
-            PositionESymbol(collision.gameObject.transform.localPosition);
-            eSymbol.SetActive(true);
-            isDetect = true;
+            if (collision.gameObject.tag.Equals("Player"))
+            {
+                PositionESymbol(collision.gameObject.transform.localPosition);
+                eSymbol.SetActive(true);
+                isDetect = true;
+            }
         }
-    }
 
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        if (collision.gameObject.tag.Equals("Player"))
+        private void OnCollisionExit2D(Collision2D collision)
         {
-            eSymbol.SetActive(false);
-            isDetect = false;
+            if (collision.gameObject.tag.Equals("Player"))
+            {
+                eSymbol.SetActive(false);
+                isDetect = false;
+            }
         }
-    }
 
-    private void PositionESymbol(Vector3 player)
-    {
-        var box = gameObject.GetComponent<BoxCollider2D>();
-        var obj = gameObject.transform.localPosition + new Vector3(box.offset.x, box.offset.y);
-        switch (setup.ObjAxis)
+        private void PositionESymbol(Vector3 player)
         {
-            case Axis.Horizontal:
-                if (player.x < obj.x) eSymbol.transform.localPosition = new Vector3(0.1f + box.size.x - 0.16f, 0.1f);
-                else if (player.x > obj.x) eSymbol.transform.localPosition = new Vector3(-0.1f, 0.1f);
-                break;
-            case Axis.Vertical:
-                if (player.x < obj.x) eSymbol.transform.localPosition = new Vector3(0.1f, 0.1f + box.size.y - 0.16f);
-                else if (player.x > obj.x) eSymbol.transform.localPosition = new Vector3(-0.1f, 0.1f + box.size.y - 0.16f);
-                break;
+            var box = gameObject.GetComponent<BoxCollider2D>();
+            var obj = gameObject.transform.localPosition + new Vector3(box.offset.x, box.offset.y);
+            switch (setup.ObjAxis)
+            {
+                case Axis.Horizontal:
+                    if (player.x < obj.x) eSymbol.transform.localPosition = new Vector3(0.1f + box.size.x - 0.16f, 0.1f);
+                    else if (player.x > obj.x) eSymbol.transform.localPosition = new Vector3(-0.1f, 0.1f);
+                    break;
+                case Axis.Vertical:
+                    if (player.x < obj.x) eSymbol.transform.localPosition = new Vector3(0.1f, 0.1f + box.size.y - 0.16f);
+                    else if (player.x > obj.x) eSymbol.transform.localPosition = new Vector3(-0.1f, 0.1f + box.size.y - 0.16f);
+                    break;
+            }
+
         }
-        
+
+        private async Task Wait(int miliSec)
+        {
+            await Task.Delay(miliSec);
+            //Debug.Log(miliSec);
+
+            setup.OnParentDestroy(gameController);
+            Destroy(gameObject);
+        }
+
+        private void OnDestroy()
+        {
+            wait -= Wait;
+        }
+
+        private delegate Task WaitToDisable(int sec);
     }
-
-    private async Task Wait(int miliSec)
-    {
-        await Task.Delay(miliSec);
-        //Debug.Log(miliSec);
-
-        setup.OnParentDestroy(gameController);
-        Destroy(gameObject);
-    }
-
-    private void OnDestroy()
-    {
-        wait -= Wait;
-    }
-
-    private delegate Task WaitToDisable(int sec);
 }

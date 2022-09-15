@@ -2,27 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DestroyAfter : MonoBehaviour
+namespace Assets.Scripts.ObjectBehaviour
 {
-    [SerializeField] private float timeWaitToDestroy;
-
-    private float timer;
-    // Start is called before the first frame update
-    void Start()
+    public class DestroyAfter : MonoBehaviour
     {
-        timer = timeWaitToDestroy;
-    }
+        [SerializeField] private float timeWaitToDestroy;
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (timer > 0)
+        private float timer;
+        // Start is called before the first frame update
+        void Start()
         {
-            timer -= Time.deltaTime;
+            timer = timeWaitToDestroy;
         }
-        else
+
+        // Update is called once per frame
+        void Update()
         {
-            Destroy(gameObject);
+            if (timer > 0)
+            {
+                timer -= Time.deltaTime;
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }

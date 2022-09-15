@@ -1,48 +1,58 @@
+using Assets.Scripts.Controller;
+using Assets.Scripts.Interfaces;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class OneTrue : MonoBehaviour
+namespace Assets.Scripts.Model
 {
-    public List<Button> Buttons;
-
-    private List<int> exceptedBtns;
-
-    private void Start()
+    public class OneTrue : MonoBehaviour, IQuest<Button>
     {
-        exceptedBtns = new List<int>();
-    }
+        [SerializeField]
+        private List<Button> buttons;
 
-    public void AfterCheck(int i, bool result, bool loop = true)
-    {
-        if (result) Buttons[i].gameObject.GetComponent<Image>().color = new Color(0, 1, 0);
-        else
+        public List<Button> ListGeneric { get => buttons; set => buttons = value; }
+
+        private List<int> exceptedBtns;
+        private QuestionManager questionManager;
+
+        private void Start()
         {
-            if (ButtonClicked() == 0) Buttons[i].gameObject.GetComponent<Image>().color = new Color(1, 59 / 255, 59 / 255);
-            if (loop) FindRightButton(i);
+            exceptedBtns = new List<int>();
+            questionManager = gameObject.GetComponentInParent<QuestionManager>();
         }
-    }
 
-    private void FindRightButton(int except)
-    {
-        exceptedBtns.Add(except);
-
-        for (int i = 0; i < Buttons.Count; i++)
+        public void AfterCheck(int i, bool result, bool loop = true)
         {
-            var isInvoke = true;
-            for (int j = 0; j < exceptedBtns.Count; j++)
+            if (result) ListGeneric[i].gameObject.GetComponent<Image>().color = questionManager.LabelTrue;
+            else
             {
-                if (i == exceptedBtns[j])
-                {
-                    isInvoke = false;
-                    break;
-                }
+                if (ListCheckedCount() == 0) ListGeneric[i].gameObject.GetComponent<Image>().color = questionManager.LabelFalse;
+                if (loop) FindRightButton(i);
             }
-
-            if (isInvoke) Buttons[i].onClick.Invoke();
         }
-    }
 
-    public int ButtonClicked() => exceptedBtns.Count;
+        private void FindRightButton(int except)
+        {
+            exceptedBtns.Add(except);
+
+            for (int i = 0; i < ListGeneric.Count; i++)
+            {
+                var isInvoke = true;
+                for (int j = 0; j < exceptedBtns.Count; j++)
+                {
+                    if (i == exceptedBtns[j])
+                    {
+                        isInvoke = false;
+                        break;
+                    }
+                }
+
+                if (isInvoke) ListGeneric[i].onClick.Invoke();
+            }
+        }
+
+        public int ListCheckedCount() => exceptedBtns.Count;
+    }
 }
