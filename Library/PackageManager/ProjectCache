@@ -4245,6 +4245,8 @@ m_PackageAssets:
         - 4.3.2
         - 4.6.0-preview
         - 4.7.0-preview
+        - 4.9.1
+        - 4.9.2
         compatible:
         - 4.0.0-preview
         - 4.0.0
@@ -4260,6 +4262,8 @@ m_PackageAssets:
         - 4.3.2
         - 4.6.0-preview
         - 4.7.0-preview
+        - 4.9.1
+        - 4.9.2
         verified: 4.3.2
       dependencies: []
       resolvedDependencies: []

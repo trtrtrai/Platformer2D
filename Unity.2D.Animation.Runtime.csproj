@@ -57,10 +57,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Library\PackageCache\com.unity.2d.animation@5.0.7\Runtime\SpriteSkin.cs" />
-    <Compile Include="Library\PackageCache\com.unity.2d.animation@5.0.7\Runtime\TransformAccessJob.cs" />
-    <Compile Include="Library\PackageCache\com.unity.2d.animation@5.0.7\Runtime\NativeArrayHelper.cs" />
     <Compile Include="Library\PackageCache\com.unity.2d.animation@5.0.7\Runtime\SpriteSkinBatch.cs" />
     <Compile Include="Library\PackageCache\com.unity.2d.animation@5.0.7\Runtime\UpdateBoundsJob.cs" />
+    <Compile Include="Library\PackageCache\com.unity.2d.animation@5.0.7\Runtime\BufferManager.cs" />
+    <Compile Include="Library\PackageCache\com.unity.2d.animation@5.0.7\Runtime\TransformAccessJob.cs" />
+    <Compile Include="Library\PackageCache\com.unity.2d.animation@5.0.7\Runtime\NativeArrayHelper.cs" />
     <Compile Include="Library\PackageCache\com.unity.2d.animation@5.0.7\Runtime\SpriteSkinManager.cs" />
     <Compile Include="Library\PackageCache\com.unity.2d.animation@5.0.7\Runtime\AssemblyInfo.cs" />
     <Compile Include="Library\PackageCache\com.unity.2d.animation@5.0.7\Runtime\DeformSpriteSystem.cs" />
@@ -73,7 +74,6 @@
     <Compile Include="Library\PackageCache\com.unity.2d.animation@5.0.7\Runtime\SpriteSkinEntity.cs" />
     <Compile Include="Library\PackageCache\com.unity.2d.animation@5.0.7\Runtime\SpriteLib\SpriteLibraryAsset.cs" />
     <Compile Include="Library\PackageCache\com.unity.2d.animation@5.0.7\Runtime\PrepareSkinningSystem.cs" />
-    <Compile Include="Library\PackageCache\com.unity.2d.animation@5.0.7\Runtime\BufferManager.cs" />
     <Compile Include="Library\PackageCache\com.unity.2d.animation@5.0.7\Runtime\SpriteSkinComposite.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -316,6 +316,9 @@
     </Reference>
     <Reference Include="log4netPlastic">
       <HintPath>Library\PackageCache\com.unity.collab-proxy@1.7.1\Lib\Editor\PlasticSCM\log4netPlastic.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.NRefactory">
+      <HintPath>Library\PackageCache\com.unity.render-pipelines.core@10.6.0\Editor\ShaderGenerator\ICSharpCode.NRefactory.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>Library\PackageCache\com.unity.nuget.newtonsoft-json@2.0.0\Runtime\Newtonsoft.Json.dll</HintPath>

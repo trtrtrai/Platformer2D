@@ -57,12 +57,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Library\PackageCache\com.unity.2d.animation@5.0.7\IK\Editor\IKEditorManager.cs" />
-    <Compile Include="Library\PackageCache\com.unity.2d.animation@5.0.7\IK\Editor\Inspectors\CCDSolver2DEditor.cs" />
-    <Compile Include="Library\PackageCache\com.unity.2d.animation@5.0.7\IK\Editor\Inspectors\IKManager2DEditor.cs" />
-    <Compile Include="Library\PackageCache\com.unity.2d.animation@5.0.7\IK\Editor\Inspectors\LimbSolver2DEditor.cs" />
     <Compile Include="Library\PackageCache\com.unity.2d.animation@5.0.7\IK\Editor\IKGizmos.cs" />
     <Compile Include="Library\PackageCache\com.unity.2d.animation@5.0.7\IK\Editor\Inspectors\Solver2DEditor.cs" />
     <Compile Include="Library\PackageCache\com.unity.2d.animation@5.0.7\IK\Editor\AssemblyInfo.cs" />
+    <Compile Include="Library\PackageCache\com.unity.2d.animation@5.0.7\IK\Editor\Inspectors\CCDSolver2DEditor.cs" />
+    <Compile Include="Library\PackageCache\com.unity.2d.animation@5.0.7\IK\Editor\Inspectors\IKManager2DEditor.cs" />
+    <Compile Include="Library\PackageCache\com.unity.2d.animation@5.0.7\IK\Editor\Inspectors\LimbSolver2DEditor.cs" />
     <Compile Include="Library\PackageCache\com.unity.2d.animation@5.0.7\IK\Editor\Inspectors\FabrikSolver2DEditor.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -305,6 +305,9 @@
     </Reference>
     <Reference Include="log4netPlastic">
       <HintPath>Library\PackageCache\com.unity.collab-proxy@1.7.1\Lib\Editor\PlasticSCM\log4netPlastic.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.NRefactory">
+      <HintPath>Library\PackageCache\com.unity.render-pipelines.core@10.6.0\Editor\ShaderGenerator\ICSharpCode.NRefactory.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>Library\PackageCache\com.unity.nuget.newtonsoft-json@2.0.0\Runtime\Newtonsoft.Json.dll</HintPath>
