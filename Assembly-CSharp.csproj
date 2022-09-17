@@ -74,7 +74,10 @@
     <Compile Include="Assets\Scripts\Object Behaviour\ObjectMovingP2P.cs" />
     <Compile Include="Assets\Scripts\Model\MessageContainer.cs" />
     <Compile Include="Assets\test.cs" />
+    <Compile Include="Assets\Scripts\Object Behaviour\LightBahaviour.cs" />
+    <Compile Include="Assets\Scripts\Model\Light2dState.cs" />
     <Compile Include="Assets\Scripts\Model\QuestionData.cs" />
+    <Compile Include="Assets\Scripts\Model\Light2dStateData.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

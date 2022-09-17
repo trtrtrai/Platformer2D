@@ -1,5 +1,6 @@
 using Assets.Scripts.Controller;
 using Assets.Scripts.Interfaces;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -20,11 +21,11 @@ namespace Assets.Scripts.Model
         Color offColor;
 
         public List<Toggle> ListGeneric { get; set; }
-        public Button ButtonCheck;
 
+        private Button buttonCheck;
         private QuestionManager questionManager;
 
-        private void Start()
+        private void Awake()
         {
             questionManager = gameObject.GetComponentInParent<QuestionManager>();
         }
@@ -39,7 +40,7 @@ namespace Assets.Scripts.Model
             throw new System.NotImplementedException();
         }
 
-        public void AddToggle(Toggle t, string content)
+        private void AddToggle(Toggle t, string content)
         {
             try
             {
@@ -69,5 +70,35 @@ namespace Assets.Scripts.Model
                 t.interactable = false;
                 t.onValueChanged.RemoveAllListeners();
             });
+
+        public void Render(List<string> labels, Action<int> action)
+        {
+            // create question UI
+            var canvasCtrl = gameObject.GetComponentInParent<CanvasController>();
+            canvasCtrl.InstantiateUI(questionManager.gameObject, new ResourcesLoadEventHandler("Prefabs/UI/Question/MultipleTrue/", "ToggleFalseGuide", new Vector3(), true));
+            canvasCtrl.InstantiateUI(questionManager.gameObject, new ResourcesLoadEventHandler("Prefabs/UI/Question/MultipleTrue/", "ToggleTrueGuide", new Vector3(), true));
+            buttonCheck = canvasCtrl.InstantiateUI(questionManager.gameObject, new ResourcesLoadEventHandler("Prefabs/UI/Question/MultipleTrue/", "CheckMultipleTrue", new Vector3(), true)).GetComponentInChildren<Button>();
+
+            // create toggle
+            labels.ForEach((a) =>
+            {
+                var obj = canvasCtrl.InstantiateUI(Content, new ResourcesLoadEventHandler("Prefabs/UI/Question/MultipleTrue/", "MultipleAnswer", new Vector3(), true));
+                var toggle = obj.GetComponent<Toggle>();
+                AddToggle(toggle, a);
+            });
+
+            // add listener
+            buttonCheck.onClick.AddListener(() =>
+            {
+                LockAllToggles();
+
+                action(-1);
+
+                buttonCheck.interactable = false;
+                buttonCheck.GetComponentInChildren<TMP_Text>().GetComponent<RectTransform>().anchorMax = new Vector2(1, 0.75f); // set up to scale with Img on screen
+                // can decor linear color for TextMeshPro...
+                buttonCheck.onClick.RemoveAllListeners();
+            });
+        }
     }
 }

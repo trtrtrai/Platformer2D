@@ -1,7 +1,9 @@
 using Assets.Scripts.Controller;
 using Assets.Scripts.Interfaces;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -54,5 +56,20 @@ namespace Assets.Scripts.Model
         }
 
         public int ListCheckedCount() => exceptedBtns.Count;
+
+        public void Render(List<string> labels, Action<int> action)
+        {
+            for (int i = 0; i < ListGeneric.Count; i++)
+            {
+                var t = i;
+                ListGeneric[t].GetComponentInChildren<TMP_Text>().text = labels[t];
+                ListGeneric[t].onClick.AddListener(() =>
+                {
+                    action(t);
+
+                    buttons[t].onClick.RemoveAllListeners();
+                });
+            }
+        }
     }
 }

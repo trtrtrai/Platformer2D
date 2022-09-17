@@ -8,6 +8,7 @@ using TMPro;
 using System.Threading.Tasks;
 using static Assets.Scripts.Others.CustomRandom;
 using Assets.Scripts.Model;
+using System;
 
 namespace Assets.Scripts.Controller
 {
@@ -69,7 +70,7 @@ namespace Assets.Scripts.Controller
                 var questions = serializer.Deserialize<List<QuestionData>>(jReader);
                 int num = RdPositiveRange(questions.Count);
                 //Debug.Log(num);
-                return questions[num];
+                return questions[3];
             }
         }
 
@@ -85,58 +86,33 @@ namespace Assets.Scripts.Controller
                     {
                         AnswerContainer = parent.InstantiateUI(QuestContainer, new ResourcesLoadEventHandler("Prefabs/UI/Question/OneTrue/", "OneTrueAnswer", new Vector3(), QuestContainer.transform));
                         var script = AnswerContainer.GetComponent<OneTrue>();
-                        var buttons = script.ListGeneric;
 
-                        for (int i = 0; i < buttons.Count; i++)
-                        {
-                            var t = i;
-                            buttons[t].GetComponentInChildren<TMP_Text>().text = answers[t];
-                            buttons[t].onClick.AddListener(() =>
+                        script.Render(answers, new Action<int>((t) => {
+                            var result = question.CheckingResult(new List<int>() { t });
+
+                            if (script.ListCheckedCount() == 0)
                             {
-                                var result = question.CheckingResult(new List<int>() { t });
-
-                                if (script.ListCheckedCount() == 0)
-                                {
-                                    isChosen = true;
-                                    Sender?.Invoke(result);
-                                }
-                                script.AfterCheck(t, result, !result);
-
-                                buttons[t].onClick.RemoveAllListeners();
-                            });
-                        }
+                                isChosen = true;
+                                Sender?.Invoke(result);
+                            }
+                            script.AfterCheck(t, result, !result);
+                        }));
                         break;
                     }
                 case QuestionType.MultipleTrue:
                     {
                         AnswerContainer = parent.InstantiateUI(QuestContainer, new ResourcesLoadEventHandler("Prefabs/UI/Question/MultipleTrue/", "MultipleTrueAnswer", new Vector3(), true));
-                        parent.InstantiateUI(gameObject, new ResourcesLoadEventHandler("Prefabs/UI/Question/MultipleTrue/", "ToggleFalseGuide", new Vector3(), true));
-                        parent.InstantiateUI(gameObject, new ResourcesLoadEventHandler("Prefabs/UI/Question/MultipleTrue/", "ToggleTrueGuide", new Vector3(), true));
                         var script = AnswerContainer.GetComponent<MultipleTrue>();
 
-                        answers.ForEach((a) =>
-                        {
-                            var obj = parent.InstantiateUI(script.Content, new ResourcesLoadEventHandler("Prefabs/UI/Question/MultipleTrue/", "MultipleAnswer", new Vector3(), true));
-                            var toggle = obj.GetComponent<Toggle>();
-                            script.AddToggle(toggle, a);
-                        });
-
-                        script.ButtonCheck = parent.InstantiateUI(gameObject, new ResourcesLoadEventHandler("Prefabs/UI/Question/MultipleTrue/", "CheckMultipleTrue", new Vector3(), true)).GetComponentInChildren<Button>();
-                        script.ButtonCheck.onClick.AddListener(() =>
-                        {
-                            script.LockAllToggles();
-
+                        script.Render(answers, new Action<int>((t) =>{
                             var checkList = new List<int>();
                             for (int i = 0; i < script.ListGeneric.Count; i++) if (script.ListGeneric[i].isOn) checkList.Add(i);
                             var result = question.CheckingResult(checkList);
+
                             isChosen = true;
                             Sender?.Invoke(result);
+                        }));
 
-                            script.ButtonCheck.interactable = false;
-                            script.ButtonCheck.GetComponentInChildren<TMP_Text>().GetComponent<RectTransform>().anchorMax = new Vector2(1, 0.75f);
-                            // can decor linear color for TextMeshPro...
-                            script.ButtonCheck.onClick.RemoveAllListeners();
-                        });
                         break;
                     }
             }
