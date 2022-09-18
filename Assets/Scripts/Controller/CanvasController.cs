@@ -9,6 +9,8 @@ namespace Assets.Scripts.Controller
         [SerializeField]
         private GameController gameController;
 
+        public GameObject SubCanvasWorldPoint;
+
         // Start is called before the first frame update
         void Start()
         {

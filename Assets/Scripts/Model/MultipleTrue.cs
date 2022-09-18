@@ -1,5 +1,6 @@
 using Assets.Scripts.Controller;
 using Assets.Scripts.Interfaces;
+using Assets.Scripts.ObjectBehaviour;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -24,6 +25,7 @@ namespace Assets.Scripts.Model
 
         private Button buttonCheck;
         private QuestionManager questionManager;
+        private LightBehaviour lightBehaviour;
 
         private void Awake()
         {
@@ -32,12 +34,12 @@ namespace Assets.Scripts.Model
 
         public void AfterCheck(int i, bool result, bool loop = true) //check each toggle
         {
-            throw new System.NotImplementedException();
+            
         }
 
         public int ListCheckedCount()
         {
-            throw new System.NotImplementedException();
+            return -1;
         }
 
         private void AddToggle(Toggle t, string content)
@@ -78,6 +80,7 @@ namespace Assets.Scripts.Model
             canvasCtrl.InstantiateUI(questionManager.gameObject, new ResourcesLoadEventHandler("Prefabs/UI/Question/MultipleTrue/", "ToggleFalseGuide", new Vector3(), true));
             canvasCtrl.InstantiateUI(questionManager.gameObject, new ResourcesLoadEventHandler("Prefabs/UI/Question/MultipleTrue/", "ToggleTrueGuide", new Vector3(), true));
             buttonCheck = canvasCtrl.InstantiateUI(questionManager.gameObject, new ResourcesLoadEventHandler("Prefabs/UI/Question/MultipleTrue/", "CheckMultipleTrue", new Vector3(), true)).GetComponentInChildren<Button>();
+            lightBehaviour = canvasCtrl.InstantiateUI(canvasCtrl.SubCanvasWorldPoint, new ResourcesLoadEventHandler("Prefabs/UI/Question/MultipleTrue/", "Light_Bulb", new Vector3(), true)).GetComponent<LightBehaviour>();
 
             // create toggle
             labels.ForEach((a) =>
@@ -86,6 +89,12 @@ namespace Assets.Scripts.Model
                 var toggle = obj.GetComponent<Toggle>();
                 AddToggle(toggle, a);
             });
+
+            // set up show result
+            SetupShowResult(canvasCtrl.SubCanvasWorldPoint);
+
+            // Set up time out
+            questionManager.Timer.TimeOutEvent += Timer_TimeOutEvent;
 
             // add listener
             buttonCheck.onClick.AddListener(() =>
@@ -99,6 +108,51 @@ namespace Assets.Scripts.Model
                 // can decor linear color for TextMeshPro...
                 buttonCheck.onClick.RemoveAllListeners();
             });
+        }
+
+        private void Timer_TimeOutEvent()
+        {
+            buttonCheck.onClick.Invoke();
+
+            questionManager.Timer.TimeOutEvent -= Timer_TimeOutEvent;
+        }
+
+        private void SetupShowResult(GameObject subCanvas)
+        {
+
+            var pos = Camera.main.transform.position; //not localPosition
+            var camSize = Camera.main.sensorSize;
+            pos.x += camSize.x * 0.4f / 10;
+            //pos.y = 0.5f;
+            pos.z = 0;
+            pos.x -= subCanvas.transform.localPosition.x;
+            pos.y -= subCanvas.transform.localPosition.y;
+            lightBehaviour.gameObject.GetComponent<RectTransform>().localPosition = pos;
+
+            questionManager.Sender += QuestionManager_Sender;
+        }
+
+        private void QuestionManager_Sender(bool result)
+        {
+            if (result)
+            {
+                lightBehaviour.ActiveState(2);
+            }
+            else
+            {
+                lightBehaviour.ActiveState(1);
+            }
+
+            StartCoroutine(StopToSeeResult(3));
+
+            questionManager.Sender -= QuestionManager_Sender;
+        }
+
+        private IEnumerator StopToSeeResult(float s)
+        {
+            yield return new WaitForSecondsRealtime(s);
+
+            Destroy(lightBehaviour.gameObject);
         }
     }
 }

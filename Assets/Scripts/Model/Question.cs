@@ -58,17 +58,42 @@ namespace Assets.Scripts.Model
             switch (Type)
             {
                 case QuestionType.OneTrue:
-                    int i = Random.Range(1, 6); // loop count 1 to 5
-                    for (; i > 0; i--)
                     {
-                        int index1 = Random.Range(0, rawData.Answers.Count); // Index will be swap 0 to Count-1
-                        int index2 = Random.Range(0, rawData.Answers.Count); // Index will be swap
-                        if (index1 == rawData.CorrectIndex[0]) rawData.CorrectIndex[0] = index2; // Change CorrectIndex
-                        else if (index2 == rawData.CorrectIndex[0]) rawData.CorrectIndex[0] = index1; // Change CorrectIndex
-                                                                                                      //Debug.Log($"Swap {index1} and  {index2} - {rawData.CorrectIndex}");
-                        Swap(index1, index2);
+                        int i = Random.Range(1, 6); // loop count 1 to 5
+                        for (; i > 0; i--)
+                        {
+                            int index1 = Random.Range(0, rawData.Answers.Count); // Index will be swap 0 to Count-1
+                            int index2 = Random.Range(0, rawData.Answers.Count); // Index will be swap
+                            if (index1 == rawData.CorrectIndex[0]) rawData.CorrectIndex[0] = index2; // Change CorrectIndex
+                            else if (index2 == rawData.CorrectIndex[0]) rawData.CorrectIndex[0] = index1; // Change CorrectIndex
+                            //Debug.Log($"Swap {index1} and  {index2} - {rawData.CorrectIndex}");
+                            Swap(index1, index2);
+                        }
+                        break;
                     }
-                    break;
+                case QuestionType.MultipleTrue:
+                    {
+                        int i = Random.Range(3, 10); // loop count 1 to 5
+                        for (; i > 0; i--)
+                        {
+                            int index1 = Random.Range(0, rawData.Answers.Count); // Index will be swap 0 to Count-1
+                            int index2 = Random.Range(0, rawData.Answers.Count); // Index will be swap
+                            if (rawData.CorrectIndex.Contains(index1))
+                            {
+                                int index = rawData.CorrectIndex.IndexOf(index1);
+                                rawData.CorrectIndex[index] = index2; // Change CorrectIndex
+                            }
+
+                            if (rawData.CorrectIndex.Contains(index2))
+                            {
+                                int index = rawData.CorrectIndex.IndexOf(index2);
+                                rawData.CorrectIndex[index] = index1; // Change CorrectIndex
+                            }
+                            //Debug.Log($"Swap {index1} and  {index2} - {rawData.CorrectIndex}");
+                            Swap(index1, index2);
+                        }
+                        break;
+                    }
             }
         }
 

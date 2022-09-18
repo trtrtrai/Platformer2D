@@ -12,7 +12,7 @@ public class test : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        var pos = mainCmr.transform.position;
+        var pos = mainCmr.transform.position; //not localPosition
         var camSize = Camera.main.sensorSize;
         var obj = Instantiate(Resources.Load<GameObject>("Prefabs/Image"), gameObject.transform);
         pos.x += camSize.x * 0.4f / 10;

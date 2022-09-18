@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using static Assets.Scripts.Others.CustomRandom;
 using Assets.Scripts.Model;
 using System;
+using Assets.Scripts.Interfaces;
 
 namespace Assets.Scripts.Controller
 {
@@ -21,10 +22,10 @@ namespace Assets.Scripts.Controller
         private GameObject AnswerContainer;
         private CanvasController parent;
         private Question question;
-        private Timer timer;
         private bool isChosen = false;
 
         public event SendResultToCaller Sender;
+        public Timer Timer;
         public Color LabelTrue;
         public Color LabelFalse;
         public float TimeAnswer;
@@ -34,8 +35,8 @@ namespace Assets.Scripts.Controller
             parent = gameObject.transform.parent.gameObject.GetComponent<CanvasController>();
             parent.SetState(GameState.QuestionDisplay);
             question = new Question(ChooseAQuestion());
-            timer = gameObject.GetComponent<Timer>();
-            timer.TimeOutAsyncEvent += TimeOutAsyncHandle;
+            Timer = gameObject.GetComponent<Timer>();
+            Timer.TimeOutAsyncEvent += TimeOutAsyncHandle;
 
             LoadQuestionScene();
             //Debug.Log(question.Quest + " " + question.Type);
@@ -46,14 +47,12 @@ namespace Assets.Scripts.Controller
             if (TimeAnswer > 0 && !isChosen)
             {
                 TimeAnswer -= Time.unscaledDeltaTime;
-                timer.UpdateTimer(TimeAnswer);
+                Timer.UpdateTimer(TimeAnswer);
             }
         }
 
         private async Task TimeOutAsyncHandle()
         {
-            // Disable buttons (OneTrue only???)
-            //buttons.ForEach((b) => b.enabled = false);
             // Message box notify
             var obj = parent.InstantiateUI(new ResourcesLoadEventHandler("Prefabs/UI/Notification/", "NotificationUI", new Vector3(), true));
             Sender?.Invoke(false);
@@ -70,7 +69,7 @@ namespace Assets.Scripts.Controller
                 var questions = serializer.Deserialize<List<QuestionData>>(jReader);
                 int num = RdPositiveRange(questions.Count);
                 //Debug.Log(num);
-                return questions[3];
+                return questions[num];
             }
         }
 
@@ -85,7 +84,7 @@ namespace Assets.Scripts.Controller
                 case QuestionType.OneTrue:
                     {
                         AnswerContainer = parent.InstantiateUI(QuestContainer, new ResourcesLoadEventHandler("Prefabs/UI/Question/OneTrue/", "OneTrueAnswer", new Vector3(), QuestContainer.transform));
-                        var script = AnswerContainer.GetComponent<OneTrue>();
+                        IQuest<Button> script = AnswerContainer.GetComponent<OneTrue>();
 
                         script.Render(answers, new Action<int>((t) => {
                             var result = question.CheckingResult(new List<int>() { t });
@@ -102,7 +101,7 @@ namespace Assets.Scripts.Controller
                 case QuestionType.MultipleTrue:
                     {
                         AnswerContainer = parent.InstantiateUI(QuestContainer, new ResourcesLoadEventHandler("Prefabs/UI/Question/MultipleTrue/", "MultipleTrueAnswer", new Vector3(), true));
-                        var script = AnswerContainer.GetComponent<MultipleTrue>();
+                        IQuest<Toggle> script = AnswerContainer.GetComponent<MultipleTrue>();
 
                         script.Render(answers, new Action<int>((t) =>{
                             var checkList = new List<int>();
@@ -121,7 +120,7 @@ namespace Assets.Scripts.Controller
         private void OnDestroy()
         {
             parent.PopState();
-            timer.TimeOutAsyncEvent -= TimeOutAsyncHandle;
+            Timer.TimeOutAsyncEvent -= TimeOutAsyncHandle;
             question.UnSubQuestionResult();
         }
 

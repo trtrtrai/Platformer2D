@@ -23,11 +23,11 @@ namespace Assets.Scripts.Model
             light.color = data.lightColor;
             light.intensity = data.minIntensity;
             var intenPerSec = (data.maxIntensity - data.minIntensity) / data.linearSpeed;
-            ratio = intenPerSec / (1 / Time.fixedUnscaledDeltaTime);
+            ratio = intenPerSec / (1 / Time.unscaledDeltaTime);
             //Debug.Log(ratio);
         }
 
-        private void FixedUpdate()
+        private void Update()
         {
             float inten;
             if (!transfer) inten = light.intensity + ratio;

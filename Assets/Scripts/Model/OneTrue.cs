@@ -3,6 +3,7 @@ using Assets.Scripts.Interfaces;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -19,7 +20,7 @@ namespace Assets.Scripts.Model
         private List<int> exceptedBtns;
         private QuestionManager questionManager;
 
-        private void Start()
+        private void Awake()
         {
             exceptedBtns = new List<int>();
             questionManager = gameObject.GetComponentInParent<QuestionManager>();
@@ -70,6 +71,16 @@ namespace Assets.Scripts.Model
                     buttons[t].onClick.RemoveAllListeners();
                 });
             }
+
+            // Set up time out
+            questionManager.Timer.TimeOutEvent += Timer_TimeOutEvent;
+        }
+
+        private void Timer_TimeOutEvent()
+        {
+            ListGeneric.ForEach((b) => b.interactable = false);
+
+            questionManager.Timer.TimeOutEvent -= Timer_TimeOutEvent;
         }
     }
 }
