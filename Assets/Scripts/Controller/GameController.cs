@@ -82,7 +82,8 @@ namespace Assets.Scripts.Controller
     {
         OneTrue,
         MultipleTrue,
+        Fill,
         Connect,
-        SlideNumber
+        SlideNumber, 
     }
 }
