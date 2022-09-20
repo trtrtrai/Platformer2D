@@ -8,17 +8,20 @@ using UnityEngine.EventSystems;
 
 public class test : MonoBehaviour, IPointerDownHandler, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
+    private Fill script;
     private RectTransform rect;
     private CanvasGroup group;
 
     private void Awake()
-    {
+    {  
         rect = GetComponent<RectTransform>();
         group = GetComponent<CanvasGroup>();
+        script = GetComponentInParent<Fill>();
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        if (!ReferenceEquals(transform.parent, script.ListGeneric[3].transform)) transform.SetParent(script.ListGeneric[3].transform);
         group.alpha = .6f;
         group.blocksRaycasts = false;
     }

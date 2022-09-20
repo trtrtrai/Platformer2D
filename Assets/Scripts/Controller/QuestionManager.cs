@@ -69,7 +69,7 @@ namespace Assets.Scripts.Controller
                 var questions = serializer.Deserialize<List<QuestionData>>(jReader);
                 int num = RdPositiveRange(questions.Count);
                 //Debug.Log(num);
-                return questions[num];
+                return questions[5];
             }
         }
 
@@ -110,6 +110,22 @@ namespace Assets.Scripts.Controller
 
                             isChosen = true;
                             Sender?.Invoke(result);
+                        }));
+
+                        break;
+                    }
+                case QuestionType.Fill:
+                    {
+                        AnswerContainer = parent.InstantiateUI(QuestContainer, new ResourcesLoadEventHandler("Prefabs/UI/Question/Fill/", "FillAnswer", new Vector3(), true));
+                        IQuest<GameObject> script = AnswerContainer.GetComponent<Fill>();
+
+                        script.Render(answers, new Action<int>((t) => {
+                            /*var checkList = new List<int>();
+                            for (int i = 0; i < script.ListGeneric.Count; i++) if (script.ListGeneric[i].isOn) checkList.Add(i);
+                            var result = question.CheckingResult(checkList);
+
+                            isChosen = true;
+                            Sender?.Invoke(result);*/
                         }));
 
                         break;

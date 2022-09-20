@@ -23,4 +23,16 @@
 			"Answers":["Khu I","Khu II","Khu III","Khu IV","Khu Hòa An", "Khu Măng Đen", "Khu Vĩnh Châu"],
 			"CorrectIndex":[0,1,2,4,5,6]
 		},
+		{
+			"Type":2,
+			"Quest":"Điền khuyết: \"Tầm nhìn của Đại học Cần Thơ là trở thành một trong những trường hàng đầu về (1) của Việt Nam và nằm trong nhóm các trường mạnh về đào tạo, nghiên cứu khoa học được ghi nhận trong (2) và (3).\"",
+			"Answers":["chất lượng","giáo dục","khu vực","thế giới","châu Á", "nông nghiệp"],
+			"CorrectIndex":[0,2,3]
+		},
+		{
+			"Type":2,
+			"Quest":"Điền khuyết: \"Các giá trị cốt lõi của Đại học Cần Thơ: Đồng thuận - (1) - (2) - (3).\"",
+			"Answers":["Chuẩn mực","Tận tâm","Nỗ lực","Mẫu mực","Sáng tạo"],
+			"CorrectIndex":[1,0,4]
+		},
 ]

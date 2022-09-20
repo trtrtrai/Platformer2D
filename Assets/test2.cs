@@ -8,7 +8,12 @@ public class test2 : MonoBehaviour, IDropHandler
     public void OnDrop(PointerEventData eventData)
     {
         if (eventData.pointerDrag != null){
-            eventData.pointerDrag.GetComponent<RectTransform>().anchoredPosition = GetComponent<RectTransform>().anchoredPosition;
+            //Debug.Log(name);
+            var rect = eventData.pointerDrag.GetComponent<RectTransform>();
+            var thisRect = GetComponent<RectTransform>();
+            // if it have 1 test.cs, don't accept fill
+            rect.transform.SetParent(thisRect.transform);
+            rect.anchoredPosition = thisRect.anchoredPosition;
         }
     }
 }

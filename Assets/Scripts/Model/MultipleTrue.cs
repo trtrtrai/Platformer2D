@@ -79,7 +79,7 @@ namespace Assets.Scripts.Model
             var canvasCtrl = gameObject.GetComponentInParent<CanvasController>();
             canvasCtrl.InstantiateUI(questionManager.gameObject, new ResourcesLoadEventHandler("Prefabs/UI/Question/MultipleTrue/", "ToggleFalseGuide", new Vector3(), true));
             canvasCtrl.InstantiateUI(questionManager.gameObject, new ResourcesLoadEventHandler("Prefabs/UI/Question/MultipleTrue/", "ToggleTrueGuide", new Vector3(), true));
-            buttonCheck = canvasCtrl.InstantiateUI(questionManager.gameObject, new ResourcesLoadEventHandler("Prefabs/UI/Question/MultipleTrue/", "CheckMultipleTrue", new Vector3(), true)).GetComponentInChildren<Button>();
+            buttonCheck = canvasCtrl.InstantiateUI(questionManager.gameObject, new ResourcesLoadEventHandler("Prefabs/UI/Question/", "CheckResult", new Vector3(), true)).GetComponentInChildren<Button>();
             lightBehaviour = canvasCtrl.InstantiateUI(canvasCtrl.SubCanvasWorldPoint, new ResourcesLoadEventHandler("Prefabs/UI/Question/MultipleTrue/", "Light_Bulb", new Vector3(), true)).GetComponent<LightBehaviour>();
 
             // create toggle
