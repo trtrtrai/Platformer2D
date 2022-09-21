@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8744211493785326919}
   - component: {fileID: 8744211493785326912}
   - component: {fileID: 8744211493785326914}
-  - component: {fileID: 8744211493785326913}
+  - component: {fileID: 2186530425722006412}
   m_Layer: 5
   m_Name: FillKeyword
   m_TagString: Untagged
@@ -135,7 +135,7 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
---- !u!114 &8744211493785326913
+--- !u!114 &2186530425722006412
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -144,7 +144,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8744211493785326924}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a0688605acdc1864ebbeceab31eaaa4e, type: 3}
+  m_Script: {fileID: 11500000, guid: ef06bb2f0348d424b9a2cb503ea028c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &8744211494322573370
@@ -239,7 +239,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 85.35
+  m_fontSize: 350
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1

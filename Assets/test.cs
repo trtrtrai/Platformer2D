@@ -5,6 +5,7 @@ using UnityEngine;
 using System.Text;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using Assets.Scripts.Controller;
 
 public class test : MonoBehaviour, IPointerDownHandler, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
@@ -16,13 +17,17 @@ public class test : MonoBehaviour, IPointerDownHandler, IDragHandler, IBeginDrag
     {  
         rect = GetComponent<RectTransform>();
         group = GetComponent<CanvasGroup>();
-        script = GetComponentInParent<Fill>();
+    }
+
+    private void Start()
+    {
+        script = gameObject.GetComponentInParent<QuestionManager>().GetComponentInChildren<Fill>();
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
         if (!ReferenceEquals(transform.parent, script.ListGeneric[3].transform)) transform.SetParent(script.ListGeneric[3].transform);
-        group.alpha = .6f;
+        group.alpha = .75f;
         group.blocksRaycasts = false;
     }
 
