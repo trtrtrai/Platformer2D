@@ -9,8 +9,15 @@ public class DropSlot : MonoBehaviour, IDropHandler
         {
             //Debug.Log(name);
             var rect = eventData.pointerDrag.GetComponent<RectTransform>();
+
+            if (!(gameObject.GetComponentInChildren<DropItem>() is null)) //it have 1 DropItem.cs, don't accept fill
+            {
+                rect.anchoredPosition = rect.parent.GetComponent<RectTransform>().anchoredPosition;
+                return;
+            }
+
             var thisRect = GetComponent<RectTransform>();
-            // if it have 1 test.cs, don't accept fill
+
             rect.transform.SetParent(thisRect.transform);
             rect.anchoredPosition = thisRect.anchoredPosition;
         }

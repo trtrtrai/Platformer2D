@@ -95,7 +95,7 @@ namespace Assets.Scripts.Model
                         break;
                     }
                 case QuestionType.Fill:
-                    //Don't need to mixed
+                    //need to mixed
                     break;
             }
         }

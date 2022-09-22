@@ -3,6 +3,7 @@ using Assets.Scripts.Interfaces;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -36,16 +37,29 @@ public class Fill : MonoBehaviour, IQuest<GameObject>
     {
         var canvasCtrl = gameObject.GetComponentInParent<CanvasController>();
 
-        buttonCheck = canvasCtrl.InstantiateUI(questionManager.gameObject, new ResourcesLoadEventHandler("Prefabs/UI/Question/", "CheckResult", new Vector3(), true)).GetComponent<Button>();
-        var obj = canvasCtrl.InstantiateUI(questionManager.gameObject, new ResourcesLoadEventHandler("Prefabs/UI/Question/Fill/", "GrayBGRect", new Vector3(), true)).GetComponentInChildren<DropSlot>().gameObject;
-        ListGeneric.Add(obj); //add to check drag and drop, always at index 3
+        buttonCheck = canvasCtrl.InstantiateUI(questionManager.gameObject, new ResourcesLoadEventHandler("Prefabs/UI/Question/", "CheckResult", new Vector3(), true)).GetComponentInChildren<Button>();
+        var obj = canvasCtrl.InstantiateUI(canvasCtrl.gameObject, new ResourcesLoadEventHandler("Prefabs/UI/Question/Fill/", "FillAnswerSlotContainer", new Vector3(), true));
+        //ListGeneric.Add(obj); //add to check drag and drop, always at index 3
+        var listDropSlot = obj.GetComponentsInChildren<DropSlot>().ToList();
 
-        labels.ForEach((l) => {
-            var kw = canvasCtrl.InstantiateUI(obj, new ResourcesLoadEventHandler("Prefabs/UI/Question/Fill/", "FillKeyword", new Vector3(), true));
-            // random position
-            kw.GetComponentInChildren<TMP_Text>().text = l;
+        for (int i = 0; i < labels.Count; i++)
+        {
+            var kw = canvasCtrl.InstantiateUI(listDropSlot[i].gameObject, new ResourcesLoadEventHandler("Prefabs/UI/Question/Fill/", "FillKeyword", new Vector3(), true));
+            kw.GetComponentInChildren<TMP_Text>().text = labels[i];
+        }
+
+        buttonCheck.onClick.AddListener(() => {
+            StartCoroutine(WaitForDestroy(3f, obj));
+
+            action(-1);
+
+
         });
+    }
 
-        
+    private IEnumerator WaitForDestroy(float t, GameObject obj)
+    {
+        yield return new WaitForSecondsRealtime(t);
+        Destroy(obj);
     }
 }

@@ -120,12 +120,16 @@ namespace Assets.Scripts.Controller
                         IQuest<GameObject> script = AnswerContainer.GetComponent<Fill>();
 
                         script.Render(answers, new Action<int>((t) => {
-                            /*var checkList = new List<int>();
-                            for (int i = 0; i < script.ListGeneric.Count; i++) if (script.ListGeneric[i].isOn) checkList.Add(i);
+                            var checkList = new List<int>();
+                            for (int i = 0; i < script.ListGeneric.Count; i++)
+                            {
+                                var item = script.ListGeneric[i].GetComponentInChildren<DropItem>();
+                                if (!(item is null)) checkList.Add(item.Index);
+                            }
                             var result = question.CheckingResult(checkList);
 
                             isChosen = true;
-                            Sender?.Invoke(result);*/
+                            Sender?.Invoke(result);
                         }));
 
                         break;
