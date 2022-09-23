@@ -50,6 +50,7 @@ namespace Assets.Scripts.ObjectBehaviour
                     questMng.Sender += Answer;
                     questMng.TimeAnswer = timeForAnswer;
                     Time.timeScale = 0; // Pause game
+                    enabled = false;
                 }
             }
         }
@@ -76,6 +77,8 @@ namespace Assets.Scripts.ObjectBehaviour
             {
                 Debug.Log("Wrong answer");
             }
+
+            enabled = true;
         }
 
         private void OnCollisionStay2D(Collision2D collision)

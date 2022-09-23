@@ -69,7 +69,7 @@ namespace Assets.Scripts.Controller
                 var questions = serializer.Deserialize<List<QuestionData>>(jReader);
                 int num = RdPositiveRange(questions.Count);
                 //Debug.Log(num);
-                return questions[4];
+                return questions[5];
             }
         }
 
@@ -130,6 +130,8 @@ namespace Assets.Scripts.Controller
 
                             isChosen = true;
                             Sender?.Invoke(result);
+
+                            script.AfterCheck(3, result, false);
                         }));
 
                         break;

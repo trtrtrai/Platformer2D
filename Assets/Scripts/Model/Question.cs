@@ -30,13 +30,24 @@ namespace Assets.Scripts.Model
         {
             // remove same index in list
             var truthList = new List<int>();
-            foreach (var answer in listAnswers)
+            for (int i = 0; i < listAnswers.Count; i++)
             {
-                if (!truthList.Contains(answer)) truthList.Add(answer);
+                if (!truthList.Contains(listAnswers[i])) truthList.Add(listAnswers[i]);
             }
 
             // check count
             if (truthList.Count != rawData.CorrectIndex.Count) return false;
+
+            // Fill handle
+            if (Type == QuestionType.Fill)
+            {
+                for (int j = 0; j < truthList.Count; j++)
+                {
+                    if (truthList[j] != rawData.CorrectIndex[j]) return false;
+                }
+
+                return true;
+            }
 
             // match answer
             foreach (var item in truthList)
@@ -73,21 +84,34 @@ namespace Assets.Scripts.Model
                     }
                 case QuestionType.MultipleTrue:
                     {
-                        int i = Random.Range(3, 10); // loop count 1 to 5
+                        int i = Random.Range(3, 10); // loop count 3 to 9
                         for (; i > 0; i--)
                         {
                             int index1 = Random.Range(0, rawData.Answers.Count); // Index will be swap 0 to Count-1
                             int index2 = Random.Range(0, rawData.Answers.Count); // Index will be swap
-                            if (rawData.CorrectIndex.Contains(index1))
-                            {
-                                int index = rawData.CorrectIndex.IndexOf(index1);
-                                rawData.CorrectIndex[index] = index2; // Change CorrectIndex
-                            }
 
-                            if (rawData.CorrectIndex.Contains(index2))
+                            var checkIndex1 = rawData.CorrectIndex.Contains(index1);
+                            var checkIndex2 = rawData.CorrectIndex.Contains(index2);
+                            if (checkIndex1 && checkIndex2)
                             {
-                                int index = rawData.CorrectIndex.IndexOf(index2);
-                                rawData.CorrectIndex[index] = index1; // Change CorrectIndex
+                                int indexA = rawData.CorrectIndex.IndexOf(index1);
+                                int indexB = rawData.CorrectIndex.IndexOf(index2);
+                                rawData.CorrectIndex[indexA] = index2; // Change CorrectIndex
+                                rawData.CorrectIndex[indexB] = index1; // Change CorrectIndex
+                            }
+                            else
+                            {
+                                if (checkIndex1)
+                                {
+                                    int indexA = rawData.CorrectIndex.IndexOf(index1);
+                                    rawData.CorrectIndex[indexA] = index2; // Change CorrectIndex
+                                }
+
+                                if (checkIndex2)
+                                {
+                                    int indexB = rawData.CorrectIndex.IndexOf(index2);
+                                    rawData.CorrectIndex[indexB] = index1; // Change CorrectIndex
+                                }
                             }
                             //Debug.Log($"Swap {index1} and  {index2} - {rawData.CorrectIndex}");
                             Swap(index1, index2);
@@ -95,8 +119,41 @@ namespace Assets.Scripts.Model
                         break;
                     }
                 case QuestionType.Fill:
-                    //need to mixed
-                    break;
+                    {
+                        int i = Random.Range(5, 8); // loop count 5 to 7
+                        for (; i > 0; i--)
+                        {
+                            int index1 = Random.Range(0, rawData.Answers.Count); // Index will be swap 0 to Count-1
+                            int index2 = Random.Range(0, rawData.Answers.Count); // Index will be swap
+
+                            var checkIndex1 = rawData.CorrectIndex.Contains(index1);
+                            var checkIndex2 = rawData.CorrectIndex.Contains(index2);
+                            if (checkIndex1 && checkIndex2)
+                            {
+                                int indexA = rawData.CorrectIndex.IndexOf(index1);
+                                int indexB = rawData.CorrectIndex.IndexOf(index2);
+                                rawData.CorrectIndex[indexA] = index2; // Change CorrectIndex
+                                rawData.CorrectIndex[indexB] = index1; // Change CorrectIndex
+                            }
+                            else
+                            {
+                                if (checkIndex1)
+                                {
+                                    int indexA = rawData.CorrectIndex.IndexOf(index1);
+                                    rawData.CorrectIndex[indexA] = index2; // Change CorrectIndex
+                                }
+
+                                if (checkIndex2)
+                                {
+                                    int indexB = rawData.CorrectIndex.IndexOf(index2);
+                                    rawData.CorrectIndex[indexB] = index1; // Change CorrectIndex
+                                }
+                            }
+                            //Debug.Log($"Swap {index1} and  {index2} - {rawData.CorrectIndex}");
+                            Swap(index1, index2);
+                        }
+                        break;
+                    }
             }
         }
 
