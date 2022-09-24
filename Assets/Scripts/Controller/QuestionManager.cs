@@ -32,9 +32,23 @@ namespace Assets.Scripts.Controller
         // Start is called before the first frame update
         void Start()
         {
-            parent = gameObject.transform.parent.gameObject.GetComponent<CanvasController>();
-            parent.SetState(GameState.QuestionDisplay);
+            parent = gameObject.transform.parent.gameObject.GetComponent<CanvasController>();            
             question = new Question(ChooseAQuestion());
+
+            if (question.Type == QuestionType.TwoChoice)
+            {
+                parent.SetState(GameState.TwoChoiceQuestionDisplay);                
+                var player = GameObject.FindGameObjectWithTag("Player");
+                Debug.Log(player.transform.localPosition);
+                player.transform.localPosition = new Vector3(0, .2f);
+                gameObject.SetActive(false);
+            }
+            else
+            {
+                Time.timeScale = 0;
+                parent.SetState(GameState.QuestionDisplay);
+            }
+
             Timer = gameObject.GetComponent<Timer>();
             Timer.TimeOutAsyncEvent += TimeOutAsyncHandle;
 
@@ -69,7 +83,7 @@ namespace Assets.Scripts.Controller
                 var questions = serializer.Deserialize<List<QuestionData>>(jReader);
                 int num = RdPositiveRange(questions.Count);
                 //Debug.Log(num);
-                return questions[5];
+                return questions[6];
             }
         }
 
@@ -132,6 +146,20 @@ namespace Assets.Scripts.Controller
                             Sender?.Invoke(result);
 
                             script.AfterCheck(3, result, false);
+                        }));
+
+                        break;
+                    }
+                case QuestionType.TwoChoice:
+                    {
+                        AnswerContainer = parent.InstantiateUI(gameObject, new ResourcesLoadEventHandler("Prefabs/UI/Question/TwoChoice/", "TwoChoiceQuestion", Vector3.zero));
+                        TwoChoice script = AnswerContainer.GetComponent<TwoChoice>();
+
+                        script.QuestField.GetComponent<TMP_Text>().text = question.Quest;
+
+                        script.Render(answers, new Action<int>((t) =>
+                        {
+                            
                         }));
 
                         break;

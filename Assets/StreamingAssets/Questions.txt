@@ -35,4 +35,16 @@
 			"Answers":["Chuẩn mực","Tận tâm","Nỗ lực","Mẫu mực","Sáng tạo"],
 			"CorrectIndex":[1,0,4]
 		},
+		{
+			"Type":3,
+			"Quest":"\"Tính đến cuối năm 2021, đại học Cần Thơ có 43850 sinh viên\", đúng hay sai?",
+			"Answers":["Đúng","Sai"],
+			"CorrectIndex":[0]
+		},
+		{
+			"Type":3,
+			"Quest":"\"Tính đến cuối năm 2021, đại học Cần Thơ có 37 dự án quốc tế\", đúng hay sai?",
+			"Answers":["Sai","Đúng"],
+			"CorrectIndex":[1]
+		},
 ]

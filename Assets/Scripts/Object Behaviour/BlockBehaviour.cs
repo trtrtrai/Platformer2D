@@ -49,7 +49,6 @@ namespace Assets.Scripts.ObjectBehaviour
                     var questMng = QuestionObj.GetComponent<QuestionManager>();
                     questMng.Sender += Answer;
                     questMng.TimeAnswer = timeForAnswer;
-                    Time.timeScale = 0; // Pause game
                     enabled = false;
                 }
             }

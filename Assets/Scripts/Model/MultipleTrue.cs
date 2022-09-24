@@ -83,12 +83,12 @@ namespace Assets.Scripts.Model
             lightBehaviour = canvasCtrl.InstantiateUI(canvasCtrl.SubCanvasWorldPoint, new ResourcesLoadEventHandler("Prefabs/UI/Question/MultipleTrue/", "Light_Bulb", new Vector3(), true)).GetComponent<LightBehaviour>();
 
             // create toggle
-            labels.ForEach((a) =>
+            for (int i = 0; i < labels.Count; i++)
             {
                 var obj = canvasCtrl.InstantiateUI(Content, new ResourcesLoadEventHandler("Prefabs/UI/Question/MultipleTrue/", "MultipleAnswer", new Vector3(), true));
                 var toggle = obj.GetComponent<Toggle>();
-                AddToggle(toggle, a);
-            });
+                AddToggle(toggle, labels[i]);
+            }
 
             // set up show result
             SetupShowResult(canvasCtrl.SubCanvasWorldPoint);

@@ -35,7 +35,7 @@ namespace Assets.Scripts.Character
 
         private void Update()
         {
-            if (gameCtrl.IsEqualsTopDisplay(GameState.GameDisplay))
+            if (gameCtrl.IsEqualsTopDisplay(GameState.GameDisplay | GameState.TwoChoiceQuestionDisplay))
             {
                 if (Input.GetButtonDown("Jump"))
                 {
@@ -53,7 +53,7 @@ namespace Assets.Scripts.Character
         // Update is called once per frame
         void FixedUpdate()
         {
-            if (gameCtrl.IsEqualsTopDisplay(GameState.GameDisplay))
+            if (gameCtrl.IsEqualsTopDisplay(GameState.GameDisplay | GameState.TwoChoiceQuestionDisplay))
             {
                 DetectGround();
 

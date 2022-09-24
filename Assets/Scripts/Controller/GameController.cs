@@ -75,6 +75,7 @@ namespace Assets.Scripts.Controller
     {
         GameDisplay,
         QuestionDisplay,
+        TwoChoiceQuestionDisplay,
         NotificationDisplay,
     }
 
@@ -83,7 +84,6 @@ namespace Assets.Scripts.Controller
         OneTrue,
         MultipleTrue,
         Fill,
-        Connect,
-        SlideNumber, 
+        TwoChoice,
     }
 }
