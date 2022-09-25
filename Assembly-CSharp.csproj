@@ -71,6 +71,7 @@
     <Compile Include="Assets\Scripts\Controller\GameController.cs" />
     <Compile Include="Assets\Scripts\Object Behaviour\ObjectRotation.cs" />
     <Compile Include="Assets\Scripts\Controller\CanvasController.cs" />
+    <Compile Include="Assets\Scripts\Model\TwoChoice.cs" />
     <Compile Include="Assets\Scripts\Controller\QuestionManager.cs" />
     <Compile Include="Assets\Scripts\Model\DropItem.cs" />
     <Compile Include="Assets\Scripts\Object Behaviour\ObjectMovingP2P.cs" />
@@ -82,7 +83,7 @@
     <Compile Include="Assets\Scripts\Model\QuestionData.cs" />
     <Compile Include="Assets\Scripts\Model\Light2dStateData.cs" />
     <Compile Include="Assets\Scripts\Object Behaviour\LightBehaviour.cs" />
-    <Compile Include="Assets\Scripts\Model\TwoChoice.cs" />
+    <Compile Include="Assets\Scripts\Object Behaviour\TwoChoiceAnswerBehaviour.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

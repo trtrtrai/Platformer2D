@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
-using System.Linq;
 using TMPro;
 using System.Threading.Tasks;
 using static Assets.Scripts.Others.CustomRandom;
 using Assets.Scripts.Model;
 using System;
 using Assets.Scripts.Interfaces;
+using System.Collections;
 
 namespace Assets.Scripts.Controller
 {
@@ -23,6 +23,7 @@ namespace Assets.Scripts.Controller
         private CanvasController parent;
         private Question question;
         private bool isChosen = false;
+        private Vector3 playerPosition;
 
         public event SendResultToCaller Sender;
         public Timer Timer;
@@ -39,9 +40,11 @@ namespace Assets.Scripts.Controller
             {
                 parent.SetState(GameState.TwoChoiceQuestionDisplay);                
                 var player = GameObject.FindGameObjectWithTag("Player");
-                Debug.Log(player.transform.localPosition);
+                playerPosition = player.transform.localPosition;
+                //Debug.Log(playerPosition);
                 player.transform.localPosition = new Vector3(0, .2f);
-                gameObject.SetActive(false);
+                Sender += QuestionManager_Sender;
+                gameObject.GetComponentInChildren<Image>().gameObject.SetActive(false); //Get children to hide because TwoChoice don't need it
             }
             else
             {
@@ -54,6 +57,20 @@ namespace Assets.Scripts.Controller
 
             LoadQuestionScene();
             //Debug.Log(question.Quest + " " + question.Type);
+        }
+
+        private void QuestionManager_Sender(bool result)
+        {
+            StartCoroutine(WaitToReturnPlayer(3f));
+        }
+
+        private IEnumerator WaitToReturnPlayer(float s)
+        {
+            yield return new WaitForSecondsRealtime(s);
+
+            Destroy(AnswerContainer);
+            GameObject.FindGameObjectWithTag("Player").transform.localPosition = playerPosition;
+            Destroy(gameObject);
         }
 
         private void Update()
@@ -159,7 +176,12 @@ namespace Assets.Scripts.Controller
 
                         script.Render(answers, new Action<int>((t) =>
                         {
-                            
+                            var result = question.CheckingResult(new List<int>() { t});
+
+                            isChosen = true;
+                            Sender?.Invoke(result);
+
+                            script.AfterCheck(t, result, false);  
                         }));
 
                         break;
