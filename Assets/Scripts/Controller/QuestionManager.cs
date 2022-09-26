@@ -43,6 +43,7 @@ namespace Assets.Scripts.Controller
                 playerPosition = player.transform.localPosition;
                 //Debug.Log(playerPosition);
                 player.transform.localPosition = new Vector3(0, .2f);
+                player.GetComponent<SpriteRenderer>().color = Color.black;
                 Sender += QuestionManager_Sender;
                 gameObject.GetComponentInChildren<Image>().gameObject.SetActive(false); //Get children to hide because TwoChoice don't need it
             }
@@ -69,7 +70,9 @@ namespace Assets.Scripts.Controller
             yield return new WaitForSecondsRealtime(s);
 
             Destroy(AnswerContainer);
-            GameObject.FindGameObjectWithTag("Player").transform.localPosition = playerPosition;
+            var player = GameObject.FindGameObjectWithTag("Player");
+            player.GetComponent<SpriteRenderer>().color = Color.white;
+            player.transform.localPosition = playerPosition;
             Destroy(gameObject);
         }
 

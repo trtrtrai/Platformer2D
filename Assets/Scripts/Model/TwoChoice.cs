@@ -1,3 +1,4 @@
+using Assets.Scripts.Controller;
 using Assets.Scripts.Interfaces;
 using System;
 using System.Collections;
@@ -14,13 +15,20 @@ public class TwoChoice : MonoBehaviour, IQuest<GameObject>
     List<GameObject> answersField;
 
     private Action<int> action;
+    private QuestionManager questionManager;
 
     public GameObject QuestField;
     public List<GameObject> ListGeneric { get => choiceFields; set => choiceFields = value; }
 
+    private void Awake()
+    {
+        questionManager = GameObject.Find("Canvas").GetComponentInChildren<QuestionManager>();
+    }
+
     public void AfterCheck(int i, bool result, bool loop = true)
     {
-        
+        if (result) choiceFields[i].GetComponent<TwoChoiceAnswerBehaviour>().ShowResultField(questionManager.LabelTrue);
+        else choiceFields[i].GetComponent<TwoChoiceAnswerBehaviour>().ShowResultField(questionManager.LabelFalse);
     }
 
     public int ListCheckedCount()

@@ -18,7 +18,7 @@ public class TwoChoiceAnswerBehaviour : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log(collision.gameObject.name);
+        //Debug.Log(collision.gameObject.name);
         if (collision.gameObject.tag.Equals("Player"))
         {
             TriggerPublisher?.Invoke(name);
@@ -35,6 +35,14 @@ public class TwoChoiceAnswerBehaviour : MonoBehaviour
 
         if (light.intensity > 1.3f) turn = false;
         if (light.intensity < 1f) turn = true;
+    }
+
+    public void ShowResultField(Color color)
+    {
+        light.color = color;
+
+        var main = particleSystem.main;
+        main.startColor = color;
     }
 
     public delegate void TwoChoiceTrigger(string name);

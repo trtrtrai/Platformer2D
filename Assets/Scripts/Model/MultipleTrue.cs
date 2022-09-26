@@ -119,7 +119,6 @@ namespace Assets.Scripts.Model
 
         private void SetupShowResult(GameObject subCanvas)
         {
-
             var pos = Camera.main.transform.position; //not localPosition
             var camSize = Camera.main.sensorSize;
             pos.x += camSize.x * 0.4f / 10;

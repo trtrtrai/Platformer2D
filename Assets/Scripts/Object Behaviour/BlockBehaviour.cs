@@ -74,6 +74,7 @@ namespace Assets.Scripts.ObjectBehaviour
             }
             else
             {
+                //health + knock
                 Debug.Log("Wrong answer");
             }
 

@@ -154,6 +154,16 @@ namespace Assets.Scripts.Model
                         }
                         break;
                     }
+                case QuestionType.TwoChoice:
+                    {
+                        int isEven = Random.Range(0, 100);
+                        if (isEven % 2 == 0)
+                        {
+                            rawData.CorrectIndex[0] = rawData.CorrectIndex[0] == 0 ? 1 : 0;
+                            Swap(0, 1);
+                        }
+                        break;
+                    }
             }
         }
 
