@@ -11,7 +11,7 @@ namespace Assets.Scripts.Model
         // Start is called before the first frame update
         void Start()
         {
-            parent = gameObject.transform.parent.gameObject.GetComponent<CanvasController>();
+            parent = GetComponentInParent<CanvasController>();
             parent.SetState(GameState.NotificationDisplay);
         }
 

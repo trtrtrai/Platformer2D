@@ -103,7 +103,7 @@ namespace Assets.Scripts.Controller
                 var questions = serializer.Deserialize<List<QuestionData>>(jReader);
                 int num = RdPositiveRange(questions.Count);
                 //Debug.Log(num);
-                return questions[6];
+                return questions[num];
             }
         }
 

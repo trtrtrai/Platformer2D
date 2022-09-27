@@ -26,6 +26,7 @@ namespace Assets.Scripts.ObjectBehaviour
         private event WaitToDisable wait;
         private GameObject QuestionObj;
         private BlockSetup setup;
+        private Health player;
 
         // Start is called before the first frame update
         void Start()
@@ -75,7 +76,8 @@ namespace Assets.Scripts.ObjectBehaviour
             else
             {
                 //health + knock
-                Debug.Log("Wrong answer");
+                player.GetHit(1, gameObject);
+                //Debug.Log("Wrong answer");
             }
 
             enabled = true;
@@ -85,6 +87,7 @@ namespace Assets.Scripts.ObjectBehaviour
         {
             if (collision.gameObject.tag.Equals("Player"))
             {
+                player = collision.gameObject.GetComponent<Health>();
                 PositionESymbol(collision.gameObject.transform.localPosition);
                 eSymbol.SetActive(true);
                 isDetect = true;

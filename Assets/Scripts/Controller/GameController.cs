@@ -1,3 +1,4 @@
+using Assets.Scripts.Model;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -11,12 +12,28 @@ namespace Assets.Scripts.Controller
         public event ResourcesLoadDelegate ResourcesLoad;
         public CanvasController CanvasController;
 
+        [SerializeField]
+        Timer gameTime;
+
+        private float time;
+
         // Start is called before the first frame update
         void Start()
         {
             ResourcesLoad += InstantiateObject;
             GameState = new Stack<string>();
             SetGameState(Controller.GameState.GameDisplay);
+            time = 180f; //load from data
+            //gameTime.TimeOutEvent += ...
+        }
+
+        private void Update()
+        {
+            if (time > 0)
+            {
+                time -= Time.deltaTime;
+                gameTime.UpdateTimer(time);
+            }
         }
 
         #region GameState

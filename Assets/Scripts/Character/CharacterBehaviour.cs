@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace Assets.Scripts.Character
 {
+    [RequireComponent(typeof(Health))]
     public class CharacterBehaviour : MonoBehaviour
     {
         [SerializeField]

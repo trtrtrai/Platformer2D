@@ -270,7 +270,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &29969893624480539
 RectTransform:
   m_ObjectHideFlags: 0
@@ -323,7 +323,7 @@ RectTransform:
   m_Father: {fileID: 116560989369620844}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.05, y: 0.35}
+  m_AnchorMin: {x: 0.05, y: 0.15}
   m_AnchorMax: {x: 0.95, y: 0.8}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
@@ -356,8 +356,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "H\xEA\u0301t th\u01A1\u0300i gian, tro\u0300 h\u01A1i se\u0303 ti\xEA\u0301p
-    tu\u0323c sau 3 gi\xE2y."
+  m_text: "H\xEA\u0301t gi\u1EDD, tro\u0300 h\u01A1i se\u0303 ti\xEA\u0301p tu\u0323c
+    sau 3 gi\xE2y."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e783daee53df8b94ea0ef88d616a368d, type: 2}
   m_sharedMaterial: {fileID: 6598168147454602522, guid: e783daee53df8b94ea0ef88d616a368d, type: 2}
@@ -384,7 +384,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 41.75
+  m_fontSize: 60.3
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
