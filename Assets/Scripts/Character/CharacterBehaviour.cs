@@ -8,8 +8,7 @@ namespace Assets.Scripts.Character
     [RequireComponent(typeof(Health))]
     public class CharacterBehaviour : MonoBehaviour
     {
-        [SerializeField]
-        GameController gameCtrl;
+        private GameController gameCtrl;
 
         [SerializeField]
         [Range(0, 100)]
@@ -32,6 +31,7 @@ namespace Assets.Scripts.Character
         // Start is called before the first frame update
         void Start()
         {
+            gameCtrl = GameObject.Find("GameController").GetComponent<GameController>();
         }
 
         private void Update()
@@ -97,6 +97,25 @@ namespace Assets.Scripts.Character
             else isGrounded = false;
 
             animator.SetBool("isJump", jumpCount == 0 && !isGrounded ? true : false);
+        }
+
+        private IEnumerator WaitToDestroy()
+        {
+            yield return new WaitForSeconds(0.5f);
+            gameCtrl.InvokeResourcesLoad(gameObject, new ResourcesLoadEventHandler("Prefabs/Players/", "MainCameraAfterDead", gameObject.transform.position, false));
+            Destroy(gameObject);
+        }
+
+        public void PlayAppearAnim() => animator.Play("CharacterAppearing");
+
+        public void IsDead(bool result)
+        {
+            if (result)
+            {
+                animator.Rebind();
+                animator.Play("CharacterDisappearing");
+                StartCoroutine(WaitToDestroy());
+            }
         }
     }
 }

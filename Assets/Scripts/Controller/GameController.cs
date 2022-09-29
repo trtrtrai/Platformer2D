@@ -1,3 +1,4 @@
+using Assets.Scripts.Character;
 using Assets.Scripts.Model;
 using System;
 using System.Collections;
@@ -11,6 +12,9 @@ namespace Assets.Scripts.Controller
         public Stack<string> GameState;
         public event ResourcesLoadDelegate ResourcesLoad;
         public CanvasController CanvasController;
+        public GameObject StartPoint;
+        public GameObject EndPoint;
+        public List<GameObject> RestPoints;
 
         [SerializeField]
         Timer gameTime;
@@ -25,6 +29,11 @@ namespace Assets.Scripts.Controller
             SetGameState(Controller.GameState.GameDisplay);
             time = 180f; //load from data
             //gameTime.TimeOutEvent += ...
+
+            //spawn player (get player choosed in dont destroy)
+            var child = StartPoint.transform.GetChild(0).localPosition;
+            var player = InvokeResourcesLoad(gameObject, new ResourcesLoadEventHandler("Prefabs/Players/", "Player", StartPoint.transform.localPosition + child, false));
+            player.GetComponent<CharacterBehaviour>().PlayAppearAnim();
         }
 
         private void Update()

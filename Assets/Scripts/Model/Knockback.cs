@@ -16,7 +16,7 @@ public class Knockback : MonoBehaviour
     {
         StopAllCoroutines();
         OnBegin?.Invoke();
-        Vector2 direction = (transform.position - sender.transform.position).normalized; Debug.Log(direction);
+        Vector2 direction = (transform.position - sender.transform.position).normalized;
         var script = sender.GetComponent<ObjectDetectHit>();
         if (script is null) rigid.AddForce(direction * strength, ForceMode2D.Impulse);
         else rigid.AddForce(direction * (sender.transform.position.y < gameObject.transform.position.y ? script.Strength + 0.5f : script.Strength), ForceMode2D.Impulse);

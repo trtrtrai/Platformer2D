@@ -33,9 +33,10 @@ public class Health : MonoBehaviour
     {
         if (!penalty)
         {
-            Debug.Log(sender.name);
+            //Debug.Log(sender.name);
             Current -= damage;
             OnHit?.Invoke(sender);
+            OnDead?.Invoke(isDead);
         }
     }
 
@@ -59,4 +60,5 @@ public class Health : MonoBehaviour
     }
 
     public UnityEvent<GameObject> OnHit;
+    public UnityEvent<bool> OnDead;
 }
