@@ -1,0 +1,38 @@
+﻿[
+		{
+			"Type":1,
+			"Quest":"Chọn các khóa bắt đầu nhập học ở Đại học Cần Thơ từ 2020-2022",
+			"Answers":["K44","K45","K46","K47","K48", "K49"],
+			"CorrectIndex":[2,3,4]
+		},
+		{
+			"Type":1,
+			"Quest":"Hãy chọn tất cả các khu thuộc Đại học Cần Thơ tính đến năm 2022!",
+			"Answers":["Khu I","Khu II","Khu III","Khu IV","Khu Hòa An", "Khu Măng Đen", "Khu Vĩnh Châu"],
+			"CorrectIndex":[0,1,2,4,5,6]
+		},
+		{
+			"Type":1,
+			"Quest":"Các giá trị cốt lõi của Đại học Cần Thơ gồm?",
+			"Answers":["Chuẩn mực","Tận tâm","Nỗ lực","Mẫu mực","Sáng tạo","Đồng thuận","Đoàn kết"],
+			"CorrectIndex":[0,1,4,5]
+		},
+		{
+			"Type":1,
+			"Quest":"Giai đoạn 1966-1975, trường Đại học Cần Thơ có tọa lạc trên những địa điểm nào?",
+			"Answers":["Khu I","Khu II","Khu III","Khu IV","Tòa Viện trưởng","Khu Hòa An"],
+			"CorrectIndex":[0,1,2,4]
+		},
+		{
+			"Type":1,
+			"Quest":"Trường cam kết xây dựng hệ thống quản trị (...), (...), (...), (...) và luôn đổi mới.",
+			"Answers":["hiệu quả","chuyên nghiệp","trách nhiệm","sáng tạo","hợp lý","tự động"],
+			"CorrectIndex":[0,1,2,3]
+		},
+		{
+			"Type":1,
+			"Quest":"Lĩnh vực hoạt động của Đại học Cần Thơ tính đến 2022?",
+			"Answers":["Đào tạo","NCKH","Hợp tác trong nước","Hợp tác quốc tế"],
+			"CorrectIndex":[0,1,2]
+		},
+]

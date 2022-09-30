@@ -7,7 +7,7 @@
 		},
 		{
 			"Type":0,
-			"Quest":"Giai đoạn 1966-1975, trường Đại học Cần Thơ có bao nhiêu cơ sở?",
+			"Quest":"Giai đoạn 1966-1975, trường Đại học Cần Thơ có tọa lạc trên bao nhiêu địa điểm?",
 			"Answers":["1","2","4","7"],
 			"CorrectIndex":[2]
 		},
@@ -18,33 +18,63 @@
 			"CorrectIndex":[3]
 		},
 		{
-			"Type":1,
-			"Quest":"Hãy chọn tất cả các khu thuộc Đại học Cần Thơ tính đến năm 2022!",
-			"Answers":["Khu I","Khu II","Khu III","Khu IV","Khu Hòa An", "Khu Măng Đen", "Khu Vĩnh Châu"],
-			"CorrectIndex":[0,1,2,4,5,6]
+			"Type":0,
+			"Quest":"Khu nào thuộc Đại học Cần Thơ tính đến năm 2022.",
+			"Answers":["Khu Sóc Trăng","Khu Đà Lạt","Khu III","Khu IV"],
+			"CorrectIndex":[2]
 		},
 		{
-			"Type":2,
-			"Quest":"Điền khuyết: \"Tầm nhìn của Đại học Cần Thơ là trở thành một trong những trường hàng đầu về (1) của Việt Nam và nằm trong nhóm các trường mạnh về đào tạo, nghiên cứu khoa học được ghi nhận trong (2) và (3).\"",
-			"Answers":["chất lượng","giáo dục","khu vực","thế giới","châu Á", "nông nghiệp"],
-			"CorrectIndex":[0,2,3]
-		},
-		{
-			"Type":2,
-			"Quest":"Điền khuyết: \"Các giá trị cốt lõi của Đại học Cần Thơ: Đồng thuận - (1) - (2) - (3).\"",
-			"Answers":["Chuẩn mực","Tận tâm","Nỗ lực","Mẫu mực","Sáng tạo"],
-			"CorrectIndex":[1,0,4]
-		},
-		{
-			"Type":3,
-			"Quest":"\"Tính đến cuối năm 2021, đại học Cần Thơ có 43850 sinh viên\", đúng hay sai?",
-			"Answers":["Đúng","Sai"],
+			"Type":0,
+			"Quest":"Điền khuyết: \"Tầm nhìn của Đại học Cần Thơ là trở thành một trong những trường hàng đầu về (1) của Việt Nam...\"",
+			"Answers":["chất lượng","giáo dục","lĩnh vực nông nghiệp"],
 			"CorrectIndex":[0]
 		},
 		{
-			"Type":3,
-			"Quest":"\"Tính đến cuối năm 2021, đại học Cần Thơ có 37 dự án quốc tế\", đúng hay sai?",
-			"Answers":["Sai","Đúng"],
+			"Type":0,
+			"Quest":"Điền khuyết: \"Các giá trị cốt lõi của Đại học Cần Thơ: Đồng thuận - Tận tâm - Chuẩn mực - (...).\"",
+			"Answers":["Nỗ lực","Kiến tạo","Sáng tạo","Hội nhập"],
+			"CorrectIndex":[2]
+		},
+		{
+			"Type":0,
+			"Quest":"Điền khuyết: \"Các giá trị cốt lõi của Đại học Cần Thơ: (...) - Tận tâm - Chuẩn mực - Sáng tạo.\"",
+			"Answers":["Đồng tâm","Đồng thuận","Đoàn kết","Chung sức"],
 			"CorrectIndex":[1]
+		},
+		{
+			"Type":0,
+			"Quest":"Tính đến cuối năm 2021, đại học Cần Thơ có bao nhiêu sinh viên?",
+			"Answers":["43850","47622","50000","38503"],
+			"CorrectIndex":[0]
+		},
+		{
+			"Type":0,
+			"Quest":"Tính đến cuối năm 2021, đại học Cần Thơ có bao nhiêu dự án quốc tế?",
+			"Answers":["34","35","36","37"],
+			"CorrectIndex":[3]
+		},
+		{
+			"Type":0,
+			"Quest":"Tính đến 2022, đại học Cần Thơ đang đào tạo bao nhiêu chuyên ngành đại học?",
+			"Answers":["89","90","91","92"],
+			"CorrectIndex":[2]
+		},
+		{
+			"Type":0,
+			"Quest":"\"Trường Đại học Cần Thơ là trung tâm đào tạo, nghiên cứu khoa học chuyển giao công nghệ hàng đầu của quốc gia, có đóng góp hữu hiệu vào sự nghiệp đào tạo nhân lực chất lượng cao, bồi dưỡng nhân tài và phát triển khoa học phục vụ phát triển kinh tế - xã hội của vùng và của quốc gia...\" là một phần nội dung của:",
+			"Answers":["Tầm nhìn","Mục tiêu","Giá trị","Sứ mệnh"],
+			"CorrectIndex":[3]
+		},
+		{
+			"Type":0,
+			"Quest":"Tính đến 2022, đại học Cần Thơ hoạt động trên bao nhiêu lĩnh vực?",
+			"Answers":["1","2","3","4"],
+			"CorrectIndex":[2]
+		},
+{
+			"Type":0,
+			"Quest":"Phương pháp đào tạo của Đại học Cần Thơ?",
+			"Answers":["tín chỉ","học phần","niên chế(năm)","học kỳ"],
+			"CorrectIndex":[0]
 		},
 ]

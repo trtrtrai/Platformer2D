@@ -1,0 +1,38 @@
+﻿[
+		{
+			"Type":3,
+			"Quest":"\"Năm 2022, Đại học Cần Thơ vừa chào đón khóa K49 vào trường\", đúng hay sai??",
+			"Answers":["Đúng","Sai"],
+			"CorrectIndex":[1]
+		},
+		{
+			"Type":3,
+			"Quest":"\"Giai đoạn 1966-1975, trường Đại học Cần Thơ có tọa lạc trên 4 địa điểm\", đúng hay sai?",
+			"Answers":["Sai","Đúng"],
+			"CorrectIndex":[1]
+		},
+		{
+			"Type":3,
+			"Quest":"\"Tính đến cuối năm 2021, đại học Cần Thơ có 43850 sinh viên\", đúng hay sai?",
+			"Answers":["Đúng","Sai"],
+			"CorrectIndex":[0]
+		},
+		{
+			"Type":3,
+			"Quest":"\"Tính đến cuối năm 2021, đại học Cần Thơ có 37 dự án quốc tế\", đúng hay sai?",
+			"Answers":["Sai","Đúng"],
+			"CorrectIndex":[1]
+		},
+		{
+			"Type":3,
+			"Quest":"Chương trình đào tạo của Đại học Cần Thơ là theo hệ thống tín chỉ, đúng hay sai?",
+			"Answers":["Đúng","Sai"],
+			"CorrectIndex":[0]
+		},
+		{
+			"Type":3,
+			"Quest":"Đại học Cần Thơ có chương trình đào tạo của theo niên chế hay không?",
+			"Answers":["Có","Không"],
+			"CorrectIndex":[1]
+		},
+]

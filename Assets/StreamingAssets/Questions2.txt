@@ -1,0 +1,26 @@
+﻿[
+		{
+			"Type":2,
+			"Quest":"Điền khuyết: \"Tầm nhìn của Đại học Cần Thơ là trở thành một trong những trường hàng đầu về (1) của Việt Nam và nằm trong nhóm các trường mạnh về đào tạo, nghiên cứu khoa học được ghi nhận trong (2) và (3).\"",
+			"Answers":["chất lượng","giáo dục","khu vực","thế giới","châu Á", "nông nghiệp"],
+			"CorrectIndex":[0,2,3]
+		},
+		{
+			"Type":2,
+			"Quest":"Điền khuyết: \"Các giá trị cốt lõi của Đại học Cần Thơ: Đồng thuận - (1) - (2) - (3).\"",
+			"Answers":["Chuẩn mực","Tận tâm","Nỗ lực","Mẫu mực","Sáng tạo"],
+			"CorrectIndex":[1,0,4]
+		},
+		{
+			"Type":2,
+			"Quest":"Điền khuyết: Năm 2022, Trường đào tạo (1) chương trình đào tạo tiên tiến, (2) chương trình đào tạo chất lượng cao và (3) chuyên ngành nghiên cứu sinh.",
+			"Answers":["19","2","15","8","5"],
+			"CorrectIndex":[1,3,0]
+		},
+{
+			"Type":2,
+			"Quest":"Điền khuyết: Trường Đại học Cần Thơ là (1) động lực có ảnh hưởng (2) cho sự phát triển của (3).",
+			"Answers":["nhân tố","yếu tố","chiến lược","quyết định","ĐBSCL","miền Nam","châu Á"],
+			"CorrectIndex":[0,3,4]
+		},
+]
