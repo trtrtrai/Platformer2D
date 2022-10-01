@@ -97,6 +97,7 @@ namespace Assets.Scripts.Controller
         Horizontal,
         Vertical,
     }
+
     public enum GameState
     {
         GameDisplay,
