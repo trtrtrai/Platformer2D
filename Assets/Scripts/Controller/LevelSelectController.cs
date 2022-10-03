@@ -14,6 +14,9 @@ public class LevelSelectController : MonoBehaviour
     [SerializeField]
     private SceneController sceneController;
 
+    [SerializeField]
+    GameObject missionManager;
+
     private List<string> listNames;
 
     // Start is called before the first frame update
@@ -29,8 +32,9 @@ public class LevelSelectController : MonoBehaviour
             obj.name = listNames[i];
             var btn = obj.GetComponent<Button>();
            btn.onClick.AddListener(() =>{
-                btn.onClick.RemoveAllListeners();
-                PlayLevel(obj);
+               //Load this mission
+               //set play button
+               missionManager.SetActive(true);
             });
         }
     }

@@ -113,4 +113,12 @@ namespace Assets.Scripts.Controller
         Fill,
         TwoChoice,
     }
+
+    public enum MissionType
+    {
+        LevelCompleted,
+        CompletionTime,
+        Point,
+        FullCollection
+    }
 }

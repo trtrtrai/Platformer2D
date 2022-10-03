@@ -1,31 +1,36 @@
 using Assets.Scripts.Character;
+using Assets.Scripts.Model;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerHealthHandle : MonoBehaviour
+namespace Assets.Scripts.Others
 {
-    [SerializeField]
-    List<GameObject> hearts;
-
-    [SerializeField]
-    Color lost;
-
-    private Health player;
-
-    // Start is called before the first frame update
-    void Start()
+    public class PlayerHealthHandle : MonoBehaviour
     {
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Health>();
+        [SerializeField]
+        List<GameObject> hearts;
 
-        for (int i = hearts.Count; i > 0 + player.Current; i--)
+        [SerializeField]
+        Color lost;
+
+        private Health player;
+
+        // Start is called before the first frame update
+        void Start()
         {
-            hearts[i].GetComponent<Image>().color = lost;
-        }
+            player = GameObject.FindGameObjectWithTag("Player").GetComponent<Health>();
 
-        player.OnHit.AddListener((s) => {
-            hearts[player.Current].GetComponent<Image>().color = lost;
-        });
+            for (int i = hearts.Count; i > 0 + player.Current; i--)
+            {
+                hearts[i].GetComponent<Image>().color = lost;
+            }
+
+            player.OnHit.AddListener((s) =>
+            {
+                hearts[player.Current].GetComponent<Image>().color = lost;
+            });
+        }
     }
 }

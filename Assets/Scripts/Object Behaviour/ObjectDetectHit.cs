@@ -1,3 +1,4 @@
+using Assets.Scripts.Model;
 using UnityEngine;
 
 public class ObjectDetectHit : MonoBehaviour

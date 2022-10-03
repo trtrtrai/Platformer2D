@@ -3,62 +3,65 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Health : MonoBehaviour
+namespace Assets.Scripts.Model
 {
-    [SerializeField]
-    private int current;
-
-    [SerializeField]
-    private int max;
-
-    [SerializeField]
-    private bool isDead;
-
-    private bool penalty;
-
-    public int Current 
+    public class Health : MonoBehaviour
     {
-        get { return current; }
-        private set 
+        [SerializeField]
+        private int current;
+
+        [SerializeField]
+        private int max;
+
+        [SerializeField]
+        private bool isDead;
+
+        private bool penalty;
+
+        public int Current
         {
-            var h = Mathf.Clamp(value, 0, max);
-            if (current > h) { current = h; }
-            else if (current < h) { current = h; /*Add heart invoke*/}
+            get { return current; }
+            private set
+            {
+                var h = Mathf.Clamp(value, 0, max);
+                if (current > h) { current = h; }
+                else if (current < h) { current = h; /*Add heart invoke*/}
 
-            if (current == 0) isDead = true;
+                if (current == 0) isDead = true;
+            }
         }
-    }
 
-    public void GetHit(int damage, GameObject sender)
-    {
-        if (!penalty)
+        public void GetHit(int damage, GameObject sender)
         {
-            //Debug.Log(sender.name);
-            Current -= damage;
-            OnHit?.Invoke(sender);
-            OnDead?.Invoke(isDead);
+            if (!penalty)
+            {
+                //Debug.Log(sender.name);
+                Current -= damage;
+                OnHit?.Invoke(sender);
+                OnDead?.Invoke(isDead);
+            }
         }
-    }
 
-    private void Awake()
-    {
-        current = max;
-        isDead = false;
-        penalty = false;
-        OnHit.AddListener((s) => { penalty = true; StartCoroutine(Penalty(1f)); }); // 1 sec to runnnnnnn
-    }
+        private void Awake()
+        {
+            current = max;
+            isDead = false;
+            penalty = false;
+            OnHit.AddListener((s) => { penalty = true; StartCoroutine(Penalty(1f)); }); // 1 sec to runnnnnnn
+        }
 
-    private IEnumerator Penalty(float s)
-    {
-        yield return new WaitForSeconds(s);
-        penalty = false;
-    }
+        private IEnumerator Penalty(float s)
+        {
+            yield return new WaitForSeconds(s);
+            penalty = false;
+        }
 
-    private void OnDestroy()
-    {
-        OnHit.RemoveAllListeners();
-    }
+        private void OnDestroy()
+        {
+            OnHit.RemoveAllListeners();
+        }
 
-    public UnityEvent<GameObject> OnHit;
-    public UnityEvent<bool> OnDead;
+        public UnityEvent<GameObject> OnHit;
+        public UnityEvent<bool> OnDead;
+    }
 }

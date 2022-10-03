@@ -81,6 +81,7 @@
     <Compile Include="Assets\Scripts\Model\DropItem.cs" />
     <Compile Include="Assets\Scripts\Object Behaviour\ObjectMovingP2P.cs" />
     <Compile Include="Assets\Scripts\Model\MessageContainer.cs" />
+    <Compile Include="Assets\Scripts\Controller\LevelSelectController.cs" />
     <Compile Include="Assets\test.cs" />
     <Compile Include="Assets\Scripts\Model\Light2dState.cs" />
     <Compile Include="Assets\Scripts\Controller\SceneController.cs" />
@@ -90,12 +91,14 @@
     <Compile Include="Assets\Scripts\Model\QuestionData.cs" />
     <Compile Include="Assets\Scripts\Model\Light2dStateData.cs" />
     <Compile Include="Assets\Scripts\Object Behaviour\LightBehaviour.cs" />
-    <Compile Include="Assets\Scripts\Controller\LevelSelectController.cs" />
+    <Compile Include="Assets\Scripts\Model\MissionData.cs" />
+    <Compile Include="Assets\Scripts\Controller\MissionManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
+    <None Include="Assets\StreamingAssets\MissionData.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
@@ -109,7 +112,6 @@
     <None Include="Assets\StreamingAssets\Questions3.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Properties.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
-    <None Include="Assets\StreamingAssets\Answers.txt" />
     <None Include="Assets\StreamingAssets\Questions1.txt" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
