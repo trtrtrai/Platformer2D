@@ -1,6 +1,8 @@
 ﻿using Assets.Scripts.Model;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using TMPro;
 using UnityEngine;
@@ -10,12 +12,12 @@ namespace Assets.Scripts.Controller
     public class MissionManager : MonoBehaviour
     {
         [SerializeField]
-        List<GameObject> missions;
+        List<TMP_Text> missionsText;
 
         // Start is called before the first frame update
         void Start()
         {
-            var script = missions[0].GetComponent<MissionData>();
+            /*var script = missions[0].GetComponent<MissionData>();
             script.Type = MissionType.LevelCompleted;
             LoadText(script, missions[0].gameObject.GetComponentInChildren<TMP_Text>());
 
@@ -27,14 +29,23 @@ namespace Assets.Scripts.Controller
             script = missions[2].GetComponent<MissionData>();
             script.Type = MissionType.FullCollection;
             //script.PointsChallenge = 3000;
-            LoadText(script, missions[2].gameObject.GetComponentInChildren<TMP_Text>());
+            LoadText(script, missions[2].gameObject.GetComponentInChildren<TMP_Text>());*/
 
+            /*JsonSerializer serializer = new JsonSerializer();
+            using (StreamReader sReader = new StreamReader(Application.streamingAssetsPath + "/MissionData.txt"))
+            using (JsonReader jReader = new JsonTextReader(sReader))
+            {
+                var questions = serializer.Deserialize<MissionData>(jReader);
+                Debug.Log(questions.Type);
+            }*/
         }
 
-        // Update is called once per frame
-        void Update()
+        public void OpenMissionDialog(MissionData[] datas)
         {
-
+            for (int i = 0; i < datas.Length; i++)
+            {
+                LoadText(datas[i], missionsText[i]);
+            }
         }
 
         private void LoadText(MissionData data, TMP_Text text)

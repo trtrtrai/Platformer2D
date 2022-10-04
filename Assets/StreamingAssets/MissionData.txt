@@ -1,0 +1,4 @@
+{
+	"Type":1,
+	"SecondsChallenge":125,
+}

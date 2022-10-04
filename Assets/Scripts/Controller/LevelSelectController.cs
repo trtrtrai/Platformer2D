@@ -1,4 +1,5 @@
 using Assets.Scripts.Controller;
+using Assets.Scripts.Model;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -17,7 +18,18 @@ public class LevelSelectController : MonoBehaviour
     [SerializeField]
     GameObject missionManager;
 
+    [SerializeField]
+    GameObject initialPlayer;
+
+    [SerializeField]
+    Sprite normalBg;
+
+    [SerializeField]
+    Sprite selectedBg;
+
     private List<string> listNames;
+    private int currentName;
+    private Image currentPlayerBg;
 
     // Start is called before the first frame update
     void Start()
@@ -28,15 +40,20 @@ public class LevelSelectController : MonoBehaviour
 
         for (int i = 0; i < levelAmount; i++)
         {
-            var obj = Instantiate(Resources.Load<GameObject>("Prefabs/UI/LevelSelect/" + "GameLevel"), content.transform);
-            obj.name = listNames[i];
+            var t = i;
+            var obj = Instantiate(Resources.Load<GameObject>("Prefabs/UI/LevelSelect/" + listNames[t]), content.transform);
+            obj.name = listNames[t];
             var btn = obj.GetComponent<Button>();
-           btn.onClick.AddListener(() =>{
-               //Load this mission
-               //set play button
-               missionManager.SetActive(true);
+            btn.onClick.AddListener(() => {
+                currentName = t;
+                missionManager.GetComponent<MissionManager>().OpenMissionDialog(obj.GetComponentsInChildren<MissionData>());
+                //set play button
+                missionManager.SetActive(true);
             });
         }
+
+        currentPlayerBg = initialPlayer.GetComponent<Image>();
+        initialPlayer.GetComponentInChildren<Button>().onClick.Invoke();
     }
 
     // Update is called once per frame
@@ -45,7 +62,7 @@ public class LevelSelectController : MonoBehaviour
         
     }
 
-    public int DirCount(DirectoryInfo d)
+    private int DirCount(DirectoryInfo d)
     {
         int i = 0;
         // Add file sizes.
@@ -62,5 +79,14 @@ public class LevelSelectController : MonoBehaviour
         return i;
     }
 
-    public void PlayLevel(GameObject obj) => sceneController.SwapScene(obj.name);
+    public void PlayLevel() => sceneController.SwapScene(listNames[currentName]);
+
+    public void ChangeBackground(Image bg)
+    {
+        currentPlayerBg.sprite = normalBg;
+
+        currentPlayerBg = bg;
+
+        currentPlayerBg.sprite = selectedBg;
+    }
 }
