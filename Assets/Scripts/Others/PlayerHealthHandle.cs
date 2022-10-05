@@ -20,6 +20,20 @@ namespace Assets.Scripts.Others
         // Start is called before the first frame update
         void Start()
         {
+            StartCoroutine(WaitToSeePlayerSpawn());
+        }
+
+        private IEnumerator WaitToSeePlayerSpawn()
+        {
+
+            var obj = GameObject.FindGameObjectWithTag("Player");
+
+            while (obj is null)
+            {
+                obj = GameObject.FindGameObjectWithTag("Player");
+                yield return null;
+            }
+
             player = GameObject.FindGameObjectWithTag("Player").GetComponent<Health>();
 
             for (int i = hearts.Count; i > 0 + player.Current; i--)

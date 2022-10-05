@@ -1,9 +1,15 @@
+using Assets.Scripts.Controller;
+using Assets.Scripts.Model;
+using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class DontDestroyOnLoad : MonoBehaviour
 {
     public string ThisScene;
+    public GameObject MissionObj;
+    public CharacterName Name;
 
     // Start is called before the first frame update
     void Start()
@@ -16,11 +22,14 @@ public class DontDestroyOnLoad : MonoBehaviour
             Destroy(gameObject);
         }
 
-        DontDestroyOnLoad(gameObject);
+        DontDestroyOnLoad(gameObject);      
     }
 
     public void SwapScene(string name)
     {
+        var child = gameObject.GetComponentInChildren<RectTransform>();
+        if (child != null) MissionObj = child.gameObject;
+
         ThisScene = name;
         SceneManager.LoadScene(name);
     }
@@ -28,5 +37,10 @@ public class DontDestroyOnLoad : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    public MissionData[] GetMission()
+    {
+        return MissionObj.transform.GetChild(0).GetComponentsInChildren<MissionData>();
     }
 }

@@ -17,27 +17,7 @@ namespace Assets.Scripts.Controller
         // Start is called before the first frame update
         void Start()
         {
-            /*var script = missions[0].GetComponent<MissionData>();
-            script.Type = MissionType.LevelCompleted;
-            LoadText(script, missions[0].gameObject.GetComponentInChildren<TMP_Text>());
-
-            script = missions[1].GetComponent<MissionData>();
-            script.Type = MissionType.CompletionTime;
-            script.SecondsChallenge = 187;
-            LoadText(script, missions[1].gameObject.GetComponentInChildren<TMP_Text>());
-
-            script = missions[2].GetComponent<MissionData>();
-            script.Type = MissionType.FullCollection;
-            //script.PointsChallenge = 3000;
-            LoadText(script, missions[2].gameObject.GetComponentInChildren<TMP_Text>());*/
-
-            /*JsonSerializer serializer = new JsonSerializer();
-            using (StreamReader sReader = new StreamReader(Application.streamingAssetsPath + "/MissionData.txt"))
-            using (JsonReader jReader = new JsonTextReader(sReader))
-            {
-                var questions = serializer.Deserialize<MissionData>(jReader);
-                Debug.Log(questions.Type);
-            }*/
+            
         }
 
         public void OpenMissionDialog(MissionData[] datas)

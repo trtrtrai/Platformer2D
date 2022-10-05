@@ -2,7 +2,6 @@
 using UnityEditor;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 using UnityEditor.SceneManagement;
 
 namespace Assets.Scripts.Model

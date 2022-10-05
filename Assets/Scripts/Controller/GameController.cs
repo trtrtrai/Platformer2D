@@ -12,6 +12,7 @@ namespace Assets.Scripts.Controller
         public Stack<string> GameState;
         public event ResourcesLoadDelegate ResourcesLoad;
         public CanvasController CanvasController;
+        public SceneController SceneController;
         public GameObject StartPoint;
         public GameObject EndPoint;
         public List<GameObject> RestPoints;
@@ -30,9 +31,17 @@ namespace Assets.Scripts.Controller
             time = 180f; //load from data
             //gameTime.TimeOutEvent += ...
 
-            //spawn player (get player choosed in dont destroy)
+
+            StartCoroutine(WaitToSeeDontDestroy());
+            //SpawnPlayer();
+        }
+
+        private IEnumerator WaitToSeeDontDestroy()
+        {
+            while (SceneController.DontDestroy is null) yield return null;
+            
             var child = StartPoint.transform.GetChild(0).localPosition;
-            var player = InvokeResourcesLoad(gameObject, new ResourcesLoadEventHandler("Prefabs/Players/", "Player", StartPoint.transform.localPosition + child, false));
+            var player = InvokeResourcesLoad(gameObject, new ResourcesLoadEventHandler("Prefabs/Players/", SceneController.DontDestroy.Name.ToString(), StartPoint.transform.localPosition + child, false));
             player.GetComponent<CharacterBehaviour>().PlayAppearAnim();
         }
 
@@ -120,5 +129,11 @@ namespace Assets.Scripts.Controller
         CompletionTime,
         Point,
         FullCollection
+    }
+
+    public enum CharacterName
+    {
+        NinjaFrog,
+        PinkMan,
     }
 }

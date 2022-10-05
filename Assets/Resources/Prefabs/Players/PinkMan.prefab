@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 8533602217549317429}
   - component: {fileID: 8533602217549317428}
   m_Layer: 0
-  m_Name: Pink
+  m_Name: PinkMan
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

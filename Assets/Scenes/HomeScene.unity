@@ -1441,6 +1441,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisScene: HomeScene
+  CanvasTemp: {fileID: 0}
 --- !u!4 &1914468795
 Transform:
   m_ObjectHideFlags: 0
@@ -1484,6 +1485,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c43339605c7510f4e8906105e6690dae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DontDestroy: {fileID: 0}
 --- !u!4 &2143448792
 Transform:
   m_ObjectHideFlags: 0

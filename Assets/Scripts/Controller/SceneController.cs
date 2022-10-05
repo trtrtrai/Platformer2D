@@ -6,15 +6,21 @@ namespace Assets.Scripts.Controller
 {
     public class SceneController : MonoBehaviour
     {
-        private DontDestroyOnLoad dontDestroy;
+        public DontDestroyOnLoad DontDestroy;
         // Start is called before the first frame update
         void Start()
         {
-            dontDestroy = GameObject.FindGameObjectWithTag("DontDestroy").GetComponent<DontDestroyOnLoad>();
+            DontDestroy = GameObject.FindGameObjectWithTag("DontDestroy").GetComponent<DontDestroyOnLoad>();
         }
 
-        public void SwapScene(string name) => dontDestroy.SwapScene(name);
+        public void SwapScene(string name) => DontDestroy.SwapScene(name);
 
-        public void QuitGame() => dontDestroy.QuitGame();
+        public void SwapSceneWhilePlay()
+        {
+            Destroy(DontDestroy.MissionObj);
+            SwapScene("LevelSelectionScene");
+        }
+
+        public void QuitGame() => DontDestroy.QuitGame();
     }
 }

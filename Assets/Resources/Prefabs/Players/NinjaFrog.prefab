@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 1369889972370676325}
   - component: {fileID: 1369889972370676324}
   m_Layer: 0
-  m_Name: Player
+  m_Name: NinjaFrog
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -30,6 +30,7 @@ public class LevelSelectController : MonoBehaviour
     private List<string> listNames;
     private int currentName;
     private Image currentPlayerBg;
+    private Transform child;
 
     // Start is called before the first frame update
     void Start()
@@ -45,13 +46,14 @@ public class LevelSelectController : MonoBehaviour
             obj.name = listNames[t];
             var btn = obj.GetComponent<Button>();
             btn.onClick.AddListener(() => {
+                child = obj.GetComponentInChildren<RectTransform>().transform;
                 currentName = t;
                 missionManager.GetComponent<MissionManager>().OpenMissionDialog(obj.GetComponentsInChildren<MissionData>());
-                //set play button
                 missionManager.SetActive(true);
             });
         }
 
+        //set default
         currentPlayerBg = initialPlayer.GetComponent<Image>();
         initialPlayer.GetComponentInChildren<Button>().onClick.Invoke();
     }
@@ -79,7 +81,12 @@ public class LevelSelectController : MonoBehaviour
         return i;
     }
 
-    public void PlayLevel() => sceneController.SwapScene(listNames[currentName]);
+    public void PlayLevel()
+    {
+        child.transform.SetParent(sceneController.DontDestroy.transform);
+        sceneController.DontDestroy.Name = (CharacterName)Enum.Parse(typeof(CharacterName), currentPlayerBg.transform.GetChild(0).name);
+        sceneController.SwapScene(listNames[currentName]);
+    }
 
     public void ChangeBackground(Image bg)
     {
