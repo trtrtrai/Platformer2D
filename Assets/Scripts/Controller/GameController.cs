@@ -9,7 +9,7 @@ namespace Assets.Scripts.Controller
 {
     public class GameController : MonoBehaviour
     {
-        public Stack<string> GameState;
+        private Stack<string> gameState;
         public event ResourcesLoadDelegate ResourcesLoad;
         public CanvasController CanvasController;
         public SceneController SceneController;
@@ -26,7 +26,7 @@ namespace Assets.Scripts.Controller
         void Start()
         {
             ResourcesLoad += InstantiateObject;
-            GameState = new Stack<string>();
+            gameState = new Stack<string>();
             SetGameState(Controller.GameState.GameDisplay);
             time = 180f; //load from data
             //gameTime.TimeOutEvent += ...
@@ -57,13 +57,13 @@ namespace Assets.Scripts.Controller
         #region GameState
         public void SetGameState(GameState type) //=> GameState.Push(type.ToString());
         {
-            GameState.Push(type.ToString());
+            gameState.Push(type.ToString());
             Debug.Log(type.ToString());
         }
 
-        public void PopGameState() => GameState.Pop();
+        public void PopGameState() => gameState.Pop();
 
-        public bool IsEqualsTopDisplay(GameState type) => type.ToString() == GameState.Peek();
+        public bool IsEqualsTopDisplay(GameState type) => type.ToString() == gameState.Peek();
         #endregion
 
         public GameObject InvokeResourcesLoad(object sender, ResourcesLoadEventHandler args) => ResourcesLoad?.Invoke(sender, args);
@@ -80,6 +80,29 @@ namespace Assets.Scripts.Controller
             if (args.Position != Vector3.zero) obj.transform.localPosition = args.Position;
 
             return obj;
+        }
+
+        public void LevelCompletedHandle(string state) => LevelCompletedHandle((EndLevelState)Enum.Parse(typeof(EndLevelState), state));
+
+        public void LevelCompletedHandle(EndLevelState state)
+        {
+            Debug.Log(state);
+            CanvasController.SetState(GameState.EndLevelDisplay); //set by canvas to do something
+            switch (state)
+            {
+                case EndLevelState.EndPoint:
+                    {
+                        break;
+                    }
+                case EndLevelState.Dead:
+                    {
+                        break;
+                    }
+                case EndLevelState.Exit:
+                    {
+                        break;
+                    }
+            }
         }
 
         public delegate GameObject ResourcesLoadDelegate(object sender, ResourcesLoadEventHandler args);
@@ -113,6 +136,7 @@ namespace Assets.Scripts.Controller
         QuestionDisplay,
         TwoChoiceQuestionDisplay,
         NotificationDisplay,
+        EndLevelDisplay,
     }
 
     public enum QuestionType
@@ -135,5 +159,12 @@ namespace Assets.Scripts.Controller
     {
         NinjaFrog,
         PinkMan,
+    }
+
+    public enum EndLevelState
+    {
+        EndPoint,
+        Dead,
+        Exit,
     }
 }

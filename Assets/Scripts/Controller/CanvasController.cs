@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Assets.Scripts.Controller
 {
@@ -12,6 +13,12 @@ namespace Assets.Scripts.Controller
 
         [SerializeField]
         MissionManager missionMng;
+
+        [SerializeField]
+        Button paused;
+
+        [SerializeField]
+        GameObject resultTable;
 
         public GameObject SubCanvasWorldPoint;
 
@@ -38,8 +45,22 @@ namespace Assets.Scripts.Controller
 
         public GameObject InstantiateUI(GameObject parent, ResourcesLoadEventHandler args) => gameController.InvokeResourcesLoad(parent, args);
 
-        public void SetState(GameState type) => gameController.SetGameState(type);
+        public void ShowResultLevel()
+        {
 
-        public void PopState() => gameController.PopGameState();
+            resultTable.SetActive(true);
+        }
+
+        public void SetState(GameState type)
+        {
+            if (type != GameState.GameDisplay) paused.interactable = false;
+            gameController.SetGameState(type);
+        }
+
+        public void PopState() 
+        {
+            gameController.PopGameState(); 
+            if (gameController.IsEqualsTopDisplay(GameState.GameDisplay)) paused.interactable = true;
+        }
     }
 }

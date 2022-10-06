@@ -93,6 +93,7 @@
     <Compile Include="Assets\Scripts\Model\QuestionData.cs" />
     <Compile Include="Assets\Scripts\Model\Light2dStateData.cs" />
     <Compile Include="Assets\Scripts\Object Behaviour\LightBehaviour.cs" />
+    <Compile Include="Assets\Scripts\Model\EndLevelDetect.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

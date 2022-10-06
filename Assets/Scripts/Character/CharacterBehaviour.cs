@@ -105,6 +105,7 @@ namespace Assets.Scripts.Character
             yield return new WaitForSeconds(0.5f);
             gameCtrl.InvokeResourcesLoad(gameObject, new ResourcesLoadEventHandler("Prefabs/Players/", "MainCameraAfterDead", gameObject.transform.position, false));
             Destroy(gameObject);
+            gameCtrl.LevelCompletedHandle(EndLevelState.Dead);
         }
 
         public void PlayAppearAnim() => animator.Play("CharacterAppearing");
