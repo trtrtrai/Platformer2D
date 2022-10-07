@@ -17,10 +17,28 @@
 			"Answers":["19","2","15","8","5"],
 			"CorrectIndex":[1,3,0]
 		},
-{
+		{
 			"Type":2,
 			"Quest":"Điền khuyết: Trường Đại học Cần Thơ là (1) động lực có ảnh hưởng (2) cho sự phát triển của (3).",
-			"Answers":["nhân tố","yếu tố","chiến lược","quyết định","ĐBSCL","miền Nam","châu Á"],
+			"Answers":["nhân tố","yếu tố","chiến lược","quyết định","ĐBSCL","miền Nam"],
 			"CorrectIndex":[0,3,4]
+		},
+		{
+			"Type":2,
+			"Quest":"Điền khuyết: Năm 2022 đánh dấu việc công bố thành lập (1) trường và (2) khoa của Đại học Cần Thơ vào ngày (3)/10",
+			"Answers":["1","4","10","22","2"],
+			"CorrectIndex":[1,0,2]
+		},
+		{
+			"Type":2,
+			"Quest":"Điền khuyết: Đại học Cần Thơ có (1) trung tâm, (2) phòng-ban, (3) đảng-đoàn thể.",
+			"Answers":["15","10","5","14","18", "20"],
+			"CorrectIndex":[4,3,2]
+		},
+		{
+			"Type":2,
+			"Quest":"Tạp chí khoa học của Đại học Cần Thơ được cho phép xuất bản (1) kỳ một năm, trong đó có (2) kỳ xuất bản bằng (3).",
+			"Answers":["9","10","3","5","song ngữ", "tiếng Anh"],
+			"CorrectIndex":[0,2,5]
 		},
 ]

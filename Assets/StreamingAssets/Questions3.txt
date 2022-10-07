@@ -31,7 +31,19 @@
 		},
 		{
 			"Type":3,
-			"Quest":"Đại học Cần Thơ có chương trình đào tạo của theo niên chế hay không?",
+			"Quest":"Đại học Cần Thơ có chương trình đào tạo theo niên chế hay không?",
+			"Answers":["Có","Không"],
+			"CorrectIndex":[1]
+		},
+		{
+			"Type":3,
+			"Quest":"Đại học Cần Thơ có tạp chí khoa học hay không?",
+			"Answers":["Có","Không"],
+			"CorrectIndex":[0]
+		},
+		{
+			"Type":3,
+			"Quest":"Tạp chí khoa học Đại học Cần Thơ có tính phí hay không?",
 			"Answers":["Có","Không"],
 			"CorrectIndex":[1]
 		},

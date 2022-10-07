@@ -55,7 +55,7 @@
 		},
 		{
 			"Type":0,
-			"Quest":"Tính đến 2022, đại học Cần Thơ đang đào tạo bao nhiêu chuyên ngành đại học?",
+			"Quest":"Tính đến cuối 2021, đại học Cần Thơ đang đào tạo bao nhiêu chuyên ngành đại học?",
 			"Answers":["89","90","91","92"],
 			"CorrectIndex":[2]
 		},
@@ -71,10 +71,52 @@
 			"Answers":["1","2","3","4"],
 			"CorrectIndex":[2]
 		},
-{
+		{
 			"Type":0,
 			"Quest":"Phương pháp đào tạo của Đại học Cần Thơ?",
 			"Answers":["tín chỉ","học phần","niên chế(năm)","học kỳ"],
 			"CorrectIndex":[0]
+		},
+		{
+			"Type":0,
+			"Quest":"Nghị quyết 34 phê duyệt chủ trương chuyển Trường đại học Cần Thơ thành Đại học Cần Thơ được ký vào?",
+			"Answers":["10/07/2021","10/07/2022","25/06/2021","25/6/2022"],
+			"CorrectIndex":[0]
+		},
+		{
+			"Type":0,
+			"Quest":"Ai là người đã ký nghị quyết phê duyệt chủ trương chuyển Trường đại học Cần Thơ thành Đại học Cần Thơ?",
+			"Answers":["Hà Thanh Toàn","Lê Thanh Sơn","Nguyễn Thanh Phương","Trịnh Quốc Lập"],
+			"CorrectIndex":[2]
+		},
+		{
+			"Type":0,
+			"Quest":"Lễ công bố thành lập 4 trường và 1 khoa của Đại học Cần Thơ năm 2022 diễn ra vào ngày nào?",
+			"Answers":["10/07","10/08","10/09","10/10"],
+			"CorrectIndex":[3]
+		},
+		{
+			"Type":0,
+			"Quest":"Hệ thống học tập trực tuyến của Đại học Cần Thơ?",
+			"Answers":["Elcit","Else","E-learning","CTU learn"],
+			"CorrectIndex":[2]
+		},
+		{
+			"Type":0,
+			"Quest":"Trung tâm quản lý chất lượng Đại học Cần Thơ có mấy chức năng (CN), bao nhiêu nhiệm vụ (NV)?",
+			"Answers":["2CN - 10NV","3CN - 7NV","4CN - 6NV","10CN - 2NV"],
+			"CorrectIndex":[0]
+		},
+		{
+			"Type":0,
+			"Quest":"Tạp chí khoa học Đại học Cần Thơ ra số đầu tiên vào năm nào?",
+			"Answers":["2002","1996","2004","2009"],
+			"CorrectIndex":[2]
+		},
+		{
+			"Type":0,
+			"Quest":"Tạp chí khoa học Đại học Cần Thơ số ra năm 2022 là tập thứ mấy?",
+			"Answers":["56","57","58","60"],
+			"CorrectIndex":[2]
 		},
 ]

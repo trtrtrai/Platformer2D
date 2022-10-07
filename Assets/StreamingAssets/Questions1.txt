@@ -35,4 +35,22 @@
 			"Answers":["Đào tạo","NCKH","Hợp tác trong nước","Hợp tác quốc tế"],
 			"CorrectIndex":[0,1,2]
 		},
+		{
+			"Type":1,
+			"Quest":"Bốn trường mà Đại học Cần Thơ đã côn bố thành lập năm 2022?",
+			"Answers":["Bách Khoa","Kinh Tế","CNTT&TT","Nông Nghiệp","Công Nghệ","Giáo Dục Thể Chất"],
+			"CorrectIndex":[0,1,2,3]
+		},
+		{
+			"Type":1,
+			"Quest":"Các Đoàn thể thuộc Đại học Cần Thơ?",
+			"Answers":["Công đoàn","Đoàn TNCSHCM","Hội Cựu Chiến binh","Hội Tân Sinh viên","Văn phòng Đảng ủy"],
+			"CorrectIndex":[0,1,2]
+		},
+		{
+			"Type":1,
+			"Quest":"Tạp chí khoa học của Đại học Cần Thơ xuất bản định kỳ vào các tháng?",
+			"Answers":["Tháng 1","Tháng 2","Tháng 4","Tháng 6","Tháng 8","Tháng 10","Tháng 11","Tháng 12"],
+			"CorrectIndex":[1,2,3,4,5,7]
+		},
 ]

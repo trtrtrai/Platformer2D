@@ -87,15 +87,18 @@ namespace Assets.Scripts.Controller
         public void LevelCompletedHandle(EndLevelState state)
         {
             Debug.Log(state);
-            CanvasController.SetState(GameState.EndLevelDisplay); //set by canvas to do something
+            CanvasController.ShowResultLevel();
+            //var label = result
             switch (state)
             {
                 case EndLevelState.EndPoint:
                     {
+                        // calculation result
                         break;
                     }
                 case EndLevelState.Dead:
                     {
+                        // 
                         break;
                     }
                 case EndLevelState.Exit:

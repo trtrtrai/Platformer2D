@@ -47,7 +47,7 @@ namespace Assets.Scripts.Controller
 
         public void ShowResultLevel()
         {
-
+            SetState(GameState.EndLevelDisplay);
             resultTable.SetActive(true);
         }
 
