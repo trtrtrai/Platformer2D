@@ -58,7 +58,7 @@ namespace Assets.Scripts.Controller
         public void SetGameState(GameState type) //=> GameState.Push(type.ToString());
         {
             gameState.Push(type.ToString());
-            Debug.Log(type.ToString());
+            //Debug.Log(type.ToString());
         }
 
         public void PopGameState() => gameState.Pop();
@@ -82,13 +82,12 @@ namespace Assets.Scripts.Controller
             return obj;
         }
 
-        public void LevelCompletedHandle(string state) => LevelCompletedHandle((EndLevelState)Enum.Parse(typeof(EndLevelState), state));
+        public void LevelCompletedHandle(string state) => LevelCompletedHandle((EndLevelState)Enum.Parse(typeof(EndLevelState), state)); //for Inspector Unity
 
         public void LevelCompletedHandle(EndLevelState state)
         {
-            Debug.Log(state);
-            CanvasController.ShowResultLevel();
-            //var label = result
+            //Debug.Log(state);
+            CanvasController.ShowResultLevel(state);
             switch (state)
             {
                 case EndLevelState.EndPoint:

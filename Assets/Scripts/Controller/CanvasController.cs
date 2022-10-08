@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -45,9 +45,25 @@ namespace Assets.Scripts.Controller
 
         public GameObject InstantiateUI(GameObject parent, ResourcesLoadEventHandler args) => gameController.InvokeResourcesLoad(parent, args);
 
-        public void ShowResultLevel()
+        public void ShowResultLevel(EndLevelState state)
         {
+
             SetState(GameState.EndLevelDisplay);
+
+            var label = resultTable.transform.GetChild(1).GetComponentInChildren<TMP_Text>();
+            switch (state)
+            {
+                case EndLevelState.EndPoint:
+                    label.text = "đến đích";
+                    break;
+                case EndLevelState.Dead:
+                    label.text = "thất bại";
+                    break;
+                case EndLevelState.Exit:
+                    label.text = "thất bại";
+                    break;
+            }
+
             resultTable.SetActive(true);
         }
 

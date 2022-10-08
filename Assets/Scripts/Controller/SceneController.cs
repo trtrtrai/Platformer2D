@@ -21,6 +21,11 @@ namespace Assets.Scripts.Controller
             SwapScene("LevelSelectionScene");
         }
 
+        public void ReloadScene()
+        {
+            SwapScene(DontDestroy.ThisScene);
+        }
+
         public void QuitGame() => DontDestroy.QuitGame();
     }
 }
