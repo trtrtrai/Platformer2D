@@ -1,28 +1,33 @@
+using Assets.Scripts.Controller;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Collection : MonoBehaviour
+namespace Assets.Scripts.Model
 {
-    // Start is called before the first frame update
-    void Start()
+    public class Collection : MonoBehaviour
     {
-        
-    }
+        public CollectionFruits Name;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag.Equals("Player"))
+        // Start is called before the first frame update
+        void Start()
         {
-            Debug.Log("Collect " + name);
-            //
-            Destroy(gameObject);
+
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+
+        }
+
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (collision.gameObject.tag.Equals("Player"))
+            {
+                //Debug.Log(Name + " was collected");
+                Destroy(gameObject);
+            }
         }
     }
 }

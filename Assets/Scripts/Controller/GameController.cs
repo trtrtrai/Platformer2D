@@ -169,4 +169,16 @@ namespace Assets.Scripts.Controller
         Dead,
         Exit,
     }
+
+    public enum CollectionFruits
+    {
+        Apple,
+        Bananas,
+        Cherries,
+        Kiwi,
+        Melon,
+        Orange,
+        Pineapple,
+        Strawberry,
+    }
 }

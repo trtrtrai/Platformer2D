@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Assets.Scripts.Model;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -20,6 +21,14 @@ namespace Assets.Scripts.Controller
         [SerializeField]
         GameObject resultTable;
 
+        [SerializeField]
+        GameObject collectionTableDisplay;
+
+        [SerializeField]
+        CollectionInfo info;
+
+        private List<TMP_Text> collected;
+
         public GameObject SubCanvasWorldPoint;
 
         // Start is called before the first frame update
@@ -27,18 +36,45 @@ namespace Assets.Scripts.Controller
         {
             StartCoroutine(WaitToSeeDontDestroy());
         }
-
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
         
         private IEnumerator WaitToSeeDontDestroy()
         {
             while (gameController.SceneController.DontDestroy is null) yield return null;
 
-            missionMng.OpenMissionDialog(gameController.SceneController.DontDestroy.GetMission());
+            var missionDatas = gameController.SceneController.DontDestroy.GetMission();
+            missionMng.OpenMissionDialog(missionDatas);
+            CheckMission(missionDatas);
+        }
+
+        private void CheckMission(MissionData[] datas)
+        {
+            foreach (var data in datas)
+            {
+                if (data.Type == MissionType.FullCollection)
+                {
+                    collected = new List<TMP_Text>();
+                    var imgs = collectionTableDisplay.GetComponentsInChildren<Image>();
+                    /*var player = GameObject.FindGameObjectWithTag("Player").GetComponent<PointCounter>();
+                    player.PointListener += Player_PointListener;*/
+
+                    for (int i = 0; i < imgs.Length; i++)
+                    {
+                        collected.Add(imgs[i].GetComponentInChildren<TMP_Text>());
+                        if (i < data.NumberOfCollection)
+                        {
+                            Debug.Log("Set image " + data.Names[i]);
+                            Debug.Log("Set amount " + data.Amount[i]);
+                            imgs[i].sprite = info.GetSprite(data.Names[i]);
+                            collected[i].text = data.Amount[i] + " left";
+                        }
+                        else imgs[i].gameObject.SetActive(false);
+                    }
+
+                    return;
+                }
+            }
+
+            collectionTableDisplay.SetActive(false);
         }
 
         public GameObject InstantiateUI(ResourcesLoadEventHandler args) => gameController.InvokeResourcesLoad(gameObject, args);

@@ -54,7 +54,16 @@ namespace Assets.Scripts.Controller
                     }
                 case MissionType.FullCollection:
                     {
-                        text.text = "Thu thập 15 chuối 20 táo.";
+                        text.text = "Thu thập ";
+                        var n = data.NumberOfCollection;
+                        for (int i = 0; i < n; i++)
+                        {
+                            text.text += data.Amount[i] + " ";
+                            text.text += data.Names[i];
+                            if (i < n - 1) text.text += ", ";
+                            else text.text += ".";
+                        }
+                        
                         break;
                     }
             }

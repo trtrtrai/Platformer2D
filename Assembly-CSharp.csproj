@@ -64,6 +64,7 @@
     <Compile Include="Assets\Scripts\Model\ObjectMovingP2PSetup.cs" />
     <Compile Include="Assets\Scripts\Model\BlockSetup.cs" />
     <Compile Include="Assets\Scripts\Model\OneTrue.cs" />
+    <Compile Include="Assets\Scripts\Model\Collection.cs" />
     <Compile Include="Assets\Scripts\Model\MultipleTrue.cs" />
     <Compile Include="Assets\Scripts\Model\Health.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IQuest.cs" />
@@ -94,7 +95,9 @@
     <Compile Include="Assets\Scripts\Model\QuestionData.cs" />
     <Compile Include="Assets\Scripts\Model\Light2dStateData.cs" />
     <Compile Include="Assets\Scripts\Object Behaviour\LightBehaviour.cs" />
-    <Compile Include="Assets\Scripts\Model\Collection.cs" />
+    <Compile Include="Assets\Scripts\Model\PointCounter.cs" />
+    <Compile Include="Assets\Scripts\Others\PointHandle.cs" />
+    <Compile Include="Assets\Scripts\Model\CollectionInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

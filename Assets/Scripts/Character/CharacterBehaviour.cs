@@ -7,6 +7,7 @@ using UnityEngine;
 namespace Assets.Scripts.Character
 {
     [RequireComponent(typeof(Health))]
+    [RequireComponent(typeof(PointCounter))]
     public class CharacterBehaviour : MonoBehaviour
     {
         private GameController gameCtrl;
@@ -118,6 +119,6 @@ namespace Assets.Scripts.Character
                 animator.Play("CharacterDisappearing");
                 StartCoroutine(WaitToDestroy());
             }
-        }
+        } 
     }
 }

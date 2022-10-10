@@ -92,7 +92,7 @@ MonoBehaviour:
   SecondsChallenge: 180
   PointsChallenge: 0
   NumberOfCollection: 0
-  Names: []
+  Names: 
   Amount: 
 --- !u!1 &2383506857308188473
 GameObject:
@@ -224,7 +224,7 @@ MonoBehaviour:
   SecondsChallenge: 0
   PointsChallenge: 0
   NumberOfCollection: 0
-  Names: []
+  Names: 
   Amount: 
 --- !u!1 &2383506858183277439
 GameObject:
@@ -435,9 +435,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0d1c6bf0e1a5f14fb63418a1fc8dd2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Type: 1
+  Type: 3
   SecondsChallenge: 90
   PointsChallenge: 0
-  NumberOfCollection: 0
-  Names: []
-  Amount: 
+  NumberOfCollection: 2
+  Names: 0000000001000000
+  Amount: 0a00000005000000

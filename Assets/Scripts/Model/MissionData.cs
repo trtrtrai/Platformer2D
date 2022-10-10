@@ -15,7 +15,7 @@ namespace Assets.Scripts.Model
         public int PointsChallenge;
 
         public int NumberOfCollection;
-        public List<string> Names;
+        public List<CollectionFruits> Names;
         public List<int> Amount;
     }
 
