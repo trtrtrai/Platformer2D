@@ -721,7 +721,7 @@ MonoBehaviour:
   m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 250, y: 150}
+  m_CellSize: {x: 350, y: 300}
   m_Spacing: {x: 50, y: 50}
   m_Constraint: 0
   m_ConstraintCount: 2
@@ -1778,6 +1778,7 @@ MonoBehaviour:
   initialPlayer: {fileID: 1899323844}
   normalBg: {fileID: 2381331627078710247, guid: 84e73c5fcbc3d324a9bebf3715abc565, type: 3}
   selectedBg: {fileID: -6676564034453352251, guid: 84e73c5fcbc3d324a9bebf3715abc565, type: 3}
+  noStar: {r: 0.509434, g: 0.509434, b: 0.509434, a: 1}
 --- !u!1 &1163941554
 GameObject:
   m_ObjectHideFlags: 0

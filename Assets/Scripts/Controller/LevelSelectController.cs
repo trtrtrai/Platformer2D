@@ -4,6 +4,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -27,30 +29,27 @@ public class LevelSelectController : MonoBehaviour
     [SerializeField]
     Sprite selectedBg;
 
-    private List<string> listNames;
-    private int currentName;
+    [SerializeField]
+    Color noStar;
+
+    private List<LevelData> levels;
+    private string currentName;
     private Image currentPlayerBg;
     private Transform child;
 
     // Start is called before the first frame update
     void Start()
     {
-        listNames = new List<string>();
-        var levelAmount = DirCount(new DirectoryInfo(Application.dataPath + "/Scenes/Level/"));
-        //Debug.Log(levelAmount);
+        var levels = PlayerData.GetLevelDatas();
 
-        for (int i = 0; i < levelAmount; i++)
+        for (int i = 0; i < levels.Count; i++)
         {
             var t = i;
-            var obj = Instantiate(Resources.Load<GameObject>("Prefabs/UI/LevelSelect/" + listNames[t]), content.transform);
-            obj.name = listNames[t];
-            var btn = obj.GetComponent<Button>();
-            btn.onClick.AddListener(() => {
-                child = obj.GetComponentInChildren<RectTransform>().transform;
-                currentName = t;
-                missionManager.GetComponent<MissionManager>().OpenMissionDialog(obj.GetComponentsInChildren<MissionData>());
-                missionManager.SetActive(true);
-            });
+            var obj = Instantiate(Resources.Load<GameObject>("Prefabs/UI/LevelSelect/" + levels[t].Name), content.transform);
+            obj.name = levels[t].Name;
+
+            if (levels[t].isUnlock) SetupGameLevel(obj, levels[t]);
+            else LockLevel(obj);
         }
 
         //set default
@@ -58,34 +57,48 @@ public class LevelSelectController : MonoBehaviour
         initialPlayer.GetComponentInChildren<Button>().onClick.Invoke();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void LockLevel(GameObject obj)
     {
-        
+        var btn = obj.GetComponent<Button>();
+        btn.interactable = false;
+
+        obj.transform.GetChild(1).GetComponentsInChildren<Image>().ToList().ForEach((i) => i.color = noStar);
+        obj.transform.GetChild(2).GetComponent<TMP_Text>().text = "HighPts: none";
     }
 
-    private int DirCount(DirectoryInfo d)
+    public void SetupGameLevel(GameObject obj, LevelData data)
     {
-        int i = 0;
-        // Add file sizes.
-        var fis = d.GetFiles();
-        foreach (FileInfo fi in fis)
+        if (data.isComplete)
         {
-            if (fi.Extension.Equals(".unity"))
+            var stars = obj.transform.GetChild(1).GetComponentsInChildren<Image>();
+            for (int i = 0; i < 3; i++)
             {
-                var name = fi.Name.Substring(0, fi.Name.LastIndexOf(".unity"));             
-                listNames.Add(name);
-                i++;
+                if (!data.IsStar[i]) stars[i].color = noStar;
             }
+
+            obj.transform.GetChild(2).GetComponent<TMP_Text>().text = $"HighPts: {data.HighPoints}";
         }
-        return i;
+        else
+        {
+            obj.transform.GetChild(1).GetComponentsInChildren<Image>().ToList().ForEach((i) => i.color = noStar);
+            obj.transform.GetChild(2).GetComponent<TMP_Text>().text = "HighPts: none";
+        }
+
+        var btn = obj.GetComponent<Button>();
+        btn.onClick.AddListener(() => {
+            child = obj.GetComponentInChildren<RectTransform>().transform;
+            currentName = data.Name;
+            missionManager.GetComponent<MissionManager>().OpenMissionDialog(obj.GetComponentsInChildren<MissionData>());
+            missionManager.SetActive(true);
+        });
     }
 
     public void PlayLevel()
     {
         child.transform.SetParent(sceneController.DontDestroy.transform);
         sceneController.DontDestroy.Name = (CharacterName)Enum.Parse(typeof(CharacterName), currentPlayerBg.transform.GetChild(0).name);
-        sceneController.SwapScene(listNames[currentName]);
+        //Debug.Log(currentName);
+        sceneController.SwapScene(currentName);
     }
 
     public void ChangeBackground(Image bg)

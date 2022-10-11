@@ -1,3 +1,4 @@
+using Assets.Scripts.Model;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -24,6 +25,11 @@ namespace Assets.Scripts.Controller
         public void ReloadScene()
         {
             SwapScene(DontDestroy.ThisScene);
+        }
+
+        public void LoadPlayerData()
+        {
+            PlayerData.InitiatePlayer(1);
         }
 
         public void QuitGame() => DontDestroy.QuitGame();
