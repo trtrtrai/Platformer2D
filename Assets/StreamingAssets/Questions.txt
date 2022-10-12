@@ -26,7 +26,7 @@
 		{
 			"Type":0,
 			"Quest":"Điền khuyết: \"Tầm nhìn của Đại học Cần Thơ là trở thành một trong những trường hàng đầu về (1) của Việt Nam...\"",
-			"Answers":["chất lượng","giáo dục","lĩnh vực nông nghiệp"],
+			"Answers":["chất lượng","giáo dục","lĩnh vực nông nghiệp", "lĩnh vực công nghệ"],
 			"CorrectIndex":[0]
 		},
 		{

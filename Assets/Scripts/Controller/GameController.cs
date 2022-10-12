@@ -1,5 +1,6 @@
 using Assets.Scripts.Character;
 using Assets.Scripts.Model;
+using Assets.Scripts.Others;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -16,6 +17,7 @@ namespace Assets.Scripts.Controller
         public GameObject StartPoint;
         public GameObject EndPoint;
         public List<GameObject> RestPoints;
+        public float FullTime;
 
         [SerializeField]
         Timer gameTime;
@@ -27,8 +29,8 @@ namespace Assets.Scripts.Controller
         {
             ResourcesLoad += InstantiateObject;
             gameState = new Stack<string>();
-            SetGameState(Controller.GameState.GameDisplay);
-            time = 180f; //load from data
+            SetGameState(GameState.GameDisplay);
+            time = FullTime; //load from data
             //gameTime.TimeOutEvent += ...
 
 
@@ -93,6 +95,14 @@ namespace Assets.Scripts.Controller
                 case EndLevelState.EndPoint:
                     {
                         // calculation result
+                        var missions = SceneController.DontDestroy.GetMission();
+                        var stars = new List<bool>();
+                        for(int i = 0; i < 3; i++)
+                        {
+                            stars.Add(CheckMissonCompleted(missions[i]));
+                        }
+
+                        PlayerData.UpdateLevel(stars, CanvasController.GetComponentInChildren<PointHandle>().Points);
                         break;
                     }
                 case EndLevelState.Dead:
@@ -104,6 +114,48 @@ namespace Assets.Scripts.Controller
                     {
                         break;
                     }
+            }
+        }
+
+        private bool CheckMissonCompleted(MissionData data)
+        {
+            switch (data.Type)
+            {
+                case MissionType.LevelCompleted:
+                    {
+                        return true;
+                    }
+                case MissionType.Point:
+                    {
+                        if (CanvasController.GetComponentInChildren<PointHandle>().Points >= data.PointsChallenge)
+                        {
+                            return true;
+                        }
+                        else return false;
+                    }
+                case MissionType.CompletionTime:
+                    {
+                        if ((FullTime - time) <= data.SecondsChallenge)
+                        {
+                            return true;
+                        }
+                        else return false;
+                    }
+                case MissionType.FullCollection:
+                    {
+                        var player = GameObject.FindGameObjectWithTag("Player").GetComponent<PointCounter>();
+
+                        int c = 0;
+                        for (int i = 0; i < data.NumberOfCollection; i++)
+                        {
+                            if (player.GetAmount(data.Names[i]) >= data.Amount[i]) c++;
+                            else break;
+                        }
+
+                        if (c == data.NumberOfCollection) return true;
+                        else return false;
+                    }
+                default: return false;
             }
         }
 

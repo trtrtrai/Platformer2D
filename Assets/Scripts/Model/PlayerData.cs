@@ -1,9 +1,11 @@
 using Newtonsoft.Json;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Assets.Scripts.Model
 {
@@ -41,9 +43,42 @@ namespace Assets.Scripts.Model
             }
         }
 
-        public static void UpdateLevel()
+        public static void UpdateLevel(List<bool> s, int p)
         {
+            var thisLevel = levels.First((l) => l.Name == SceneManager.GetActiveScene().name);
+            thisLevel.isComplete = true;
+            for (int i = 0; i < thisLevel.IsStar.Count; i++)
+            {
+                thisLevel.IsStar[i] = s[i];
+            }
+            if (thisLevel.HighPoints < p) thisLevel.HighPoints = p;
 
+            var index = levels.IndexOf(thisLevel);
+            if (index == levels.Count - 1)
+            {
+                UpdatePlayer();
+                return;
+            }
+            else levels[index + 1].isUnlock = true;
+
+            UpdatePlayer();
+        }
+
+        public static void SaveBeforeExit()
+        {
+            JsonSerializer serializer = new JsonSerializer();
+            using (StreamWriter streamWriter = new StreamWriter(Application.streamingAssetsPath + $"/PlayerData/{current}/LevelCompletedInfo.txt"))
+            using (JsonWriter writer = new JsonTextWriter(streamWriter))
+            {
+                serializer.Serialize(writer, levels);
+            }
+
+            serializer = new JsonSerializer();
+            using (StreamWriter streamWriter = new StreamWriter(Application.streamingAssetsPath + $"/PlayerData/{current}/PlayerInfo.txt"))
+            using (JsonWriter writer = new JsonTextWriter(streamWriter))
+            {
+                serializer.Serialize(writer, player);
+            }
         }
 
         private static void GetLevels(int n)

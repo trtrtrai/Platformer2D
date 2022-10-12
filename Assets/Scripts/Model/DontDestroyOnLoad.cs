@@ -41,6 +41,11 @@ public class DontDestroyOnLoad : MonoBehaviour
 
     public MissionData[] GetMission()
     {
-        return MissionObj.transform.GetChild(0).GetComponentsInChildren<MissionData>();
+        return MissionObj.transform.GetChild(1).GetComponentsInChildren<MissionData>();
+    }
+
+    private void OnApplicationQuit()
+    {
+        PlayerData.SaveBeforeExit();
     }
 }

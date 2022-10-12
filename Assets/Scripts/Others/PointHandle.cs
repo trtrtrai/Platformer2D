@@ -16,13 +16,13 @@ namespace Assets.Scripts.Others
         private TMP_Text pointField;
 
         private PointCounter player;
-        private int points;
+        public int Points { get; private set; }
 
         // Start is called before the first frame update
         void Start()
         {
             StartCoroutine(WaitToSeePlayerSpawn());
-            points = 0;
+            Points = 0;
             UpdateUI();
         }
 
@@ -47,13 +47,13 @@ namespace Assets.Scripts.Others
             int add = info.GetPoints(sender.Name); // anyway
             //Debug.Log("Collected " + sender.Name + " is " + add + " point.");
 
-            points += add;
+            Points += add;
             UpdateUI();
         }
 
         private void UpdateUI()
         {
-            pointField.text = points.ToString();
+            pointField.text = Points.ToString();
         }
 
         private void OnDestroy()

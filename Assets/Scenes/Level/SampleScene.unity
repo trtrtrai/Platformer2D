@@ -519,7 +519,6 @@ GameObject:
   m_Component:
   - component: {fileID: 172168249}
   - component: {fileID: 172168250}
-  - component: {fileID: 172168251}
   m_Layer: 0
   m_Name: GameController
   m_TagString: GameController
@@ -559,19 +558,8 @@ MonoBehaviour:
   EndPoint: {fileID: 860957744}
   RestPoints:
   - {fileID: 524104635}
+  FullTime: 180
   gameTime: {fileID: 568854056}
---- !u!114 &172168251
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 172168248}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a510c1481b38a834aaee47fe0ed40486, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &184303244
 GameObject:
   m_ObjectHideFlags: 0
@@ -3550,7 +3538,7 @@ RectTransform:
   m_AnchorMin: {x: 0.03, y: 0.1}
   m_AnchorMax: {x: 0.97, y: 0.25}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: -237.90508, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &414121614
 MonoBehaviour:
@@ -5780,7 +5768,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: EndPoint
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!61 &860957749
@@ -5820,6 +5808,7 @@ GameObject:
   - component: {fileID: 869759110}
   - component: {fileID: 869759112}
   - component: {fileID: 869759111}
+  - component: {fileID: 869759113}
   m_Layer: 5
   m_Name: CollectionMissionField
   m_TagString: Untagged
@@ -5883,6 +5872,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 869759109}
   m_CullTransparentMesh: 1
+--- !u!114 &869759113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 869759109}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5553105de9f43cf418755ebcbf35f5bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &873208145
 GameObject:
   m_ObjectHideFlags: 0
@@ -8439,7 +8440,7 @@ GameObject:
   - component: {fileID: 1310011234}
   - component: {fileID: 1310011235}
   m_Layer: 0
-  m_Name: ColelectionContainer
+  m_Name: CollectionContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9668,7 +9669,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1610256372
 RectTransform:
   m_ObjectHideFlags: 0
@@ -38693,10 +38694,10 @@ RectTransform:
   m_Father: {fileID: 414121613}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 690.594, y: -55.565994}
+  m_SizeDelta: {x: 281, y: 110}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1792488414
 MonoBehaviour:
@@ -39778,10 +39779,10 @@ RectTransform:
   m_Father: {fileID: 414121613}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 309.59396, y: -55.565994}
+  m_SizeDelta: {x: 281, y: 110}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2039926116
 MonoBehaviour:
