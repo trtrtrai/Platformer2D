@@ -39,7 +39,12 @@ namespace Assets.Scripts.Controller
         private IEnumerator WaitToSeeDontDestroy()
         {
             while (gameController.SceneController.DontDestroy is null) yield return null;
-            
+
+            if (gameController.SceneController.Loading.activeInHierarchy)
+            {
+                gameController.SceneController.Loading.SetActive(false);
+                Destroy(GameObject.FindGameObjectWithTag("MainCamera").transform.parent.gameObject);
+            }
             var missionDatas = gameController.SceneController.DontDestroy.GetMission();
             missionMng.OpenMissionDialog(missionDatas);
             collectionTableDisplay.GetComponent<CollectionHandle>().CheckMission(missionDatas, info);

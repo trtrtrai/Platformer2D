@@ -76,6 +76,7 @@
     <Compile Include="Assets\Scripts\Model\Fill.cs" />
     <Compile Include="Assets\Scripts\Controller\GameController.cs" />
     <Compile Include="Assets\Scripts\Object Behaviour\ObjectRotation.cs" />
+    <Compile Include="Assets\Scripts\Object Behaviour\CollectionHandle.cs" />
     <Compile Include="Assets\Scripts\Model\PlayerData.cs" />
     <Compile Include="Assets\Scripts\Model\EndLevelDetect.cs" />
     <Compile Include="Assets\Scripts\Controller\CanvasController.cs" />
@@ -99,7 +100,6 @@
     <Compile Include="Assets\Scripts\Model\QuestionData.cs" />
     <Compile Include="Assets\Scripts\Model\Light2dStateData.cs" />
     <Compile Include="Assets\Scripts\Object Behaviour\LightBehaviour.cs" />
-    <Compile Include="Assets\Scripts\Object Behaviour\CollectionHandle.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

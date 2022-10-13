@@ -8,6 +8,9 @@ namespace Assets.Scripts.Controller
     public class SceneController : MonoBehaviour
     {
         public DontDestroyOnLoad DontDestroy;
+
+        public GameObject Loading;
+
         // Start is called before the first frame update
         void Start()
         {
@@ -31,6 +34,8 @@ namespace Assets.Scripts.Controller
         {
             PlayerData.InitiatePlayer(1);
         }
+
+        public void SaveBeforeExit() => PlayerData.SaveBeforeExit();
 
         public void QuitGame() => DontDestroy.QuitGame();
     }

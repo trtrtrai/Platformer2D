@@ -41,7 +41,12 @@ namespace Assets.Scripts.Controller
         private IEnumerator WaitToSeeDontDestroy()
         {
             while (SceneController.DontDestroy is null) yield return null;
-            
+
+            if (SceneController.Loading.activeInHierarchy)
+            {
+                SceneController.Loading.SetActive(false);
+                Destroy(GameObject.FindGameObjectWithTag("MainCamera").transform.parent.gameObject);
+            }
             var child = StartPoint.transform.GetChild(0).localPosition;
             var player = InvokeResourcesLoad(gameObject, new ResourcesLoadEventHandler("Prefabs/Players/", SceneController.DontDestroy.Name.ToString(), StartPoint.transform.localPosition + child, false));
             player.GetComponent<CharacterBehaviour>().PlayAppearAnim();
@@ -97,7 +102,7 @@ namespace Assets.Scripts.Controller
                         // calculation result
                         var missions = SceneController.DontDestroy.GetMission();
                         var stars = new List<bool>();
-                        for(int i = 0; i < 3; i++)
+                        for (int i = 0; i < 3; i++)
                         {
                             stars.Add(CheckMissonCompleted(missions[i]));
                         }

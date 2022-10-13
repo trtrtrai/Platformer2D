@@ -22,7 +22,7 @@ namespace Assets.Scripts.Model
             GetLevels(current);
         }
 
-        public static void UpdatePlayer()
+        private static void UpdatePlayer()
         {
             player.MaxLevel = levels.Count;
             player.MaxStar = player.MaxLevel * 3;
@@ -47,10 +47,13 @@ namespace Assets.Scripts.Model
         {
             var thisLevel = levels.First((l) => l.Name == SceneManager.GetActiveScene().name);
             thisLevel.isComplete = true;
-            for (int i = 0; i < thisLevel.IsStar.Count; i++)
-            {
-                thisLevel.IsStar[i] = s[i];
-            }
+            
+            if (s.Count((b) => b) >= thisLevel.IsStar.Count((s) => s)) 
+                for (int i = 0; i < thisLevel.IsStar.Count; i++)
+                {
+                    thisLevel.IsStar[i] = s[i];
+                }
+
             if (thisLevel.HighPoints < p) thisLevel.HighPoints = p;
 
             var index = levels.IndexOf(thisLevel);
@@ -66,6 +69,8 @@ namespace Assets.Scripts.Model
 
         public static void SaveBeforeExit()
         {
+            if (current == 0) return;
+
             JsonSerializer serializer = new JsonSerializer();
             using (StreamWriter streamWriter = new StreamWriter(Application.streamingAssetsPath + $"/PlayerData/{current}/LevelCompletedInfo.txt"))
             using (JsonWriter writer = new JsonTextWriter(streamWriter))
