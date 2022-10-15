@@ -47,4 +47,16 @@
 			"Answers":["Có","Không"],
 			"CorrectIndex":[1]
 		},
+		{
+			"Type":3,
+			"Quest":"Diễn đàn Phát triển bền vững ĐBSCL - Tầm nhìn 2045 (SDMD 2045) do Đại học Cần Thơ chủ trì?",
+			"Answers":["Đúng","Sai"],
+			"CorrectIndex":[0]
+		},
+		{
+			"Type":3,
+			"Quest":"Diễn đàn Phát triển bền vững ĐBSCL năm 2022 là \"Khoa học và Công nghệ - Động lực cho đổi mới và phát triển bền vững\"?",
+			"Answers":["Đúng","Sai"],
+			"CorrectIndex":[0]
+		},
 ]

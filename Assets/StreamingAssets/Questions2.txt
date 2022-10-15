@@ -41,4 +41,10 @@
 			"Answers":["9","10","3","5","song ngữ", "tiếng Anh"],
 			"CorrectIndex":[0,2,5]
 		},
+		{
+			"Type":2,
+			"Quest":"Dự án nâng cấp Trường Đại học Cần Thơ từ ODA Nhật Bản gồm (1) thuộc lĩnh vực nông nghiệp, (2) thuộc lĩnh vực thủy sản, (3) thuộc lĩnh vực môi trường.",
+			"Answers":["16 CTNC","8 CTNC","12 CTNC","20 CTNC"],
+			"CorrectIndex":[0,1,2]
+		},
 ]

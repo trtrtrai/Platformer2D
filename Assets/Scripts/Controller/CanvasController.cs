@@ -54,7 +54,7 @@ namespace Assets.Scripts.Controller
 
         public GameObject InstantiateUI(GameObject parent, ResourcesLoadEventHandler args) => gameController.InvokeResourcesLoad(parent, args);
 
-        public void ShowResultLevel(EndLevelState state)
+        public void ShowResultLevel(EndLevelState state, List<bool> rs)
         {
 
             SetState(GameState.EndLevelDisplay);
@@ -68,9 +68,21 @@ namespace Assets.Scripts.Controller
                 case EndLevelState.Dead:
                     label.text = "thất bại";
                     break;
+                case EndLevelState.TimeOut:
+                    label.text = "hết giờ";
+                    break;
                 case EndLevelState.Exit:
                     label.text = "thất bại";
                     break;
+            }
+
+            var content = resultTable.GetComponentInChildren<MissionManager>();
+            content.OpenMissionDialog(gameController.SceneController.DontDestroy.GetMission());
+            var missionTxts = content.GetComponentsInChildren<TMP_Text>();
+            for (int i = 0; i < rs.Count; i++)
+            {
+                if (rs[i]) missionTxts[i].color = Color.blue;
+                else missionTxts[i].color = Color.red;
             }
 
             resultTable.SetActive(true);

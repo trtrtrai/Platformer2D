@@ -31,11 +31,16 @@ namespace Assets.Scripts.Controller
             gameState = new Stack<string>();
             SetGameState(GameState.GameDisplay);
             time = FullTime; //load from data
-            //gameTime.TimeOutEvent += ...
+            gameTime.TimeOutEvent += GameTime_TimeOutEvent;
 
 
             StartCoroutine(WaitToSeeDontDestroy());
             //SpawnPlayer();
+        }
+
+        private void GameTime_TimeOutEvent()
+        {
+            LevelCompletedHandle(EndLevelState.TimeOut);
         }
 
         private IEnumerator WaitToSeeDontDestroy()
@@ -94,7 +99,8 @@ namespace Assets.Scripts.Controller
         public void LevelCompletedHandle(EndLevelState state)
         {
             //Debug.Log(state);
-            CanvasController.ShowResultLevel(state);
+            GamePause();
+            
             switch (state)
             {
                 case EndLevelState.EndPoint:
@@ -106,17 +112,23 @@ namespace Assets.Scripts.Controller
                         {
                             stars.Add(CheckMissonCompleted(missions[i]));
                         }
-
+                        CanvasController.ShowResultLevel(state, stars);
                         PlayerData.UpdateLevel(stars, CanvasController.GetComponentInChildren<PointHandle>().Points);
                         break;
                     }
                 case EndLevelState.Dead:
                     {
-                        // 
+                        CanvasController.ShowResultLevel(state, new List<bool>() { false, false, false});
+                        break;
+                    }
+                case EndLevelState.TimeOut:
+                    {
+                        CanvasController.ShowResultLevel(state, new List<bool>() { false, false, false });
                         break;
                     }
                 case EndLevelState.Exit:
                     {
+                        CanvasController.ShowResultLevel(state, new List<bool>() { false, false, false });
                         break;
                     }
             }
@@ -163,6 +175,10 @@ namespace Assets.Scripts.Controller
                 default: return false;
             }
         }
+
+        public void GamePause() => Time.timeScale = 0;
+
+        public void GameContinue() => Time.timeScale = 1;
 
         public delegate GameObject ResourcesLoadDelegate(object sender, ResourcesLoadEventHandler args);
     }
@@ -224,6 +240,7 @@ namespace Assets.Scripts.Controller
     {
         EndPoint,
         Dead,
+        TimeOut,
         Exit,
     }
 

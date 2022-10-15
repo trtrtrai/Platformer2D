@@ -33,6 +33,8 @@ namespace Assets.Scripts.Model
 
         public void GetHit(int damage, GameObject sender)
         {
+            if (sender.GetComponent<RestPointDetect>() != null) {Current -= damage; return; }
+
             if (!penalty)
             {
                 //Debug.Log(sender.name);

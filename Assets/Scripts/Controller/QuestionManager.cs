@@ -49,7 +49,7 @@ namespace Assets.Scripts.Controller
             }
             else
             {
-                Time.timeScale = 0;
+                GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>().GamePause();
                 parent.SetState(GameState.QuestionDisplay);
             }
 

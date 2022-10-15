@@ -119,4 +119,46 @@
 			"Answers":["56","57","58","60"],
 			"CorrectIndex":[2]
 		},
+		{
+			"Type":0,
+			"Quest":"Dự án nâng cấp từ nguồn vốn ODA của Chính phủ Nhật Bản cơ bản được Đại học Cần Thơ hoàn thành vào khoảng?",
+			"Answers":["2015-2022","2014-2021","2002-2020","2004-2022"],
+			"CorrectIndex":[0]
+		},
+		{
+			"Type":0,
+			"Quest":"Dự án nâng cấp từ nguồn vốn ODA của Chính phủ Nhật Bản cơ bản được Đại học Cần Thơ hoàn thành trong?",
+			"Answers":["3 năm","5 năm","7 năm","9 năm"],
+			"CorrectIndex":[2]
+		},
+		{
+			"Type":0,
+			"Quest":"Có bao nhiêu chương trình nghiên cứu trong Dự án nâng cấp Trường Đại học Cần Thơ từ ODA Nhật Bản?",
+			"Answers":["25","36","49","64"],
+			"CorrectIndex":[1]
+		},
+		{
+			"Type":0,
+			"Quest":"Tính đến cuối 2021, Đại học Cần Thơ là đối tác ký kết của bao nhiêu quốc gia khác Việt Nam?",
+			"Answers":["0","8","16","24"],
+			"CorrectIndex":[2]
+		},
+		{
+			"Type":0,
+			"Quest":"\"Diễn đàn Phát triển bền vững ĐBSCL - Tầm nhìn 2045\" viết tắt là?",
+			"Answers":["SDMD 45","45 SDMD","MDSD 45","45 MSDS"],
+			"CorrectIndex":[0]
+		},
+		{
+			"Type":0,
+			"Quest":"\"Diễn đàn Phát triển bền vững ĐBSCL được tổ chức định kỳ?",
+			"Answers":["2 năm","3 năm","4 năm","5 năm"],
+			"CorrectIndex":[0]
+		},
+		{
+			"Type":0,
+			"Quest":"\"Chương trình được thiết kế chuyên biệt cho sinh viên quốc tế tham gia học tập, nghiên cứu về môi trường, nông nghiệp, khoa học đất, thủy sản, kinh tế, giáo dục, văn hóa, ngôn ngữ học, và đời sống,..của Việt Nam?",
+			"Answers":["Việt học","Học phần Nhiệt đới","Học phần Việt học","Văn hóa Việt"],
+			"CorrectIndex":[1]
+		},
 ]

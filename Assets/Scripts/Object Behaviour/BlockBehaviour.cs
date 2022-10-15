@@ -66,7 +66,7 @@ namespace Assets.Scripts.ObjectBehaviour
             yield return new WaitForSecondsRealtime(s);
 
             Destroy(QuestionObj);
-            Time.timeScale = 1;
+            gameController.GameContinue();
 
             if (result)
             {

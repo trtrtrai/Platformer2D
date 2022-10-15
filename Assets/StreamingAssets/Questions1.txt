@@ -53,4 +53,16 @@
 			"Answers":["Tháng 1","Tháng 2","Tháng 4","Tháng 6","Tháng 8","Tháng 10","Tháng 11","Tháng 12"],
 			"CorrectIndex":[1,2,3,4,5,7]
 		},
+		{
+			"Type":1,
+			"Quest":"Lĩnh vực nghiên cứu chính của chương trình nghiên cứu trong Dự án nâng cấp Trường Đại học Cần Thơ từ ODA Nhật Bản?",
+			"Answers":["Công nghệ","CNTT","Nông nghiệp","Môi trường","Thủy sản","Kinh tế"],
+			"CorrectIndex":[2,3,4]
+		},
+		{
+			"Type":1,
+			"Quest":"Các vấn đề tọa đàm của Diễn đàn Phát triển bền vững ĐBSCL 2022?",
+			"Answers":["Nông nghiệp","Thủy sản","MT, TNTN, BĐKH","Chuyển đổi số","Thực phẩm","Ngập mặn","Giáo dục"],
+			"CorrectIndex":[0,1,2,3]
+		},
 ]

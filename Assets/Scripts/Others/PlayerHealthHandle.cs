@@ -1,4 +1,5 @@
 using Assets.Scripts.Character;
+using Assets.Scripts.Controller;
 using Assets.Scripts.Model;
 using System.Collections;
 using System.Collections.Generic;
@@ -9,6 +10,9 @@ namespace Assets.Scripts.Others
 {
     public class PlayerHealthHandle : MonoBehaviour
     {
+        [SerializeField]
+        GameController gameController;
+
         [SerializeField]
         List<GameObject> hearts;
 
@@ -45,6 +49,14 @@ namespace Assets.Scripts.Others
             {
                 hearts[player.Current].GetComponent<Image>().color = lost;
             });
+
+            if (gameController.RestPoints != null)
+            {
+                foreach (var point in gameController.RestPoints)
+                {
+                    point.GetComponent<RestPointDetect>().OnRest.AddListener(() => { hearts.ForEach((h) => h.GetComponent<Image>().color = Color.white); });
+                }
+            }
         }
     }
 }
