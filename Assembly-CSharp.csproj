@@ -59,6 +59,7 @@
     <Compile Include="Assets\Scripts\Controller\MissionManager.cs" />
     <Compile Include="Assets\Scripts\Object Behaviour\BlockBehaviour.cs" />
     <Compile Include="Assets\Scripts\Model\MissionData.cs" />
+    <Compile Include="Assets\Scripts\Model\RestPointDetect.cs" />
     <Compile Include="Assets\Scripts\Character\CharacterBehaviour.cs" />
     <Compile Include="Assets\Scripts\Model\Knockback.cs" />
     <Compile Include="Assets\Scripts\Model\ObjectMovingP2PSetup.cs" />
@@ -100,7 +101,6 @@
     <Compile Include="Assets\Scripts\Model\QuestionData.cs" />
     <Compile Include="Assets\Scripts\Model\Light2dStateData.cs" />
     <Compile Include="Assets\Scripts\Object Behaviour\LightBehaviour.cs" />
-    <Compile Include="Assets\Scripts\Model\RestPointDetect.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

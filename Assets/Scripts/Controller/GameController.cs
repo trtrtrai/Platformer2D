@@ -234,6 +234,8 @@ namespace Assets.Scripts.Controller
     {
         NinjaFrog,
         PinkMan,
+        MaskDude,
+        VirtualGuy
     }
 
     public enum EndLevelState
