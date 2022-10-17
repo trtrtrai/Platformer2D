@@ -3,6 +3,7 @@ using Assets.Scripts.ObjectBehaviour;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor;
 using UnityEngine;
 using static Assets.Scripts.Others.CustomRandom;
 
@@ -155,20 +156,20 @@ namespace Assets.Scripts.Model
 
         public void OnParentDestroy(GameController gameController)
         {
-            blocks.ForEach((b) =>
+            gameObject.GetComponentsInChildren<Animator>().ToList().ForEach((b) =>
             {
-                Destroy(b);
+                Destroy(b.gameObject);
 
                 // block will break some parts when destroy
-                var pos = gameObject.transform.localPosition + b.transform.localPosition;
+                var pos = gameObject.transform.localPosition + b.gameObject.transform.localPosition;
                 pos.x += 0.02f;
-                var obj = gameController.InvokeResourcesLoad(b, new ResourcesLoadEventHandler("Prefabs/", "Block_part_top", pos));
+                var obj = gameController.InvokeResourcesLoad(b.gameObject, new ResourcesLoadEventHandler("Prefabs/", "Block_part_top", pos));
                 obj.GetComponent<Rigidbody2D>().AddForce(RdVector2(-1.5f, -0.5f, 1f, 2f), ForceMode2D.Impulse);
                 obj.GetComponent<Rigidbody2D>().angularVelocity = 300;
 
-                pos = gameObject.transform.localPosition + b.transform.localPosition;
+                pos = gameObject.transform.localPosition + b.gameObject.transform.localPosition;
                 pos.x -= 0.04f;
-                obj = gameController.InvokeResourcesLoad(b, new ResourcesLoadEventHandler("Prefabs/", "Block_part_bottom", pos));
+                obj = gameController.InvokeResourcesLoad(b.gameObject, new ResourcesLoadEventHandler("Prefabs/", "Block_part_bottom", pos));
                 obj.GetComponent<Rigidbody2D>().AddForce(RdVector2(1.5f, 0.5f, 1f, 2f), ForceMode2D.Impulse);
                 obj.GetComponent<Rigidbody2D>().angularVelocity = 300;
             });
@@ -176,7 +177,7 @@ namespace Assets.Scripts.Model
 
         public void PlayAnimation()
         {
-            blocks.ForEach((b) => b.GetComponent<Animator>().SetBool("isDestroy", true));
+            gameObject.GetComponentsInChildren<Animator>().ToList().ForEach((b) => b.GetComponent<Animator>().SetBool("isDestroy", true));
         }
 
         private bool isHorizontalInEditMode() => objAxis.Equals(Axis.Horizontal);

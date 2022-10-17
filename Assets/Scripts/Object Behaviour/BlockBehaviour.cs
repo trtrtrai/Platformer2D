@@ -28,14 +28,17 @@ namespace Assets.Scripts.ObjectBehaviour
         private BlockSetup setup;
         private Health player;
 
+        private void Awake()
+        {
+            setup = gameObject.GetComponent<BlockSetup>();
+            setup.enabled = false;
+        }
+
         // Start is called before the first frame update
         void Start()
         {
             wait += Wait;
-            //wait.Invoke(500);
-
-            setup = gameObject.GetComponent<BlockSetup>();
-            setup.enabled = false;
+            //wait.Invoke(500);        
         }
 
         // Update is called once per frame
