@@ -617,7 +617,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Type: 2
   SecondsChallenge: 180
-  PointsChallenge: 5000
+  PointsChallenge: 1750
   NumberOfCollection: 0
   Names: 
   Amount: 

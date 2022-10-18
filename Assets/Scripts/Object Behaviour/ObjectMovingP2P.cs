@@ -13,7 +13,7 @@ namespace Assets.Scripts.ObjectBehaviour
         bool startAtRight;
 
         [SerializeField]
-        [Range(0f, 1f)]
+        [Range(0f, 3f)]
         float speed;
 
         GameObject firstPoint;
@@ -64,22 +64,47 @@ namespace Assets.Scripts.ObjectBehaviour
             var fpAxis = firstPoint.transform.localPosition;
             var lpAxis = lastPoint.transform.localPosition;
             var mainPos = mainObj.transform.localPosition;
+            //if (gameObject.name.Equals("Saw")) Debug.Log(fpAxis == lpAxis);
+            if (fpAxis == lpAxis) startAtRight = true;
+            else if (fpAxis.y == 0f)
+            {
+                if (startAtRight && mainPos.x < lpAxis.x)
+                {
+                    var num = mainPos.x + speed * Time.fixedDeltaTime;
+                    mainPos.x = Mathf.Clamp(num, fpAxis.x, lpAxis.x);
+                }
+                else if (!startAtRight && mainPos.x > fpAxis.x)
+                {
+                    var num = mainPos.x - speed * Time.fixedDeltaTime;
+                    mainPos.x = Mathf.Clamp(num, fpAxis.x, lpAxis.x);
+                }
+                else if (mainPos.x == lpAxis.x || mainPos.x == fpAxis.x)
+                {
+                    startAtRight = !startAtRight;
 
-            if (startAtRight && mainPos.x < lpAxis.x)
-            {
-                var num = mainPos.x + speed * Time.fixedDeltaTime;
-                mainPos.x = Mathf.Clamp(num, fpAxis.x, lpAxis.x);
+                    if (startAtRight) mainObj.transform.localScale = new Vector3(-1, 1, 1);
+                    else mainObj.transform.localScale = new Vector3(1, 1, 1);
+                }
             }
-            else if (!startAtRight && mainPos.x > fpAxis.x)
+            else
             {
-                var num = mainPos.x - speed * Time.fixedDeltaTime;
-                mainPos.x = Mathf.Clamp(num, fpAxis.x, lpAxis.x);
-            }
-            else if (mainPos.x == lpAxis.x || mainPos.x == fpAxis.x)
-            {
-                startAtRight = !startAtRight;
-                if (startAtRight) mainObj.transform.localScale = new Vector3(-1, 1, 1);
-                else mainObj.transform.localScale = new Vector3(1, 1, 1);
+                if (startAtRight && mainPos.y < lpAxis.y)
+                {
+                    var num = mainPos.y + speed * Time.fixedDeltaTime;
+                    mainPos.y = Mathf.Clamp(num, fpAxis.y, lpAxis.y);
+                }
+                else if (!startAtRight && mainPos.y > fpAxis.y)
+                {
+                    var num = mainPos.y - speed * Time.fixedDeltaTime;
+                    mainPos.y = Mathf.Clamp(num, fpAxis.y, lpAxis.y);
+                }
+                else if (mainPos.y == lpAxis.y || mainPos.y == fpAxis.y)
+                {
+                    startAtRight = !startAtRight;
+
+                    if (startAtRight) mainObj.transform.localScale = new Vector3(1, 1, 1);
+                    else mainObj.transform.localScale = new Vector3(1, -1, 1);
+                }
             }
 
             mainObj.transform.localPosition = mainPos;
