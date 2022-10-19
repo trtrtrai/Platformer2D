@@ -66,6 +66,11 @@ namespace Assets.Scripts.Controller
                         
                         break;
                     }
+                case MissionType.PerfectCompleted:
+                    {
+                        text.text = "Hoàn thành màn chơi với 3 điểm sự sống.";
+                        break;
+                    }
             }
         }
     }

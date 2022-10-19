@@ -172,6 +172,13 @@ namespace Assets.Scripts.Controller
                         if (c == data.NumberOfCollection) return true;
                         else return false;
                     }
+                case MissionType.PerfectCompleted:
+                    {
+                        var player = GameObject.FindGameObjectWithTag("Player").GetComponent<Health>();
+
+                        if (player.Current == player.Max) return true;
+                        else return false;
+                    }
                 default: return false;
             }
         }
@@ -227,7 +234,8 @@ namespace Assets.Scripts.Controller
         LevelCompleted,
         CompletionTime,
         Point,
-        FullCollection
+        FullCollection,
+        PerfectCompleted
     }
 
     public enum CharacterName

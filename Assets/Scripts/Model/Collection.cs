@@ -26,9 +26,15 @@ namespace Assets.Scripts.Model
             if (collision.gameObject.tag.Equals("Player"))
             {
                 //Debug.Log(Name + " was collected");
-                
-                Destroy(gameObject);
+                GetComponent<Animator>().Play("Collected");
+                StartCoroutine(WaitAnimation());
             }
+        }
+
+        private IEnumerator WaitAnimation()
+        {
+            yield return new WaitForSeconds(0.15f);
+            Destroy(gameObject);
         }
     }
 }

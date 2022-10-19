@@ -10,6 +10,7 @@ public class DontDestroyOnLoad : MonoBehaviour
     public string ThisScene;
     public GameObject MissionObj;
     public CharacterName Name;
+    public AudioSource MainBG;
 
     // Start is called before the first frame update
     void Start()

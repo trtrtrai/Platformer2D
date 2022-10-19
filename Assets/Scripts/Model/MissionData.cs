@@ -54,6 +54,8 @@ namespace Assets.Scripts.Model
                         EditorGUILayout.PropertyField(serializedObject.FindProperty("Amount"), new GUIContent("List Amount:"));
                         break;
                     }
+                case MissionType.PerfectCompleted:
+                    break;
             }
 
             EditorUtility.SetDirty(target);
