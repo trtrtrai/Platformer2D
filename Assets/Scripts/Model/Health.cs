@@ -1,3 +1,4 @@
+using Assets.Scripts.Controller;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -51,7 +52,8 @@ namespace Assets.Scripts.Model
             current = max;
             isDead = false;
             penalty = false;
-            OnHit.AddListener((s) => { penalty = true; StartCoroutine(Penalty(1f)); }); // 1 sec to runnnnnnn
+            OnHit.AddListener((s) => { SoundPackage.Controller.PlayAudio("Hit"); penalty = true; StartCoroutine(Penalty(1f)); }); // 1 sec to runnnnnnn
+            OnDead.AddListener((s) => { if (s) SoundPackage.Controller.PlayAudio("Died"); });
         }
 
         private IEnumerator Penalty(float s)

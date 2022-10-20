@@ -28,12 +28,16 @@ namespace Assets.Scripts.Character
         [SerializeField] new CircleCollider2D collider2D;
         [SerializeField] Animator animator;
 
-        float jumpCD;
+        private float jumpCD;
+        private bool moveContinue;
+        private bool isMove;
 
         // Start is called before the first frame update
         void Start()
         {
             gameCtrl = GameObject.Find("GameController").GetComponent<GameController>();
+            moveContinue = false;
+            isMove = false;
         }
 
         private void Update()
@@ -45,6 +49,7 @@ namespace Assets.Scripts.Character
                     if (isGrounded || jumpCount < 1)
                     {
                         //Debug.Log("Jump");
+                        SoundPackage.Controller.PlayAudio("Jump");
                         rigid.AddForce(transform.up * jumpHigh * Time.fixedDeltaTime, ForceMode2D.Impulse);
                         rigid.velocity = new Vector2(rigid.velocity.x, Vector2.ClampMagnitude(rigid.velocity, 5f).y);
                         jumpCount++;
@@ -65,8 +70,23 @@ namespace Assets.Scripts.Character
                 //Left-Right
                 rigid.AddForce(new Vector2(horizon * speed * Time.fixedDeltaTime, 0), ForceMode2D.Impulse);
                 rigid.velocity = new Vector2(Vector2.ClampMagnitude(rigid.velocity, maxSpeed).x, rigid.velocity.y);
-                if (horizon != 0) animator.SetBool("isRun", true);
-                else animator.SetBool("isRun", false);
+                if (horizon != 0)
+                {
+                    animator.SetBool("isRun", true);
+                    isMove = true;
+                }
+                else
+                {
+                    animator.SetBool("isRun", false);
+                    isMove = false;
+                }
+
+                if (moveContinue != isMove)
+                {
+                    if (!moveContinue) SoundPackage.Controller.PlayAudio("Walk");
+                    else SoundPackage.Controller.StopAudio("Walk");
+                    moveContinue = isMove;
+                }
 
                 //Flip
                 if (horizon > 0)

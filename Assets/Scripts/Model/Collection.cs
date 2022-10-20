@@ -26,6 +26,7 @@ namespace Assets.Scripts.Model
             if (collision.gameObject.tag.Equals("Player"))
             {
                 //Debug.Log(Name + " was collected");
+                SoundPackage.Controller.PlayAudio("Collect");
                 GetComponent<Animator>().Play("Collected");
                 StartCoroutine(WaitAnimation());
             }

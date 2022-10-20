@@ -1,52 +1,55 @@
 using Assets.Scripts.Controller;
-using Assets.Scripts.Model;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class DontDestroyOnLoad : MonoBehaviour
+namespace Assets.Scripts.Model
 {
-    public string ThisScene;
-    public GameObject MissionObj;
-    public CharacterName Name;
-    public AudioSource MainBG;
-
-    // Start is called before the first frame update
-    void Start()
+    public class DontDestroyOnLoad : MonoBehaviour
     {
-        //Don't destroy on load script
-        var objs = GameObject.FindGameObjectsWithTag("DontDestroy"); //only right when have 1 obj don't destroy
+        public string ThisScene;
+        public GameObject MissionObj;
+        public CharacterName Name;
+        public AudioSource MainBG;
 
-        if (objs.Length > 1)
+        // Start is called before the first frame update
+        void Start()
         {
-            Destroy(gameObject);
+            //Don't destroy on load script
+            var objs = GameObject.FindGameObjectsWithTag("DontDestroy"); //only right when have 1 obj don't destroy
+
+            if (objs.Length > 1)
+            {
+                Destroy(gameObject);
+            }
+
+            DontDestroyOnLoad(gameObject);
         }
 
-        DontDestroyOnLoad(gameObject);      
-    }
+        public void SwapScene(string name)
+        {
+            var child = gameObject.GetComponentInChildren<RectTransform>();
+            if (child != null) MissionObj = child.gameObject;
 
-    public void SwapScene(string name)
-    {
-        var child = gameObject.GetComponentInChildren<RectTransform>();
-        if (child != null) MissionObj = child.gameObject;
+            if (!ThisScene.Equals("HomeScene") && !ThisScene.Equals("LevelSelectionScene") && (name.Equals("HomeScene") || name.Equals("LevelSelectionScene"))) MainBG.Play();
+            ThisScene = name;
+            SceneManager.LoadScene(name);
+        }
 
-        ThisScene = name;
-        SceneManager.LoadScene(name);
-    }
+        public void QuitGame()
+        {
+            Application.Quit();
+        }
 
-    public void QuitGame()
-    {
-        Application.Quit();
-    }
+        public MissionData[] GetMission()
+        {
+            return MissionObj.transform.GetChild(1).GetComponentsInChildren<MissionData>();
+        }
 
-    public MissionData[] GetMission()
-    {
-        return MissionObj.transform.GetChild(1).GetComponentsInChildren<MissionData>();
-    }
-
-    private void OnApplicationQuit()
-    {
-        PlayerData.SaveBeforeExit();
+        private void OnApplicationQuit()
+        {
+            PlayerData.SaveBeforeExit();
+        }
     }
 }
