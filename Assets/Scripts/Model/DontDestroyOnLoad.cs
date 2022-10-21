@@ -1,8 +1,10 @@
 using Assets.Scripts.Controller;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 namespace Assets.Scripts.Model
 {
@@ -12,6 +14,7 @@ namespace Assets.Scripts.Model
         public GameObject MissionObj;
         public CharacterName Name;
         public AudioSource MainBG;
+        public AudioSource Click;
 
         // Start is called before the first frame update
         void Start()

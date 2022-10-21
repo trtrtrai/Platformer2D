@@ -87,6 +87,7 @@
     <Compile Include="Assets\Scripts\Object Behaviour\TwoChoiceAnswerBehaviour.cs" />
     <Compile Include="Assets\Scripts\Controller\QuestionManager.cs" />
     <Compile Include="Assets\Scripts\Others\PointHandle.cs" />
+    <Compile Include="Assets\Scripts\Controller\SoundController.cs" />
     <Compile Include="Assets\Scripts\Model\DropItem.cs" />
     <Compile Include="Assets\Scripts\Object Behaviour\ObjectMovingP2P.cs" />
     <Compile Include="Assets\Scripts\Model\MessageContainer.cs" />
@@ -101,7 +102,6 @@
     <Compile Include="Assets\Scripts\Model\QuestionData.cs" />
     <Compile Include="Assets\Scripts\Model\Light2dStateData.cs" />
     <Compile Include="Assets\Scripts\Object Behaviour\LightBehaviour.cs" />
-    <Compile Include="Assets\Scripts\Controller\SoundController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
