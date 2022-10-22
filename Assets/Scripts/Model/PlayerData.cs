@@ -105,6 +105,7 @@ namespace Assets.Scripts.Model
             {
                 player = serializer.Deserialize<PlayerDataJson>(jReader);
             }
+
             //Debug.Log(player.Name);
         }
 
@@ -122,6 +123,19 @@ namespace Assets.Scripts.Model
         {
             return new List<LevelData>(levels);
         }
+
+        public static void CreateNewUser(int n, string name)
+        {
+            //Debug.Log("Create new user " + n);
+
+            File.Copy(Application.streamingAssetsPath + $"/PlayerData/0/PlayerInfo.txt", Application.streamingAssetsPath + $"/PlayerData/{n}/PlayerInfo.txt");
+            File.Copy(Application.streamingAssetsPath + $"/PlayerData/0/LevelCompletedInfo.txt", Application.streamingAssetsPath + $"/PlayerData/{n}/LevelCompletedInfo.txt");
+
+            InitiatePlayer(n);
+            player.Name = name;
+        }
+
+        public static bool HaveUser(int n) => File.Exists(Application.streamingAssetsPath + $"/PlayerData/{n}/PlayerInfo.txt");
     }
 
     public class PlayerDataJson

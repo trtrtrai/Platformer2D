@@ -6,8 +6,6 @@ namespace Assets.Scripts.Controller
 {
     public class SoundController : MonoBehaviour
     {
-        public AudioSource BG;
-
         [SerializeField]
         GameController gameController;
 

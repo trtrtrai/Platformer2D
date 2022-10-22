@@ -43,11 +43,6 @@ namespace Assets.Scripts.Controller
             SwapScene(DontDestroy.ThisScene);
         }
 
-        public void LoadPlayerData()
-        {
-            PlayerData.InitiatePlayer(1);
-        }
-
         public void SaveBeforeExit() => PlayerData.SaveBeforeExit();
 
         public void QuitGame() => DontDestroy.QuitGame();
