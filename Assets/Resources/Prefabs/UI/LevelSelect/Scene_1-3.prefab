@@ -297,9 +297,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0d1c6bf0e1a5f14fb63418a1fc8dd2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Type: 1
+  Type: 2
   SecondsChallenge: 180
-  PointsChallenge: 0
+  PointsChallenge: 6750
   NumberOfCollection: 0
   Names: 
   Amount: 
@@ -429,8 +429,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0d1c6bf0e1a5f14fb63418a1fc8dd2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Type: 0
-  SecondsChallenge: 0
+  Type: 1
+  SecondsChallenge: 180
   PointsChallenge: 0
   NumberOfCollection: 0
   Names: 
@@ -615,7 +615,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0d1c6bf0e1a5f14fb63418a1fc8dd2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Type: 1
+  Type: 4
   SecondsChallenge: 90
   PointsChallenge: 0
   NumberOfCollection: 0

@@ -33,7 +33,7 @@ namespace Assets.Scripts.Controller
             time = FullTime; //load from data
             gameTime.TimeOutEvent += GameTime_TimeOutEvent;
 
-
+            SceneController.Loading.SetActive(true);
             StartCoroutine(WaitToSeeDontDestroy());
             //SpawnPlayer();
         }

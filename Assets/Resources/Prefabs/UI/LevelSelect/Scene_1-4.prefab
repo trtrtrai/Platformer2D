@@ -274,7 +274,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0d1c6bf0e1a5f14fb63418a1fc8dd2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Type: 1
+  Type: 4
   SecondsChallenge: 90
   PointsChallenge: 0
   NumberOfCollection: 0
@@ -368,12 +368,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0d1c6bf0e1a5f14fb63418a1fc8dd2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Type: 1
+  Type: 3
   SecondsChallenge: 180
   PointsChallenge: 0
-  NumberOfCollection: 0
-  Names: 
-  Amount: 
+  NumberOfCollection: 2
+  Names: 0000000007000000
+  Amount: 0a00000019000000
 --- !u!1 &2477292749553916784
 GameObject:
   m_ObjectHideFlags: 0
