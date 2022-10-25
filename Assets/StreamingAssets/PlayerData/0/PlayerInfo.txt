@@ -1,5 +1,5 @@
 {
-	"Name":"NNDK",
+	"Name":"",
 	"CurrentStar":0,
 	"MaxStar":18,
 	"CurrentLevel":0,

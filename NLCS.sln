@@ -91,6 +91,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.InternalAPIEditorBrid
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.ShaderGraph.Utilities", "Unity.ShaderGraph.Utilities.csproj", "{DD17C73E-558E-1FCC-C995-4A506A06D809}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp-Editor", "Assembly-CSharp-Editor.csproj", "{986C8EC6-FAEA-0A71-9B84-413143C56735}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -277,6 +279,10 @@ Global
 		{DD17C73E-558E-1FCC-C995-4A506A06D809}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DD17C73E-558E-1FCC-C995-4A506A06D809}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DD17C73E-558E-1FCC-C995-4A506A06D809}.Release|Any CPU.Build.0 = Release|Any CPU
+		{986C8EC6-FAEA-0A71-9B84-413143C56735}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{986C8EC6-FAEA-0A71-9B84-413143C56735}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{986C8EC6-FAEA-0A71-9B84-413143C56735}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{986C8EC6-FAEA-0A71-9B84-413143C56735}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

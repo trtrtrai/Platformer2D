@@ -72,6 +72,7 @@
     <Compile Include="Assets\Scripts\Interfaces\IQuest.cs" />
     <Compile Include="Assets\Scripts\Object Behaviour\DestroyAfter.cs" />
     <Compile Include="Assets\Scripts\Others\CustomRandom.cs" />
+    <Compile Include="Assets\Scripts\Controller\MainMenuController.cs" />
     <Compile Include="Assets\Scripts\Model\Question.cs" />
     <Compile Include="Assets\Scripts\Model\Timer.cs" />
     <Compile Include="Assets\Scripts\Model\Fill.cs" />
@@ -102,7 +103,6 @@
     <Compile Include="Assets\Scripts\Model\QuestionData.cs" />
     <Compile Include="Assets\Scripts\Model\Light2dStateData.cs" />
     <Compile Include="Assets\Scripts\Object Behaviour\LightBehaviour.cs" />
-    <Compile Include="Assets\Scripts\Controller\MainMenuController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
@@ -111,6 +111,7 @@
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
     <None Include="Assets\StreamingAssets\PlayerData\1\LevelCompletedInfo.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
+    <None Include="Assets\StreamingAssets\PlayerData\3\PlayerInfo.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
     <None Include="Assets\CasualGameBGM05\ReadMe.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
@@ -119,9 +120,11 @@
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface.shader" />
     <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
+    <None Include="Assets\StreamingAssets\Config.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile SSD.shader" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
+    <None Include="Assets\StreamingAssets\PlayerData\3\LevelCompletedInfo.txt" />
     <None Include="Assets\StreamingAssets\Questions3.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Properties.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
@@ -133,7 +136,7 @@
     <None Include="Assets\StreamingAssets\PlayerData\1\PlayerInfo.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Mobile.shader" />
     <None Include="Assets\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
-    <None Include="Assets\StreamingAssets\Questions.txt" />
+    <None Include="Assets\StreamingAssets\Questions0.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile.shader" />
     <None Include="Assets\StreamingAssets\PlayerData\0\PlayerInfo.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Sprite.shader" />

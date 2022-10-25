@@ -128,14 +128,17 @@ namespace Assets.Scripts.Model
         {
             //Debug.Log("Create new user " + n);
 
-            File.Copy(Application.streamingAssetsPath + $"/PlayerData/0/PlayerInfo.txt", Application.streamingAssetsPath + $"/PlayerData/{n}/PlayerInfo.txt");
-            File.Copy(Application.streamingAssetsPath + $"/PlayerData/0/LevelCompletedInfo.txt", Application.streamingAssetsPath + $"/PlayerData/{n}/LevelCompletedInfo.txt");
-
             InitiatePlayer(n);
             player.Name = name;
         }
 
-        public static bool HaveUser(int n) => File.Exists(Application.streamingAssetsPath + $"/PlayerData/{n}/PlayerInfo.txt");
+        public static bool HaveUser(int n) 
+        {
+            var playerData = GetPlayerDataJson(n);
+
+            if (playerData.Name.Equals("$$$$$$$$$$$$$$$$$$$$")) return false;
+            else return true;
+        }
     }
 
     public class PlayerDataJson

@@ -12,9 +12,6 @@ namespace Assets.Scripts.Controller
         [SerializeField]
         List<AudioSource> audioSources;
 
-        [SerializeField]
-        List<AudioClip> audioClips;
-
         private List<string> audioNames;
 
         // Start is called before the first frame update

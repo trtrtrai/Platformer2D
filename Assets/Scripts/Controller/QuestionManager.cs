@@ -96,8 +96,9 @@ namespace Assets.Scripts.Controller
 
         private QuestionData ChooseAQuestion()
         {
+            var pack = RdPositiveRange(400) % 4;
             JsonSerializer serializer = new JsonSerializer();
-            using (StreamReader sReader = new StreamReader(Application.streamingAssetsPath + "/Questions.txt"))
+            using (StreamReader sReader = new StreamReader(Application.streamingAssetsPath + $"/Questions{pack}.txt"))
             using (JsonReader jReader = new JsonTextReader(sReader))
             {
                 var questions = serializer.Deserialize<List<QuestionData>>(jReader);

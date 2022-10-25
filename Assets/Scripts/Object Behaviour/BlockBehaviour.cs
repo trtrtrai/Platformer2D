@@ -73,6 +73,7 @@ namespace Assets.Scripts.ObjectBehaviour
 
             if (result)
             {
+                SoundPackage.Controller.PlayAudio("Explosion");
                 setup.PlayAnimation();
                 wait?.Invoke(timeToDestroy);
             }

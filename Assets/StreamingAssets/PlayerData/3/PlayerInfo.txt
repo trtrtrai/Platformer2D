@@ -1,0 +1,7 @@
+{
+	"Name":"$$$$$$$$$$$$$$$$$$$$",
+	"CurrentStar":0,
+	"MaxStar":18,
+	"CurrentLevel":0,
+	"MaxLevel":6
+}

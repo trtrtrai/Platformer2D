@@ -1,1 +1,1 @@
-{"Name":"​","CurrentStar":0,"MaxStar":18,"CurrentLevelCompleted":0,"MaxLevel":6}
+{"Name":"D​","CurrentStar":0,"MaxStar":18,"CurrentLevelCompleted":0,"MaxLevel":6}

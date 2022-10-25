@@ -22,7 +22,7 @@ public class TwoChoice : MonoBehaviour, IQuest<GameObject>
 
     private void Awake()
     {
-        questionManager = GameObject.Find("Canvas").GetComponentInChildren<QuestionManager>();
+        questionManager = GameObject.Find("MainCanvas").GetComponentInChildren<QuestionManager>();
     }
 
     public void AfterCheck(int i, bool result, bool loop = true)

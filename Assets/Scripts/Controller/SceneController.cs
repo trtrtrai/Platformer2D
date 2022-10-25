@@ -2,6 +2,7 @@ using Assets.Scripts.Model;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -42,6 +43,19 @@ namespace Assets.Scripts.Controller
         {
             SwapScene(DontDestroy.ThisScene);
         }
+
+        public void OnVolumnChange(float v) => DontDestroy.OnVolumnChange(v);
+
+        public void UpdateVolumnSlider(Slider slider)
+        {
+            slider.value = DontDestroy.Config.Volumn;
+        }
+
+        public void ChangeResolution() => DontDestroy.ChangeResolution();
+
+        public void NextResolution(TMP_Text txt) => DontDestroy.NextResolution(txt);
+
+        public void PrevResolution(TMP_Text txt) => DontDestroy.PrevResolution(txt);
 
         public void SaveBeforeExit() => PlayerData.SaveBeforeExit();
 

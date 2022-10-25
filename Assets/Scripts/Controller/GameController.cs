@@ -105,6 +105,7 @@ namespace Assets.Scripts.Controller
             {
                 case EndLevelState.EndPoint:
                     {
+                        SoundPackage.Controller.PlayAudio("EndPoint");
                         // calculation result
                         var missions = SceneController.DontDestroy.GetMission();
                         var stars = new List<bool>();
@@ -118,16 +119,19 @@ namespace Assets.Scripts.Controller
                     }
                 case EndLevelState.Dead:
                     {
+                        SoundPackage.Controller.PlayAudio("Failed");
                         CanvasController.ShowResultLevel(state, new List<bool>() { false, false, false});
                         break;
                     }
                 case EndLevelState.TimeOut:
                     {
+                        SoundPackage.Controller.PlayAudio("Failed");
                         CanvasController.ShowResultLevel(state, new List<bool>() { false, false, false });
                         break;
                     }
                 case EndLevelState.Exit:
                     {
+                        SoundPackage.Controller.PlayAudio("Failed");
                         CanvasController.ShowResultLevel(state, new List<bool>() { false, false, false });
                         break;
                     }
