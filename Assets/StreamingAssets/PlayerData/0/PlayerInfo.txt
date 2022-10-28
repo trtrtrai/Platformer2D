@@ -1,7 +1,7 @@
 {
-	"Name":"",
+	"Name":"$$$$$$$$$$$$$$$$$$$$",
 	"CurrentStar":0,
-	"MaxStar":18,
+	"MaxStar":27,
 	"CurrentLevel":0,
-	"MaxLevel":6
+	"MaxLevel":9
 }

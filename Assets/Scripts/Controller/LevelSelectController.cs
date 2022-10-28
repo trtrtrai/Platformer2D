@@ -5,15 +5,13 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class LevelSelectController : MonoBehaviour
 {
-    [SerializeField]
-    GameObject content;
-
     [SerializeField]
     private SceneController sceneController;
 
@@ -32,20 +30,37 @@ public class LevelSelectController : MonoBehaviour
     [SerializeField]
     Color noStar;
 
+    [SerializeField]
+    GameObject btnPrevious;
+
+    [SerializeField]
+    GameObject btnNext;
+
     private List<LevelData> levels;
+    private List<GameObject> contents;
     private string currentName;
     private Image currentPlayerBg;
     private Transform child;
+    private int currentContent;
 
     // Start is called before the first frame update
     void Start()
     {
-        var levels = PlayerData.GetLevelDatas();
+        levels = PlayerData.GetLevelDatas();
+        contents = new List<GameObject>();
+        contents.Add(Instantiate(Resources.Load<GameObject>("Prefabs/UI/LevelSelect/Content"), gameObject.transform));
 
+        var j = 0;
         for (int i = 0; i < levels.Count; i++)
         {
+            if (i == (j + 1) * 8)
+            {
+                j++;
+                contents.Add(Instantiate(Resources.Load<GameObject>("Prefabs/UI/LevelSelect/Content"), gameObject.transform));
+            }
+
             var t = i;
-            var obj = Instantiate(Resources.Load<GameObject>("Prefabs/UI/LevelSelect/" + levels[t].Name), content.transform);
+            var obj = Instantiate(Resources.Load<GameObject>("Prefabs/UI/LevelSelect/" + levels[t].Name), contents[j].transform);
             obj.name = levels[t].Name;
 
             if (levels[t].isUnlock) SetupGameLevel(obj, levels[t]);
@@ -55,6 +70,39 @@ public class LevelSelectController : MonoBehaviour
         //set default
         currentPlayerBg = initialPlayer.GetComponent<Image>();
         initialPlayer.GetComponentInChildren<Button>().onClick.Invoke();
+        InitialContent();
+    }
+
+    private void InitialContent()
+    {
+        for (int i = 1; i < contents.Count; i++)
+        {
+            contents[i].SetActive(false);
+        }
+        currentContent = 0;
+
+        btnPrevious.SetActive(false);
+        if (contents.Count == 1) btnNext.SetActive(false);
+    }
+
+    public void PreviousPage()
+    {
+        if (currentContent == contents.Count - 1) btnNext.SetActive(true);
+        contents[currentContent].SetActive(false);
+        currentContent--;
+        contents[currentContent].SetActive(true);
+
+        if (currentContent == 0) btnPrevious.SetActive(false);
+    }
+
+    public void NextPage()
+    {
+        if (currentContent == 0) btnPrevious.SetActive(true);
+        contents[currentContent].SetActive(false);
+        currentContent++;
+        contents[currentContent].SetActive(true);
+
+        if (currentContent == contents.Count - 1) btnNext.SetActive(false);
     }
 
     public void LockLevel(GameObject obj)
@@ -89,7 +137,7 @@ public class LevelSelectController : MonoBehaviour
             child = obj.GetComponentInChildren<RectTransform>().transform;
             currentName = data.Name;
             missionManager.GetComponent<MissionManager>().OpenMissionDialog(obj.GetComponentsInChildren<MissionData>());
-            missionManager.SetActive(true);
+            missionManager.transform.parent.gameObject.SetActive(true);
         });
     }
 
