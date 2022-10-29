@@ -1,1 +1,1 @@
-{"Name":"NNDK","CurrentStar":18,"MaxStar":27,"CurrentLevelCompleted":7,"MaxLevel":9}
+{"Name":"NNDK","CurrentStar":19,"MaxStar":27,"CurrentLevelCompleted":7,"MaxLevel":9}

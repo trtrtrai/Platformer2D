@@ -22,6 +22,9 @@ namespace Assets.Scripts.Controller
         [SerializeField]
         Timer gameTime;
 
+        [SerializeField]
+        List<GameObject> specialControllers;
+
         private float time;
 
         // Start is called before the first frame update
@@ -55,6 +58,7 @@ namespace Assets.Scripts.Controller
             var child = StartPoint.transform.GetChild(0).localPosition;
             var player = InvokeResourcesLoad(gameObject, new ResourcesLoadEventHandler("Prefabs/Players/", SceneController.DontDestroy.Name.ToString(), StartPoint.transform.localPosition + child, false));
             player.GetComponent<CharacterBehaviour>().PlayAppearAnim();
+            specialControllers.ForEach((s) => s.SetActive(true));
         }
 
         private void Update()

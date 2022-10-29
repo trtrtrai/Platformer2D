@@ -62,4 +62,11 @@
 		"isStar":[false,false,false],
 		"HighPoints":0
 	},
+	{
+		"Name":"Scene_1-9",
+		"isUnlock":false,
+		"isComplete":false,
+		"isStar":[false,false,false],
+		"HighPoints":0
+	},
 ]
