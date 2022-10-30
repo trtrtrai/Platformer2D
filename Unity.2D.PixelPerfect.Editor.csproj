@@ -667,13 +667,13 @@
       <Project>{26273949-2BDD-F22E-4A7C-00816826ECA4}</Project>
       <Name>Unity.2D.PixelPerfect</Name>
     </ProjectReference>
-    <ProjectReference Include="UnityEditor.UI.csproj">
-      <Project>{C93EE41C-6332-A4AD-5E81-AE1102A1D5A2}</Project>
-      <Name>UnityEditor.UI</Name>
-    </ProjectReference>
     <ProjectReference Include="UnityEngine.UI.csproj">
       <Project>{0B4E7F4B-2D05-BC36-17AB-0CE21D015A94}</Project>
       <Name>UnityEngine.UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="UnityEditor.UI.csproj">
+      <Project>{C93EE41C-6332-A4AD-5E81-AE1102A1D5A2}</Project>
+      <Name>UnityEditor.UI</Name>
     </ProjectReference>
     <ProjectReference Include="UnityEngine.TestRunner.csproj">
       <Project>{1A45FA33-F9B7-EE98-4AA8-7E7BD67433C0}</Project>

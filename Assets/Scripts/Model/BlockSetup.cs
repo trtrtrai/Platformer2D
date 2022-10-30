@@ -23,7 +23,7 @@ namespace Assets.Scripts.Model
         List<GameObject> blocks;
 
         [SerializeField]
-        new BoxCollider2D collider;
+        BoxCollider2D collider;
 
         private bool isHorizontal;
 

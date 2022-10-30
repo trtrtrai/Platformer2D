@@ -6,10 +6,10 @@ using UnityEngine.Experimental.Rendering.Universal;
 public class TwoChoiceAnswerBehaviour : MonoBehaviour
 {
     [SerializeField]
-    new Light2D light;
+    Light2D light;
 
     [SerializeField]
-    new ParticleSystem particleSystem;
+    ParticleSystem particleSystem;
 
     private bool turn = false;
     //private float speed = 2f;

@@ -315,7 +315,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Type: 1
-  SecondsChallenge: 30
+  SecondsChallenge: 60
   PointsChallenge: 0
   NumberOfCollection: 0
   Names: 

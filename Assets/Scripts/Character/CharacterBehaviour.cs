@@ -25,7 +25,7 @@ namespace Assets.Scripts.Character
         [SerializeField] int jumpCount = 2;
         [SerializeField] bool isGrounded;
         [SerializeField] LayerMask ground;
-        [SerializeField] new CircleCollider2D collider2D;
+        [SerializeField] CircleCollider2D collider2D;
         [SerializeField] Animator animator;
 
         private float jumpCD;

@@ -13,7 +13,7 @@ namespace Assets.Scripts.Model
         private int current;
         private bool transfer = false;
         private float ratio;
-        private new Light2D light;
+        private Light2D light;
 
         public void ActiveState(int index, Light2D light)
         {

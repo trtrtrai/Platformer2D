@@ -47,6 +47,9 @@ namespace Assets.Scripts.Controller
             }
             var missionDatas = gameController.SceneController.DontDestroy.GetMission();
             missionMng.OpenMissionDialog(missionDatas);
+
+            while (GameObject.FindGameObjectWithTag("Player") is null) yield return null;
+
             collectionTableDisplay.GetComponent<CollectionHandle>().CheckMission(missionDatas, info);
         }
 
