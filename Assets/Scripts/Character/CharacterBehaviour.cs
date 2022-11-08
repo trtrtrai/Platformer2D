@@ -3,6 +3,7 @@ using Assets.Scripts.Model;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Assets.Scripts.Character
 {
@@ -31,6 +32,11 @@ namespace Assets.Scripts.Character
         private float jumpCD;
         private bool moveContinue;
         private bool isMove;
+        public float horizon;
+
+#if UNITY_ANDROID
+        PlayerControl inputActions;
+#endif
 
         // Start is called before the first frame update
         void Start()
@@ -38,27 +44,48 @@ namespace Assets.Scripts.Character
             gameCtrl = GameObject.Find("GameController").GetComponent<GameController>();
             moveContinue = false;
             isMove = false;
+
+#if UNITY_STANDALONE
+            gameCtrl.CanvasController.TouchScreenPackage.SetActive(false);
+#endif
+
+#if UNITY_ANDROID
+            var obj = gameCtrl.CanvasController.TouchScreenPackage;
+            obj.SetActive(true);
+
+            inputActions = new PlayerControl();
+            inputActions.Enable();
+
+            inputActions.Land.Move.performed += ctx =>
+            {
+                horizon = ctx.ReadValue<float>();
+            };
+
+            inputActions.Land.Jump.performed += ctx =>
+            {
+                if (gameCtrl.IsEqualsTopDisplay(GameState.GameDisplay) || gameCtrl.IsEqualsTopDisplay(GameState.TwoChoiceQuestionDisplay))
+                {
+                    Jump();
+                }
+            };
+#endif
         }
 
         private void Update()
         {
+#if UNITY_STANDALONE
             if (gameCtrl.IsEqualsTopDisplay(GameState.GameDisplay) || gameCtrl.IsEqualsTopDisplay(GameState.TwoChoiceQuestionDisplay))
             {
+
                 if (Input.GetButtonDown("Jump"))
                 {
-                    if (isGrounded || jumpCount < 1)
-                    {
-                        //Debug.Log("Jump");
-                        SoundPackage.Controller.PlayAudio("Jump");
-                        rigid.AddForce(transform.up * jumpHigh * Time.fixedDeltaTime, ForceMode2D.Impulse);
-                        rigid.velocity = new Vector2(rigid.velocity.x, Vector2.ClampMagnitude(rigid.velocity, 5f).y);
-                        jumpCount++;
-                    }
+                    Jump();              
                 }
             }
+#endif
         }
 
-        // Update is called once per frame
+            // Update is called once per frame
         void FixedUpdate()
         {
             if (gameCtrl.IsEqualsTopDisplay(GameState.GameDisplay) || gameCtrl.IsEqualsTopDisplay(GameState.TwoChoiceQuestionDisplay))
@@ -66,7 +93,11 @@ namespace Assets.Scripts.Character
                 DetectGround();
 
                 animator.SetFloat("Yveloc", Mathf.Clamp(rigid.velocity.y, -1f, 4f));
-                var horizon = Input.GetAxis("Horizontal");
+
+#if UNITY_STANDALONE
+                horizon = Input.GetAxis("Horizontal");  
+#endif
+
                 //Left-Right
                 rigid.AddForce(new Vector2(horizon * speed * Time.fixedDeltaTime, 0), ForceMode2D.Impulse);
                 rigid.velocity = new Vector2(Vector2.ClampMagnitude(rigid.velocity, maxSpeed).x, rigid.velocity.y);
@@ -104,6 +135,18 @@ namespace Assets.Scripts.Character
                     gameObject.transform.localScale = scale;
                 }
             }
+        }
+
+        private void Jump()
+        {
+            if (isGrounded || jumpCount < 1)
+            {
+                //Debug.Log("Jump");
+                SoundPackage.Controller.PlayAudio("Jump");
+                rigid.AddForce(transform.up * jumpHigh * Time.fixedDeltaTime, ForceMode2D.Impulse);
+                rigid.velocity = new Vector2(rigid.velocity.x, Vector2.ClampMagnitude(rigid.velocity, 5f).y);
+                jumpCount++;
+            }        
         }
 
         void DetectGround()

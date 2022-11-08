@@ -1,10 +1,15 @@
 using Newtonsoft.Json;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
+using System.Text;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 
 namespace Assets.Scripts.Model
@@ -67,10 +72,11 @@ namespace Assets.Scripts.Model
             UpdatePlayer();
         }
 
+#if UNITY_STANDALONE
         public static void SaveBeforeExit()
         {
             if (current == 0) return;
-
+            
             JsonSerializer serializer = new JsonSerializer();
             using (StreamWriter streamWriter = new StreamWriter(Application.streamingAssetsPath + $"/PlayerData/{current}/LevelCompletedInfo.txt"))
             using (JsonWriter writer = new JsonTextWriter(streamWriter))
@@ -118,6 +124,111 @@ namespace Assets.Scripts.Model
                 return serializer.Deserialize<PlayerDataJson>(jReader);
             }
         }
+#endif
+
+#if UNITY_ANDROID
+        private static readonly string pData = "{\"Name\":\"$$$$$$$$$$$$$$$$$$$$\",\"CurrentStar\":0,\"MaxStar\":30,\"CurrentLevel\":0,\"MaxLevel\":10}";
+
+        private static readonly string levelsData = "[{\"Name\":\"SampleScene\",\"isUnlock\":true,\"isComplete\":false,\"isStar\":[false,false,false],\"HighPoints\":0},{\"Name\":\"Scene_1-1\",\"isUnlock\":false,\"isComplete\":false,\"isStar\":[false,false,false],\"HighPoints\":0},{\"Name\":\"Scene_1-2\",\"isUnlock\":false,\"isComplete\":false,\"isStar\":[false,false,false],\"HighPoints\":0},{\"Name\":\"Scene_1-3\",\"isUnlock\":false,\"isComplete\":false,\"isStar\":[false,false,false],\"HighPoints\":0},{\"Name\":\"Scene_1-4\",\"isUnlock\":false,\"isComplete\":false,\"isStar\":[false,false,false],\"HighPoints\":0},{\"Name\":\"Scene_1-5\",\"isUnlock\":false,\"isComplete\":false,\"isStar\":[false,false,false],\"HighPoints\":0},{\"Name\":\"Scene_1-6\",\"isUnlock\":false,\"isComplete\":false,\"isStar\":[false,false,false],\"HighPoints\":0},{\"Name\":\"Scene_1-7\",\"isUnlock\":false,\"isComplete\":false,\"isStar\":[false,false,false],\"HighPoints\":0},{\"Name\":\"Scene_1-8\",\"isUnlock\":false,\"isComplete\":false,\"isStar\":[false,false,false],\"HighPoints\":0},{\"Name\":\"Scene_1-9\",\"isUnlock\":false,\"isComplete\":false,\"isStar\":[false,false,false],\"HighPoints\":0},]";
+        
+        public static void SaveBeforeExit()
+        {
+            if (current == 0) return;
+
+            using (var stream = new FileStream(path: Application.persistentDataPath + $"/LevelCompletedInfo{current}.txt", mode: FileMode.Open, access: FileAccess.Write, share: FileShare.ReadWrite)) // write in new file at persistent
+            {
+                Encoding encoding = Encoding.UTF8;
+
+                using (var sWriter = new StreamWriter(stream, encoding))
+                using (JsonWriter jReader = new JsonTextWriter(sWriter))
+                {
+                    JsonSerializer serializer = new JsonSerializer();
+                    serializer.Serialize(jReader, levels);
+                }
+            }
+
+            using (var stream = new FileStream(path: Application.persistentDataPath + $"/PlayerInfo{current}.txt", mode: FileMode.Open, access: FileAccess.Write, share: FileShare.ReadWrite)) // write in new file at persistent
+            {
+                Encoding encoding = Encoding.UTF8;
+
+                using (var sWriter = new StreamWriter(stream, encoding))
+                using (JsonWriter jReader = new JsonTextWriter(sWriter))
+                {
+                    JsonSerializer serializer = new JsonSerializer();
+                    serializer.Serialize(jReader, player);
+                }
+            }
+        }
+
+        private static void GetLevels(int n)
+        {
+            using (var sReader = new StreamReader(Application.persistentDataPath + $"/LevelCompletedInfo{n}.txt"))
+            using (JsonReader jReader = new JsonTextReader(sReader))
+            {
+                JsonSerializer serializer = new JsonSerializer();
+                levels = serializer.Deserialize<List<LevelData>>(jReader);
+            }
+
+            //Debug.Log(levels[0].Name);
+        }
+
+        private static void GetPlayer(int n)
+        {
+            using (var sReader = new StreamReader(Application.persistentDataPath + $"/PlayerInfo{n}.txt"))
+            using (JsonReader jReader = new JsonTextReader(sReader))
+            {
+                JsonSerializer serializer = new JsonSerializer();
+                player = serializer.Deserialize<PlayerDataJson>(jReader);
+            }
+
+            //Debug.Log(player.Name);
+        }
+
+        public static PlayerDataJson GetPlayerDataJson(int n)
+        {
+            if (File.Exists(Application.persistentDataPath + $"/PlayerInfo{n}.txt")) // exists -> read -> convert
+            {
+                using (var sReader = new StreamReader(Application.persistentDataPath + $"/PlayerInfo{n}.txt"))
+                using (JsonReader jReader = new JsonTextReader(sReader))
+                {
+                    JsonSerializer serializer = new JsonSerializer();
+                    return serializer.Deserialize<PlayerDataJson>(jReader);
+                }
+            }
+            else // create new
+            {
+                #region PlayerInfo
+                using (var stream = new FileStream(path: Application.persistentDataPath + $"/PlayerInfo{n}.txt", mode: FileMode.CreateNew, access: FileAccess.Write, share: FileShare.ReadWrite)) // write in new file at persistent
+                {
+                    Encoding encoding = Encoding.UTF8;
+
+                    using (var sWriter = new StreamWriter(stream, encoding))
+                    using (JsonWriter jReader = new JsonTextWriter(sWriter))
+                    {
+                        JsonSerializer serializer = new JsonSerializer();
+                        serializer.Serialize(jReader, JsonConvert.DeserializeObject<PlayerDataJson>(pData));
+                    }
+                }
+                #endregion
+
+                #region LevelCompletedInfo
+                using (var stream = new FileStream(path: Application.persistentDataPath + $"/LevelCompletedInfo{n}.txt", mode: FileMode.CreateNew, access: FileAccess.Write, share: FileShare.ReadWrite)) // write in new file at persistent
+                {
+                    Encoding encoding = Encoding.UTF8;
+
+                    using (var sWriter = new StreamWriter(stream, encoding))
+                    using (JsonWriter jReader = new JsonTextWriter(sWriter))
+                    {
+                        JsonSerializer serializer = new JsonSerializer();
+                        serializer.Serialize(jReader, JsonConvert.DeserializeObject<List<LevelData>>(levelsData));
+                    }
+                }
+                #endregion
+
+                return JsonConvert.DeserializeObject<PlayerDataJson>(pData);
+            }
+        }
+#endif
 
         public static List<LevelData> GetLevelDatas()
         {
@@ -130,6 +241,7 @@ namespace Assets.Scripts.Model
 
             InitiatePlayer(n);
             player.Name = name;
+            SaveBeforeExit();
         }
 
         public static bool HaveUser(int n) 

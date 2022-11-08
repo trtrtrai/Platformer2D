@@ -38,6 +38,7 @@ public class MainMenuController : MonoBehaviour
 
     public void LoadPlayerData(int no)
     {
+        sceneController.DontDestroy.PlayerIndex = no;
         if (!PlayerData.HaveUser(no))
         {
             currentChoice = no;
@@ -46,8 +47,8 @@ public class MainMenuController : MonoBehaviour
         else
         {
             PlayerData.InitiatePlayer(no);
-            sceneController.SwapScene("LevelSelectionScene");
             sceneController.Loading.SetActive(true);
+            sceneController.SwapScene("LevelSelectionScene");
         }
     }
 

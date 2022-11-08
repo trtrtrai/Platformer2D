@@ -28,6 +28,7 @@ namespace Assets.Scripts.Controller
         [SerializeField]
         CollectionInfo info;
 
+        public GameObject TouchScreenPackage;
         public GameObject SubCanvasWorldPoint;
 
         // Start is called before the first frame update

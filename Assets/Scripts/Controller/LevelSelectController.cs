@@ -1,17 +1,18 @@
-using Assets.Scripts.Controller;
+﻿using Assets.Scripts.Controller;
 using Assets.Scripts.Model;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Reflection;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class LevelSelectController : MonoBehaviour
 {
+    [SerializeField]
+    GameObject playerInfo;
+
     [SerializeField]
     private SceneController sceneController;
 
@@ -46,7 +47,10 @@ public class LevelSelectController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        StartCoroutine(WaitDontDestroy());
+
         levels = PlayerData.GetLevelDatas();
+
         contents = new List<GameObject>();
         contents.Add(Instantiate(Resources.Load<GameObject>("Prefabs/UI/LevelSelect/Content"), gameObject.transform));
 
@@ -71,6 +75,21 @@ public class LevelSelectController : MonoBehaviour
         currentPlayerBg = initialPlayer.GetComponent<Image>();
         initialPlayer.GetComponentInChildren<Button>().onClick.Invoke();
         InitialContent();
+    }
+
+    private IEnumerator WaitDontDestroy()
+    {
+        if (sceneController.DontDestroy is null) yield return null;
+
+        var playerData = PlayerData.GetPlayerDataJson(sceneController.DontDestroy.PlayerIndex);
+
+        //Load player info
+        var txts = playerInfo.GetComponentsInChildren<TMP_Text>();
+        txts[0].text = playerData.Name; //txt name
+        txts[1].text = $"{playerData.CurrentStar}/{playerData.MaxStar}"; // txt star
+        int pts = 0;
+        levels.ForEach((l) => pts += l.HighPoints);
+        txts[2].text = "Tổng điểm: " + pts; // txt sumpts
     }
 
     private void InitialContent()

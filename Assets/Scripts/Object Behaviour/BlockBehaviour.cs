@@ -3,6 +3,7 @@ using UnityEngine;
 using System.Collections;
 using Assets.Scripts.Controller;
 using Assets.Scripts.Model;
+using UnityEngine.UI;
 
 namespace Assets.Scripts.ObjectBehaviour
 {
@@ -38,24 +39,37 @@ namespace Assets.Scripts.ObjectBehaviour
         void Start()
         {
             wait += Wait;
-            //wait.Invoke(500);        
+            //wait.Invoke(500);
+
+#if UNITY_ANDROID
+            touchPack = gameController.CanvasController.TouchScreenPackage.transform.GetChild(3).gameObject;     
+#endif
         }
 
-        // Update is called once per frame
-        void Update()
+#if UNITY_STANDALONE
+        private void Update()
         {
             if (isDetect)
             {
                 if (Input.GetKeyDown(KeyCode.E))
                 {
-                    //Debug.Log("Active");
-                    QuestionObj = gameController.CanvasController.InstantiateUI(new ResourcesLoadEventHandler("Prefabs/UI/Question/", "QuestionUI", new Vector3(), true));
-                    var questMng = QuestionObj.GetComponent<QuestionManager>();
-                    questMng.Sender += Answer;
-                    questMng.TimeAnswer = timeForAnswer;
-                    enabled = false;
+                    Action();
                 }
             }
+         }
+#endif
+#if UNITY_ANDROID
+        private GameObject touchPack;
+#endif
+
+        private void Action()
+        {
+            //Debug.Log("Active");
+            QuestionObj = gameController.CanvasController.InstantiateUI(new ResourcesLoadEventHandler("Prefabs/UI/Question/", "QuestionUI", new Vector3(), true));
+            var questMng = QuestionObj.GetComponent<QuestionManager>();
+            questMng.Sender += Answer;
+            questMng.TimeAnswer = timeForAnswer;
+            enabled = false;
         }
 
         private void Answer(bool result)
@@ -69,6 +83,7 @@ namespace Assets.Scripts.ObjectBehaviour
             yield return new WaitForSecondsRealtime(s);
 
             Destroy(QuestionObj);
+            QuestionObj = null;
             gameController.GameContinue();
 
             if (result)
@@ -87,6 +102,13 @@ namespace Assets.Scripts.ObjectBehaviour
             enabled = true;
         }
 
+#if UNITY_ANDROID
+        private void OnCollisionEnter2D(Collision2D collision)
+        {
+            if (collision.gameObject.tag.Equals("Player")) touchPack.GetComponent<Button>().onClick.AddListener(() => { if (QuestionObj is null) Action(); });
+        }
+#endif
+
         private void OnCollisionStay2D(Collision2D collision)
         {
             if (collision.gameObject.tag.Equals("Player"))
@@ -95,6 +117,10 @@ namespace Assets.Scripts.ObjectBehaviour
                 PositionESymbol(collision.gameObject.transform.localPosition);
                 eSymbol.SetActive(true);
                 isDetect = true;
+
+#if UNITY_ANDROID
+                touchPack.SetActive(true);
+#endif
             }
         }
 
@@ -104,6 +130,11 @@ namespace Assets.Scripts.ObjectBehaviour
             {
                 eSymbol.SetActive(false);
                 isDetect = false;
+
+#if UNITY_ANDROID
+                touchPack.GetComponent<Button>().onClick.RemoveAllListeners();
+                touchPack.SetActive(false);
+#endif
             }
         }
 

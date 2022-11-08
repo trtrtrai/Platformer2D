@@ -6,6 +6,7 @@ TagManager:
   tags:
   - DontDestroy
   - Collection
+  - ButtonPlayer
   layers:
   - Default
   - TransparentFX

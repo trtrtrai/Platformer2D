@@ -19,6 +19,14 @@ namespace Assets.Scripts.Controller
         // Start is called before the first frame update
         void Start()
         {
+            Loading.SetActive(true);
+            StartCoroutine(WaitToSeeDontDestroy());
+        }
+
+        private IEnumerator WaitToSeeDontDestroy()
+        {
+            while (GameObject.FindGameObjectWithTag("DontDestroy") is null) yield return null;
+
             DontDestroy = GameObject.FindGameObjectWithTag("DontDestroy").GetComponent<DontDestroyOnLoad>();
 
             sceneBtns = new List<Button>();
@@ -28,7 +36,9 @@ namespace Assets.Scripts.Controller
                 sceneBtns.Add(b as Button);
             });
 
-            sceneBtns.ForEach((b) => { b.onClick.AddListener(() => DontDestroy.Click.Play()); });
+            sceneBtns.ForEach((b) => { if (!b.tag.Equals("ButtonPlayer")) b.onClick.AddListener(() => DontDestroy.Click.Play()); });
+
+            Loading.SetActive(false);
         }
 
         public void SwapScene(string name) => DontDestroy.SwapScene(name);

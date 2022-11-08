@@ -10,6 +10,7 @@ using Assets.Scripts.Model;
 using System;
 using Assets.Scripts.Interfaces;
 using System.Collections;
+using System.Runtime.Remoting.Messaging;
 
 namespace Assets.Scripts.Controller
 {
@@ -97,7 +98,8 @@ namespace Assets.Scripts.Controller
         private QuestionData ChooseAQuestion()
         {
             var pack = RdPositiveRange(400) % 4;
-            JsonSerializer serializer = new JsonSerializer();
+#if UNITY_STANDALONE
+            JsonSerializer serializer = new JsonSerializer();           
             using (StreamReader sReader = new StreamReader(Application.streamingAssetsPath + $"/Questions{pack}.txt"))
             using (JsonReader jReader = new JsonTextReader(sReader))
             {
@@ -106,6 +108,14 @@ namespace Assets.Scripts.Controller
                 //Debug.Log(num);
                 return questions[num];
             }
+#endif
+#if UNITY_ANDROID
+            BetterStreamingAssets.Initialize();
+            var questions = JsonConvert.DeserializeObject<List<QuestionData>>(BetterStreamingAssets.ReadAllText($"/Questions{pack}.txt"));
+            int num = RdPositiveRange(questions.Count);
+            //Debug.Log(num);
+            return questions[num];
+#endif 
         }
 
         private void LoadQuestionScene()
