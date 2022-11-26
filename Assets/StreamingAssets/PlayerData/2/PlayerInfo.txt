@@ -1,1 +1,1 @@
-{"Name":"Q​","CurrentStar":0,"MaxStar":30,"CurrentLevelCompleted":0,"MaxLevel":10}
+{"Name":"Q​","CurrentStar":3,"MaxStar":30,"CurrentLevelCompleted":1,"MaxLevel":10}

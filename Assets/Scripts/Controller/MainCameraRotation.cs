@@ -1,3 +1,4 @@
+using Assets.Scripts.Character;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,10 +11,15 @@ namespace Assets.Scripts.Controller
         GameController gameCtrl;
 
         Camera main;
+        CharacterBehaviour player;
 
         private void Start()
         {
-            main = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Camera>();
+            var gObj = GameObject.FindGameObjectWithTag("Player");
+
+            player = gObj.GetComponent<CharacterBehaviour>();
+
+            main = gObj.GetComponentInChildren<Camera>();
             main.transform.localRotation = Quaternion.Euler(0, 0, 90f);
         }
 
@@ -21,13 +27,12 @@ namespace Assets.Scripts.Controller
         {
             if (gameCtrl.IsEqualsTopDisplay(GameState.GameDisplay) || gameCtrl.IsEqualsTopDisplay(GameState.TwoChoiceQuestionDisplay))
             {
-                var horizon = Input.GetAxis("Horizontal");
 
-                if (horizon > 0)
+                if (player.Horizon > 0)
                 {
                     main.transform.localRotation = Quaternion.Euler(0, 0, 90f);
                 }
-                else if (horizon < 0)
+                else if (player.Horizon < 0)
                 {
                     main.transform.localRotation = Quaternion.Euler(0, 0, -90f);
                 }

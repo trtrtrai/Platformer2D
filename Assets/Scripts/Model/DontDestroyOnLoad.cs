@@ -75,6 +75,7 @@ namespace Assets.Scripts.Model
 
                 OnVolumnChange(Config.Volumn);
             }
+
 #if UNITY_STANDALONE
             DontDestroyOnLoad(gameObject);
 #endif
@@ -87,6 +88,8 @@ namespace Assets.Scripts.Model
 
 #if UNITY_STANDALONE
             if (!ThisScene.Equals("HomeScene") && !ThisScene.Equals("LevelSelectionScene") && (name.Equals("HomeScene") || name.Equals("LevelSelectionScene"))) MainBG.Play();
+            ThisScene = name;
+            SceneManager.LoadScene(name);
 #endif
 #if UNITY_ANDROID
             if (name.Equals("HomeScene"))
@@ -102,14 +105,16 @@ namespace Assets.Scripts.Model
 #if UNITY_ANDROID
         private IEnumerator LoadSceneAsync(string name)
         {
+            var old = ThisScene;
+            ThisScene = name;
+
             var asyncLoad = SceneManager.LoadSceneAsync(name, LoadSceneMode.Additive);
 
             while (!asyncLoad.isDone) yield return null;
 
             SceneManager.MoveGameObjectToScene(gameObject, SceneManager.GetSceneByName(name));
             SceneManager.MoveGameObjectToScene(EventSystem, SceneManager.GetSceneByName(name));
-            var old = ThisScene;
-            ThisScene = name;
+            
             SceneManager.UnloadSceneAsync(old);
         }
 #endif
@@ -127,6 +132,27 @@ namespace Assets.Scripts.Model
         {
             Config.Volumn = v;
             AudioListener.volume = v;
+        }
+
+        public void GetResolution(TMP_Text txt)
+        {
+            if (Screen.fullScreen) DisplayResolution(txt);
+            else
+            {
+                for (int i = 0; i < Resolutions.Count; i++)
+                {
+                    if (Screen.width == Resolutions[i].Width && Screen.height == Resolutions[i].Height)
+                    {
+                        IndexRes = i;
+                        DisplayResolution(txt);
+                        return;
+                    }
+                }
+
+                Resolutions.Add(new ResolutionProp() { Width = Screen.width, Height = Screen.height });
+                IndexRes = Resolutions.Count - 1;
+                DisplayResolution(txt);
+            }
         }
 
         public void ChangeResolution()
@@ -164,6 +190,11 @@ namespace Assets.Scripts.Model
         {
             PlayerData.SaveBeforeExit();
 
+            SaveConfig();
+        }
+
+        public void SaveConfig()
+        {
 #if UNITY_STANDALONE
             var serializer = new JsonSerializer();
             using (StreamWriter streamWriter = new StreamWriter(Application.streamingAssetsPath + $"/Config.txt"))

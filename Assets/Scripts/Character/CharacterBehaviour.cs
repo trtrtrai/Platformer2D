@@ -32,7 +32,9 @@ namespace Assets.Scripts.Character
         private float jumpCD;
         private bool moveContinue;
         private bool isMove;
-        public float horizon;
+        private float horizon;
+
+        public float Horizon => horizon;
 
 #if UNITY_ANDROID
         PlayerControl inputActions;

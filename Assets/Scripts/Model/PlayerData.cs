@@ -115,14 +115,18 @@ namespace Assets.Scripts.Model
             //Debug.Log(player.Name);
         }
 
-        public static PlayerDataJson GetPlayerDataJson(int n)
+        public static PlayerDataJson GetPlayerDataJson(int n, bool isLoad = true)
         {
-            JsonSerializer serializer = new JsonSerializer();
-            using (StreamReader sReader = new StreamReader(Application.streamingAssetsPath + $"/PlayerData/{n}/PlayerInfo.txt"))
-            using (JsonReader jReader = new JsonTextReader(sReader))
+            if (isLoad)
             {
-                return serializer.Deserialize<PlayerDataJson>(jReader);
+                JsonSerializer serializer = new JsonSerializer();
+                using (StreamReader sReader = new StreamReader(Application.streamingAssetsPath + $"/PlayerData/{n}/PlayerInfo.txt"))
+                using (JsonReader jReader = new JsonTextReader(sReader))
+                {
+                    return serializer.Deserialize<PlayerDataJson>(jReader);
+                }
             }
+            else return player;
         }
 #endif
 
@@ -184,8 +188,10 @@ namespace Assets.Scripts.Model
             //Debug.Log(player.Name);
         }
 
-        public static PlayerDataJson GetPlayerDataJson(int n)
+        public static PlayerDataJson GetPlayerDataJson(int n, bool isLoad = true)
         {
+            if (!isLoad) return player;
+
             if (File.Exists(Application.persistentDataPath + $"/PlayerInfo{n}.txt")) // exists -> read -> convert
             {
                 using (var sReader = new StreamReader(Application.persistentDataPath + $"/PlayerInfo{n}.txt"))

@@ -41,11 +41,11 @@ namespace Assets.Scripts.Controller
         {
             while (gameController.SceneController.DontDestroy is null) yield return null;
 
-            if (gameController.SceneController.Loading.activeInHierarchy)
+            /*if (gameController.SceneController.Loading.activeInHierarchy) //it only in gamecontroller?
             {
                 gameController.SceneController.Loading.SetActive(false);
                 Destroy(GameObject.FindGameObjectWithTag("MainCamera").transform.parent.gameObject);
-            }
+            }*/
             var missionDatas = gameController.SceneController.DontDestroy.GetMission();
             missionMng.OpenMissionDialog(missionDatas);
 

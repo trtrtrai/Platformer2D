@@ -81,7 +81,7 @@ public class LevelSelectController : MonoBehaviour
     {
         if (sceneController.DontDestroy is null) yield return null;
 
-        var playerData = PlayerData.GetPlayerDataJson(sceneController.DontDestroy.PlayerIndex);
+        var playerData = PlayerData.GetPlayerDataJson(sceneController.DontDestroy.PlayerIndex, false);
 
         //Load player info
         var txts = playerInfo.GetComponentsInChildren<TMP_Text>();
@@ -168,7 +168,7 @@ public class LevelSelectController : MonoBehaviour
         sceneController.SwapScene(currentName);
     }
 
-    public void ChangeBackground(Image bg)
+    public void ChangeBackground(Image bg) //Choose character
     {
         currentPlayerBg.sprite = normalBg;
 

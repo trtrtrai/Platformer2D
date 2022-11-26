@@ -29,6 +29,13 @@ namespace Assets.Scripts.Controller
 
             DontDestroy = GameObject.FindGameObjectWithTag("DontDestroy").GetComponent<DontDestroyOnLoad>();
 
+#if UNITY_STANDALONE
+            if (!DontDestroy.ThisScene.Equals("HomeScene"))
+            {
+                Instantiate(Resources.Load<GameObject>("Prefabs/GameScene/EventSystem"));
+            }
+#endif
+
             sceneBtns = new List<Button>();
 
             Resources.FindObjectsOfTypeAll(typeof(Button)).ToList().ForEach((b) => {
@@ -38,7 +45,10 @@ namespace Assets.Scripts.Controller
 
             sceneBtns.ForEach((b) => { if (!b.tag.Equals("ButtonPlayer")) b.onClick.AddListener(() => DontDestroy.Click.Play()); });
 
-            Loading.SetActive(false);
+            if (DontDestroy.ThisScene.Equals("HomeScene") || DontDestroy.ThisScene.Equals("LevelSelectionScene"))
+            {
+                Loading.SetActive(false);
+            }
         }
 
         public void SwapScene(string name) => DontDestroy.SwapScene(name);
@@ -66,6 +76,8 @@ namespace Assets.Scripts.Controller
         public void NextResolution(TMP_Text txt) => DontDestroy.NextResolution(txt);
 
         public void PrevResolution(TMP_Text txt) => DontDestroy.PrevResolution(txt);
+
+        public void SaveConfig() => DontDestroy.SaveConfig();
 
         public void SaveBeforeExit() => PlayerData.SaveBeforeExit();
 

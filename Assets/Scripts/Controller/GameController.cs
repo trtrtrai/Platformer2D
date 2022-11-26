@@ -4,6 +4,7 @@ using Assets.Scripts.Others;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 namespace Assets.Scripts.Controller
@@ -55,10 +56,17 @@ namespace Assets.Scripts.Controller
                 SceneController.Loading.SetActive(false);
                 Destroy(GameObject.FindGameObjectWithTag("MainCamera").transform.parent.gameObject);
             }
+
             var child = StartPoint.transform.GetChild(0).localPosition;
             var player = InvokeResourcesLoad(gameObject, new ResourcesLoadEventHandler("Prefabs/Players/", SceneController.DontDestroy.Name.ToString(), StartPoint.transform.localPosition + child, false));
             player.GetComponent<CharacterBehaviour>().PlayAppearAnim();
             specialControllers.ForEach((s) => s.SetActive(true));
+
+            if (SceneController.Loading.activeInHierarchy)
+            {
+                SceneController.Loading.SetActive(false);
+                Destroy(GameObject.FindGameObjectWithTag("MainCamera").transform.parent.gameObject);
+            }
         }
 
         private void Update()

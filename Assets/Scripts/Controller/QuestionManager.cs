@@ -10,7 +10,9 @@ using Assets.Scripts.Model;
 using System;
 using Assets.Scripts.Interfaces;
 using System.Collections;
+#if UNITY_ANDROID
 using System.Runtime.Remoting.Messaging;
+#endif
 
 namespace Assets.Scripts.Controller
 {
@@ -115,7 +117,7 @@ namespace Assets.Scripts.Controller
             int num = RdPositiveRange(questions.Count);
             //Debug.Log(num);
             return questions[num];
-#endif 
+#endif
         }
 
         private void LoadQuestionScene()
